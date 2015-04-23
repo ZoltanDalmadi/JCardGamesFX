@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit test for class <code>FrenchCard</code>.
+ */
 public class FrenchCardTest {
 
   /**
@@ -14,41 +17,33 @@ public class FrenchCardTest {
 
   /**
    * Runs before each test method.
-   *
-   * @throws Exception
    */
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     card = new FrenchCard(true, FrenchSuit.Hearts, FrenchRank.Queen);
   }
 
   /**
    * Tests getter for field <code>suit</code>.
-   *
-   * @throws Exception
    */
   @Test
-  public void testGetSuit() throws Exception {
+  public void testGetSuit() {
     assertEquals(FrenchSuit.Hearts, card.getSuit());
   }
 
   /**
    * Tests getter for field <code>rank</code>.
-   *
-   * @throws Exception
    */
   @Test
-  public void testGetRank() throws Exception {
+  public void testGetRank() {
     assertEquals(FrenchRank.Queen, card.getRank());
   }
 
   /**
    * Tests <code>toString()</code> method.
-   *
-   * @throws Exception
    */
   @Test
-  public void testToString() throws Exception {
+  public void testToString() {
     assertEquals("The Queen of Hearts", card.toString());
     card = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Ace);
     assertEquals("The Ace of Clubs", card.toString());
@@ -60,11 +55,9 @@ public class FrenchCardTest {
 
   /**
    * Tests <code>flip()</code> method, which is defined in the superclass.
-   *
-   * @throws Exception
    */
   @Test
-  public void testFlip() throws Exception {
+  public void testFlip() {
     assertEquals(true, card.isFaceDown());
     card.flip();
     assertEquals(false, card.isFaceDown());
@@ -74,11 +67,9 @@ public class FrenchCardTest {
 
   /**
    * Tests <code>faceDown()</code> method, which is defined in the superclass.
-   *
-   * @throws Exception
    */
   @Test
-  public void testFaceDown() throws Exception {
+  public void testFaceDown() {
     card.faceDown();
     assertEquals(true, card.isFaceDown());
     card.flip();
@@ -88,11 +79,9 @@ public class FrenchCardTest {
 
   /**
    * Tests <code>faceUp()</code> method, which is defined in the superclass.
-   *
-   * @throws Exception
    */
   @Test
-  public void testFaceUp() throws Exception {
+  public void testFaceUp() {
     card.faceUp();
     assertEquals(false, card.isFaceDown());
     card.flip();
