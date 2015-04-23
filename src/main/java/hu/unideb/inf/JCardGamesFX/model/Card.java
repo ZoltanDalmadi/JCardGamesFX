@@ -8,7 +8,7 @@ public abstract class Card {
   protected boolean faceDown;
 
   /**
-   * Constructs a Card object.
+   * Constructs a <code>Card</code> object.
    *
    * @param faceDown Whether the card is facing down.
    */
@@ -40,7 +40,8 @@ public abstract class Card {
   /**
    * Returns whether the card is facing down.
    *
-   * @return true if the card is facing down, false otherwise.
+   * @return <code>true</code> if the card is facing down, <code>false</code>
+   * otherwise.
    */
   protected boolean isFaceDown() {
     return faceDown;

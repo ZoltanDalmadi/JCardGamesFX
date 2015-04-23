@@ -13,7 +13,7 @@ public class FrenchCard extends Card {
   private FrenchRank rank;
 
   /**
-   * Constructs a FrenchCard object.
+   * Constructs a <code>FrenchCard</code> object.
    *
    * @param faceDown Whether the card is facing down.
    * @param suit     Suit of the card.
@@ -44,9 +44,9 @@ public class FrenchCard extends Card {
   }
 
   /**
-   * Returns a String representation of this card.
+   * Returns a <code>String</code> representation of this card.
    *
-   * @return The String representation of this card.
+   * @return The <code>String</code> representation of this card.
    */
   @Override
   public String toString() {

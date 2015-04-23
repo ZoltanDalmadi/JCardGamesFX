@@ -10,7 +10,7 @@ public abstract class CardDeck {
   protected List<Card> cards;
 
   /**
-   * Creates an empty CardDeck object.
+   * Creates an empty <code>CardDeck</code> object.
    */
   public CardDeck() {
   }
