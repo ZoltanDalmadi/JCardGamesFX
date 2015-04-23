@@ -40,8 +40,7 @@ public abstract class Card {
   /**
    * Returns whether the card is facing down.
    *
-   * @return <code>true</code> if the card is facing down, <code>false</code>
-   * otherwise.
+   * @return true if the card is facing down, false otherwise.
    */
   protected boolean isFaceDown() {
     return faceDown;
