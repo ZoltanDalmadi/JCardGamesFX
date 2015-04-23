@@ -44,11 +44,12 @@ public abstract class CardDeck {
   }
 
   /**
-   * Shuffles the card deck.
-   * Researches proved that if we want a deck of cards to be well shuffled,
-   * we have to do it about seven times.
+   * Shuffles the deck.
    */
   public void shuffle() {
+
+    // Researches proved that if we want a deck of cards to be well shuffled,
+    // we have to do it about seven times.
     for (int i = 0; i < 7; i++) {
       Collections.shuffle(cards);
     }
