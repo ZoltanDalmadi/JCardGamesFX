@@ -5,8 +5,6 @@ import javafx.scene.image.Image;
 
 /**
  * This class provides a JavaFX based view for a {@link FrenchCard}.
- *
- * @author Zoltan Dalmadi
  */
 public class FrenchCardView extends CardView {
 

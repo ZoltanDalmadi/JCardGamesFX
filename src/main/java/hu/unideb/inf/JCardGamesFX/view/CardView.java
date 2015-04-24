@@ -7,8 +7,6 @@ import javafx.scene.image.ImageView;
 /**
  * This abstract class provides a base for classes that implements various
  * JavaFX based views for {@link Card} objects.
- *
- * @author Zoltan Dalmadi
  */
 public class CardView {
 
