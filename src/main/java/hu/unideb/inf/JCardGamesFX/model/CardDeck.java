@@ -14,7 +14,7 @@ public abstract class CardDeck {
   protected List<Card> cards;
 
   /**
-   * Creates an empty <code>CardDeck</code> object.
+   * Creates an empty {@link CardDeck} object.
    */
   public CardDeck() {
     this.cards = new ArrayList<>();
