@@ -21,7 +21,7 @@ public abstract class CardDeck {
   }
 
   /**
-   * Returns the list of cards od this deck.
+   * Returns the list of cards of this deck.
    *
    * @return The list of cards
    */
@@ -52,7 +52,6 @@ public abstract class CardDeck {
    * Shuffles the deck.
    */
   public void shuffle() {
-
     // Researches proved that if we want a deck of cards to be well shuffled,
     // we have to do it about seven times.
     for (int i = 0; i < 7; i++) {
