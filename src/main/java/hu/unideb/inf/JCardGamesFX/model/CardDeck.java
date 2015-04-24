@@ -8,6 +8,7 @@ import java.util.List;
  * Abstract class representing the concept of a deck of cards.
  */
 public abstract class CardDeck {
+
   /**
    * A List holding the individual cards of this deck.
    */

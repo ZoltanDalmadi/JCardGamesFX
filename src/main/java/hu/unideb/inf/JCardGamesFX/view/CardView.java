@@ -11,20 +11,24 @@ import javafx.scene.image.ImageView;
  * @author Zoltan Dalmadi
  */
 public class CardView {
+
   /**
    * This static field holds the Image object that will be
    * the back face of all cards.
    */
   protected static Image backFace;
+
   /**
    * The {@link Card} object to be represented.
    */
   protected Card card;
+
   /**
    * This field holds the Image object that will be the front face
    * of an individual card.
    */
   protected Image frontFace;
+
   /**
    * This field is responsible for actually displaying
    * the {@link Image} objects.

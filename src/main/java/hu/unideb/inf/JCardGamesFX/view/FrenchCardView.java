@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
  * @author Zoltan Dalmadi
  */
 public class FrenchCardView extends CardView {
+
   /**
    * Constructs a {@link FrenchCardView} object for the given
    * {@link FrenchCard} object with the {@link Image} object as a
