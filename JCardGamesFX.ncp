@@ -1,0 +1,336 @@
+<Project>
+  <Name>JCardgamesFX</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>JCardGamesFX</Name>
+    <Language>Java</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Card</Name>
+        <Access>Public</Access>
+        <Location left="548" top="634" />
+        <Size width="162" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected boolean faceDown</Member>
+        <Member type="Constructor">protected Card(boolean faceDown)</Member>
+        <Member type="Method">public void flip()</Member>
+        <Member type="Method">public void faceDown()</Member>
+        <Member type="Method">public void faceUp()</Member>
+        <Member type="Method">public boolean isFaceDown()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FrenchCard</Name>
+        <Access>Public</Access>
+        <Location left="548" top="889" />
+        <Size width="186" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Rank rank</Member>
+        <Member type="Field">private Suit suit</Member>
+        <Member type="Constructor">public FrenchCard(boolean faceDown)</Member>
+        <Member type="Method">public Suit getSuit()</Member>
+        <Member type="Method">public Rank getRank()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>Suit</Name>
+        <Access>Public</Access>
+        <Location left="913" top="634" />
+        <Size width="163" height="129" />
+        <Collapsed>False</Collapsed>
+        <Value>Clubs</Value>
+        <Value>Spades</Value>
+        <Value>Hearts</Value>
+        <Value>Diamonds</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>Rank</Name>
+        <Access>Public</Access>
+        <Location left="913" top="776" />
+        <Size width="163" height="282" />
+        <Collapsed>False</Collapsed>
+        <Value>Ace</Value>
+        <Value>Two</Value>
+        <Value>Three</Value>
+        <Value>Four</Value>
+        <Value>Five</Value>
+        <Value>Six</Value>
+        <Value>Seven</Value>
+        <Value>Eight</Value>
+        <Value>Nine</Value>
+        <Value>Ten</Value>
+        <Value>Jack</Value>
+        <Value>Queen</Value>
+        <Value>King</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>CardDeck</Name>
+        <Access>Public</Access>
+        <Location left="475" top="233" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected List&lt;Card&gt; cards</Member>
+        <Member type="Constructor">public CardDeck()</Member>
+        <Member type="Method">public List&lt;Card&gt; getCards()</Member>
+        <Member type="Method">public void shuffle()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FrenchCardDeck</Name>
+        <Access>Public</Access>
+        <Location left="392" top="461" />
+        <Size width="195" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public FrenchCardDeck()</Member>
+        <Member type="Method">public static boolean createFrenchCardDeck()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CardView</Name>
+        <Access>Public</Access>
+        <Location left="117" top="776" />
+        <Size width="314" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected Card card</Member>
+        <Member type="Field">protected Image frontFace</Member>
+        <Member type="Field">protected Image backFace</Member>
+        <Member type="Field">protected ImageView display</Member>
+        <Member type="Constructor">protected CardView()</Member>
+        <Member type="Constructor">protected CardView(Card card)</Member>
+        <Member type="Constructor">protected CardView(Card card, Image frontFace, Image backFace)</Member>
+        <Member type="Method">public Image getFrontFace()</Member>
+        <Member type="Method">public void setFrontFace(Image image)</Member>
+        <Member type="Method">public Image getBackFace()</Member>
+        <Member type="Method">public void setBackFace(Image image)</Member>
+        <Member type="Method">public ImageView getDisplay()</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FrenchCardView</Name>
+        <Access>Public</Access>
+        <Location left="85" top="1160" />
+        <Size width="379" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public FrenchCardView()</Member>
+        <Member type="Constructor">public FrenchCardView(FrenchCard card)</Member>
+        <Member type="Constructor">public FrenchCardView(FrenchCard card, Image frontFace, Image backFace)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>KlondikeTableau</Name>
+        <Access>Public</Access>
+        <Location left="899" top="1195" />
+        <Size width="233" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Deque&lt;FrenchCard&gt;[] foundations</Member>
+        <Member type="Field">private Deque&lt;FrenchCard&gt;[] piles</Member>
+        <Member type="Field">private Deque&lt;FrenchCard&gt; waste</Member>
+        <Member type="Field">private Deque&lt;FrenchCard&gt; stock</Member>
+        <Member type="Constructor">public KlondikeTableau()</Member>
+        <Member type="Method">public Deque&lt;FrenchCard&gt;[] getFoundations()</Member>
+        <Member type="Method">public Deque&lt;FrenchCard&gt;[] getPiles()</Member>
+        <Member type="Method">public Deque&lt;FrenchCard&gt; getStock()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>FrenchCardViewBuilder</Name>
+        <Access>Public</Access>
+        <Location left="117" top="1360" />
+        <Size width="285" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public static FrenchCardView createCardView(FrenchCard card)</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>KlondikeGame</Name>
+        <Access>Public</Access>
+        <Location left="1144" top="481" />
+        <Size width="401" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private FrenchCardDeck deck</Member>
+        <Member type="Field">private KlondikeTableau tableau</Member>
+        <Member type="Field">private Deque&lt;FrenchCard&gt; activeCardStack</Member>
+        <Member type="Method">void gameStatus()</Member>
+        <Member type="Method">boolean isGameWon()</Member>
+        <Member type="Method">public boolean isMoveValid(Deque&lt;FrenchCard&gt; from, Deque&lt;FrenchCard&gt; to)</Member>
+        <Member type="Method">public void pickUpCards(FrenchCard from)</Member>
+        <Member type="Method">public void dropCards(Deque&lt;FrenchCard&gt; to)</Member>
+        <Member type="Method">public static boolean isOppositeColor(FrenchCard a, FrenchCard b)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>KlondikeTableauView</Name>
+        <Access>Public</Access>
+        <Location left="883" top="1499" />
+        <Size width="262" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private StackPane[] foundationViews</Member>
+        <Member type="Field">private StackPane[] pileViews</Member>
+        <Member type="Field">private StackPane wasteView</Member>
+        <Member type="Field">private StackPane stockView</Member>
+        <Member type="Field">private Image background</Member>
+        <Member type="Field">private ImageView display</Member>
+        <Member type="Constructor">public KlondikeTableauView(KlondikeTableau tableau)</Member>
+        <Member type="Constructor">public KlondikeTableauView(Image background)</Member>
+        <Member type="Method">public void setBackground(Image image)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>Game</Name>
+        <Access>Public</Access>
+        <Location left="1144" top="302" />
+        <Size width="162" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void gameStatus()</Member>
+        <Member type="Method">boolean isGameWon()</Member>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="1" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>628</X>
+          <Y>864</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>628</X>
+          <Y>856</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="1" second="2">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>768</X>
+          <Y>922</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="3">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>509</X>
+          <Y>406</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="6" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>277</X>
+          <Y>694</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>607</X>
+          <Y>422</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="7" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>499</X>
+          <Y>1234</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>579</X>
+          <Y>1079</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>672</X>
+          <Y>1076</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="9" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>272</X>
+          <Y>1335</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="5" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>521</X>
+          <Y>943</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="10" second="12">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="9" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>434</X>
+          <Y>1410</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="11" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="7" second="6">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="10" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>701</X>
+          <Y>1094</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
