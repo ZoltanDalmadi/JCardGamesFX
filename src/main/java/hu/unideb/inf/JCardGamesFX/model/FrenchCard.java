@@ -1,5 +1,8 @@
 package hu.unideb.inf.JCardGamesFX.model;
 
+/**
+ * Class representing a classic French playing card.
+ */
 public class FrenchCard extends Card {
 
   /**

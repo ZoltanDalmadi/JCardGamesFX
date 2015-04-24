@@ -1,9 +1,12 @@
 package hu.unideb.inf.JCardGamesFX.model;
 
+/**
+ * Class representing a deck of French playing cards.
+ */
 public class FrenchCardDeck extends CardDeck {
 
   /**
-   * Creates a standard 52-card deck of Frenck playing cards.
+   * Creates a standard 52-card deck of French playing cards.
    *
    * @return The FrenchCardDeck object containing the 52 cards.
    */

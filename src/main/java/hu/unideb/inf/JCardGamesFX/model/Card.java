@@ -1,5 +1,8 @@
 package hu.unideb.inf.JCardGamesFX.model;
 
+/**
+ * Abstract class representing the concept of a playing card.
+ */
 public abstract class Card {
 
   /**
