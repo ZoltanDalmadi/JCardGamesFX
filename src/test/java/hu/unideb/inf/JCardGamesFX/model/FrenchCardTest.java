@@ -3,7 +3,7 @@ package hu.unideb.inf.JCardGamesFX.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Unit test for class <code>FrenchCard</code>.
@@ -58,11 +58,11 @@ public class FrenchCardTest {
    */
   @Test
   public void testFlip() {
-    assertEquals(true, card.isFaceDown());
+    assertTrue(card.isFaceDown());
     card.flip();
-    assertEquals(false, card.isFaceDown());
+    assertFalse(card.isFaceDown());
     card.flip();
-    assertEquals(true, card.isFaceDown());
+    assertTrue(card.isFaceDown());
   }
 
   /**
@@ -71,10 +71,10 @@ public class FrenchCardTest {
   @Test
   public void testFaceDown() {
     card.faceDown();
-    assertEquals(true, card.isFaceDown());
+    assertTrue(card.isFaceDown());
     card.flip();
     card.faceDown();
-    assertEquals(true, card.isFaceDown());
+    assertTrue(card.isFaceDown());
   }
 
   /**
@@ -83,10 +83,10 @@ public class FrenchCardTest {
   @Test
   public void testFaceUp() {
     card.faceUp();
-    assertEquals(false, card.isFaceDown());
+    assertFalse(card.isFaceDown());
     card.flip();
     card.faceUp();
-    assertEquals(false, card.isFaceDown());
+    assertFalse(card.isFaceDown());
   }
 
 }
