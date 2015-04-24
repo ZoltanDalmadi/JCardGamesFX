@@ -1,5 +1,6 @@
 package hu.unideb.inf.JCardGamesFX.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public abstract class CardDeck {
    * Creates an empty <code>CardDeck</code> object.
    */
   public CardDeck() {
+    this.cards = new ArrayList<>();
   }
 
   /**
