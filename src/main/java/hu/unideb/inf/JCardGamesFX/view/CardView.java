@@ -8,13 +8,13 @@ import javafx.scene.image.ImageView;
  * This abstract class provides a base for classes that implements various
  * JavaFX based views for {@link Card} objects.
  */
-public class CardView {
+public class CardView implements CardObserver {
 
   /**
-   * This static field holds the Image object that will be
-   * the back face of all cards.
+   * This field holds the Image object that will be
+   * the back face of this card.
    */
-  protected static Image backFace;
+  protected Image backFace;
 
   /**
    * The {@link Card} object to be represented.
@@ -23,7 +23,7 @@ public class CardView {
 
   /**
    * This field holds the Image object that will be the front face
-   * of an individual card.
+   * of this card.
    */
   protected Image frontFace;
 
@@ -40,9 +40,10 @@ public class CardView {
    * @param card      The {@link Card} object to be represented.
    * @param frontFace The {@link Image} object for representing the card.
    */
-  public CardView(Card card, Image frontFace) {
+  public CardView(Card card, Image frontFace, Image backFace) {
     this.card = card;
     this.frontFace = frontFace;
+    this.backFace = backFace;
   }
 
   /**
@@ -61,19 +62,19 @@ public class CardView {
   }
 
   /**
-   * Returns the {@link Image} object that holds the back face of all cards.
+   * Returns the {@link Image} object that holds the back face of this card.
    *
    * @return The back face {@link Image} object.
    */
-  public static Image getBackFace() {
+  public Image getBackFace() {
     return backFace;
   }
 
   /**
-   * Sets the {@link Image} object that holds the back face of all cards.
+   * Sets the {@link Image} object that holds the back face of this card.
    */
-  public static void setBackFace(Image backFace) {
-    CardView.backFace = backFace;
+  public void setBackFace(Image backFace) {
+    this.backFace = backFace;
   }
 
   /**
@@ -109,7 +110,6 @@ public class CardView {
    * @return The back face {@link Image} object.
    */
   public Image getFrontFace() {
-
     return frontFace;
   }
 
@@ -119,4 +119,13 @@ public class CardView {
   public void setFrontFace(Image frontFace) {
     this.frontFace = frontFace;
   }
+
+  /**
+   * Sets the current {@link Image} object for the <code>display</code> field.
+   */
+  @Override
+  public void update() {
+    display.setImage(card.isFaceDown() ? backFace : frontFace);
+  }
+
 }
