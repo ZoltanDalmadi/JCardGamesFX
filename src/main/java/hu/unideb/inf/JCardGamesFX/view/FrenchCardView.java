@@ -15,6 +15,7 @@ public class FrenchCardView extends CardView {
    *
    * @param card      The {@link FrenchCard} object to be represented.
    * @param frontFace The {@link Image} object for representing the card.
+   * @param backFace  The {@link Image} object for the back face.
    */
   public FrenchCardView(FrenchCard card, Image frontFace, Image backFace) {
     super(card, frontFace, backFace);

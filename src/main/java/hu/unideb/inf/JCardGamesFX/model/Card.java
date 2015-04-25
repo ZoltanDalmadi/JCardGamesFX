@@ -54,6 +54,7 @@ public abstract class Card {
 
   /**
    * Sets the suit of this card.
+   * @param suit The suit to be set.
    */
   public void setSuit(Suit suit) {
     this.suit = suit;
@@ -70,6 +71,7 @@ public abstract class Card {
 
   /**
    * Sets the rank of this card.
+   * @param rank The rank to be set.
    */
   public void setRank(Rank rank) {
     this.rank = rank;

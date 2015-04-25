@@ -39,6 +39,7 @@ public class CardView implements CardObserver {
    *
    * @param card      The {@link Card} object to be represented.
    * @param frontFace The {@link Image} object for representing the card.
+   * @param backFace  The {@link Image} object for the back face.
    */
   public CardView(Card card, Image frontFace, Image backFace) {
     this.card = card;
@@ -72,6 +73,8 @@ public class CardView implements CardObserver {
 
   /**
    * Sets the {@link Image} object that holds the back face of this card.
+   *
+   * @param backFace The {@link Image} object to be set.
    */
   public void setBackFace(Image backFace) {
     this.backFace = backFace;
@@ -115,6 +118,8 @@ public class CardView implements CardObserver {
 
   /**
    * Sets the {@link Image} object that holds the front face of this card.
+   *
+   * @param frontFace The {@link Image} object to be set.
    */
   public void setFrontFace(Image frontFace) {
     this.frontFace = frontFace;
