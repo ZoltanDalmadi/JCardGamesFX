@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class FrenchCardViewTest {
 
@@ -30,14 +31,16 @@ public class FrenchCardViewTest {
 
   @Before
   public void setUp() {
-    cardView = new FrenchCardView();
     FrenchCard card = new FrenchCard(true, FrenchSuit.Hearts, FrenchRank.Queen);
     Image frontFace = new Image("/test_front.png");
     Image backFace = new Image("/test_back.png");
-    cardView.setCard(card);
+    cardView = new FrenchCardView(card, frontFace, backFace);
+    card.addView(cardView);
+    FrenchCardView otherCardView = new FrenchCardView();
+    otherCardView.setCard(card);
     cardView.setFrontFace(frontFace);
     cardView.setBackFace(backFace);
-    card.addView(cardView);
+    card.addView(otherCardView);
   }
 
   @Test
@@ -60,6 +63,14 @@ public class FrenchCardViewTest {
   @Test
   public void testGetFrontFace() {
     assertEquals(180.0, cardView.getFrontFace().getHeight(), 0.0);
+  }
+
+  @Test
+  public void testUpdate() {
+    Image displayedImage = cardView.getDisplay().getImage();
+    cardView.getCard().flip();
+    Image afterFlipImage = cardView.getDisplay().getImage();
+    assertNotEquals(displayedImage, afterFlipImage);
   }
 
   public static class TestApp extends Application {
