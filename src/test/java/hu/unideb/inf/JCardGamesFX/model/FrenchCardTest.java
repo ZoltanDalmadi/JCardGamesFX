@@ -117,4 +117,21 @@ public class FrenchCardTest {
     assertTrue(card.getViews().isEmpty());
   }
 
+  /**
+   * Tests <code>getId()</code> method.
+   */
+  @Test
+  public void testGetId() {
+    assertEquals("QH", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Ace);
+    assertEquals("AC", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Jack);
+    assertEquals("JS", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Seven);
+    assertEquals("7D", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Hearts, FrenchRank.Ten);
+    assertEquals("10H", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Three);
+    assertEquals("3S", card.getId());
+  }
 }
