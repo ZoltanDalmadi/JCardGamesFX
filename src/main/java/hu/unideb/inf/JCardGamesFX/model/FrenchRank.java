@@ -3,7 +3,7 @@ package hu.unideb.inf.JCardGamesFX.model;
 /**
  * Standard French playing card ranks.
  */
-public enum FrenchRank {
+public enum FrenchRank implements Rank {
   Ace,
   Two,
   Three,
