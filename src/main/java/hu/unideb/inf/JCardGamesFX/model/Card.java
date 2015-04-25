@@ -156,4 +156,6 @@ public abstract class Card {
     views.forEach(CardObserver::update);
   }
 
+  public abstract String getId();
+
 }
