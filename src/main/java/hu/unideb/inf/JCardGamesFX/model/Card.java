@@ -21,6 +21,13 @@ public abstract class Card {
   private Suit suit;
   private Rank rank;
 
+  /**
+   * Constructs a {@link Card} object, with the specified suit and rank.
+   *
+   * @param faceDown Whether the card is facing down.
+   * @param suit     The suit of the card.
+   * @param rank     The rank of the card.
+   */
   public Card(boolean faceDown, Suit suit, Rank rank) {
     this.faceDown = faceDown;
     this.suit = suit;
@@ -46,12 +53,26 @@ public abstract class Card {
   }
 
   /**
+   * Sets the suit of this card.
+   */
+  public void setSuit(Suit suit) {
+    this.suit = suit;
+  }
+
+  /**
    * Returns the rank of this card.
    *
    * @return The rank of this card.
    */
   public Rank getRank() {
     return rank;
+  }
+
+  /**
+   * Sets the rank of this card.
+   */
+  public void setRank(Rank rank) {
+    this.rank = rank;
   }
 
   /**
