@@ -8,7 +8,7 @@
         <Name>Card</Name>
         <Access>Public</Access>
         <Location left="548" top="584" />
-        <Size width="262" height="366" />
+        <Size width="262" height="400" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private boolean faceDown</Member>
         <Member type="Field">private Rank rank</Member>
@@ -17,7 +17,9 @@
         <Member type="Constructor">public Card(boolean faceDown, Suit suit, Rank rank)</Member>
         <Member type="Constructor">public Card(boolean faceDown)</Member>
         <Member type="Method">public Suit getSuit()</Member>
+        <Member type="Method">public void setSuit(Suit suit)</Member>
         <Member type="Method">public Rank getRank()</Member>
+        <Member type="Method">public void setRank(Rank rank)</Member>
         <Member type="Method">public String toString()</Member>
         <Member type="Method">public void flip()</Member>
         <Member type="Method">public void faceDown()</Member>
@@ -32,16 +34,17 @@
       <Entity type="Class">
         <Name>FrenchCard</Name>
         <Access>Public</Access>
-        <Location left="548" top="1014" />
-        <Size width="186" height="94" />
+        <Location left="548" top="1053" />
+        <Size width="361" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Constructor">public FrenchCard(boolean faceDown)</Member>
+        <Member type="Constructor">public FrenchCard(boolean faceDown, FrenchSuit suit, FrenchRank rank)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Enum">
         <Name>FrenchSuit</Name>
         <Access>Public</Access>
-        <Location left="913" top="634" />
+        <Location left="1033" top="634" />
         <Size width="163" height="129" />
         <Collapsed>False</Collapsed>
         <Value>Clubs</Value>
@@ -52,7 +55,7 @@
       <Entity type="Enum">
         <Name>FrenchRank</Name>
         <Access>Public</Access>
-        <Location left="913" top="776" />
+        <Location left="1033" top="776" />
         <Size width="163" height="282" />
         <Collapsed>False</Collapsed>
         <Value>Ace</Value>
@@ -98,13 +101,13 @@
         <Location left="117" top="776" />
         <Size width="314" height="332" />
         <Collapsed>False</Collapsed>
-        <Member type="Field">protected Card card</Member>
-        <Member type="Field">protected Image frontFace</Member>
-        <Member type="Field">protected Image backFace</Member>
-        <Member type="Field">protected ImageView display</Member>
-        <Member type="Constructor">protected CardView()</Member>
-        <Member type="Constructor">protected CardView(Card card)</Member>
-        <Member type="Constructor">protected CardView(Card card, Image frontFace, Image backFace)</Member>
+        <Member type="Field">private Card card</Member>
+        <Member type="Field">private Image frontFace</Member>
+        <Member type="Field">private Image backFace</Member>
+        <Member type="Field">private ImageView display</Member>
+        <Member type="Constructor">public CardView()</Member>
+        <Member type="Constructor">public CardView(Card card)</Member>
+        <Member type="Constructor">public CardView(Card card, Image frontFace, Image backFace)</Member>
         <Member type="Method">public Image getBackFace()</Member>
         <Member type="Method">public void setBackFace(Image image)</Member>
         <Member type="Method">public Card getCard()</Member>
@@ -129,7 +132,7 @@
       <Entity type="Class">
         <Name>KlondikeTableau</Name>
         <Access>Public</Access>
-        <Location left="690" top="1254" />
+        <Location left="692" top="1266" />
         <Size width="233" height="213" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private Deque&lt;FrenchCard&gt;[] foundations</Member>
@@ -143,7 +146,7 @@
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
-        <Name>FrenchCardViewBuilder</Name>
+        <Name>FrenchCardViewFactory</Name>
         <Access>Public</Access>
         <Location left="117" top="1360" />
         <Size width="285" height="94" />
@@ -154,7 +157,7 @@
       <Entity type="Class">
         <Name>KlondikeGame</Name>
         <Access>Public</Access>
-        <Location left="1009" top="1214" />
+        <Location left="1010" top="1227" />
         <Size width="401" height="230" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private FrenchCardDeck deck</Member>
@@ -171,7 +174,7 @@
       <Entity type="Class">
         <Name>KlondikeTableauView</Name>
         <Access>Public</Access>
-        <Location left="677" top="1526" />
+        <Location left="680" top="1569" />
         <Size width="262" height="230" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private StackPane[] foundationViews</Member>
@@ -205,14 +208,14 @@
       <Entity type="Interface">
         <Name>Suit</Name>
         <Access>Public</Access>
-        <Location left="1134" top="634" />
+        <Location left="1265" top="634" />
         <Size width="163" height="77" />
         <Collapsed>False</Collapsed>
       </Entity>
       <Entity type="Interface">
         <Name>Rank</Name>
         <Access>Public</Access>
-        <Location left="1134" top="776" />
+        <Location left="1265" top="776" />
         <Size width="163" height="77" />
         <Collapsed>False</Collapsed>
       </Entity>
@@ -223,11 +226,11 @@
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
           <X>628</X>
-          <Y>989</Y>
+          <Y>1028</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
           <X>628</X>
-          <Y>993</Y>
+          <Y>1027</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
@@ -236,8 +239,8 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>768</X>
-          <Y>1047</Y>
+          <X>943</X>
+          <Y>1086</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -248,8 +251,8 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>820</X>
-          <Y>1077</Y>
+          <X>995</X>
+          <Y>1116</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -291,7 +294,7 @@
         </BendPoint>
         <BendPoint relativeToStartShape="False">
           <X>579</X>
-          <Y>1136</Y>
+          <Y>1192</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
@@ -301,7 +304,7 @@
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
           <X>672</X>
-          <Y>1133</Y>
+          <Y>1189</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
@@ -321,7 +324,7 @@
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">
           <X>521</X>
-          <Y>1068</Y>
+          <Y>1107</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
@@ -342,6 +345,10 @@
         <BendPoint relativeToStartShape="True">
           <X>434</X>
           <Y>1410</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>625</X>
+          <Y>1196</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
@@ -367,7 +374,7 @@
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
           <X>707</X>
-          <Y>1136</Y>
+          <Y>1192</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
@@ -390,11 +397,11 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1101</X>
+          <X>1221</X>
           <Y>675</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1109</X>
+          <X>1240</X>
           <Y>675</Y>
         </BendPoint>
       </Relationship>
@@ -412,7 +419,7 @@
           <Y>608</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1217</X>
+          <X>1348</X>
           <Y>608</Y>
         </BendPoint>
       </Relationship>
@@ -424,7 +431,7 @@
           <Y>541</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1332</X>
+          <X>1463</X>
           <Y>815</Y>
         </BendPoint>
       </Relationship>
