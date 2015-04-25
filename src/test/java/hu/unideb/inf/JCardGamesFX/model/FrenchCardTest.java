@@ -46,11 +46,17 @@ public class FrenchCardTest {
   @Test
   public void testToString() {
     assertEquals("The Queen of Hearts", card.toString());
-    card = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Ace);
+    card = new FrenchCard(true);
+    card.setRank(FrenchRank.Ace);
+    card.setSuit(FrenchSuit.Clubs);
     assertEquals("The Ace of Clubs", card.toString());
-    card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Jack);
+    card = new FrenchCard(true);
+    card.setRank(FrenchRank.Jack);
+    card.setSuit(FrenchSuit.Spades);
     assertEquals("The Jack of Spades", card.toString());
-    card = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Seven);
+    card = new FrenchCard(true);
+    card.setRank(FrenchRank.Seven);
+    card.setSuit(FrenchSuit.Diamonds);
     assertEquals("The Seven of Diamonds", card.toString());
   }
 
