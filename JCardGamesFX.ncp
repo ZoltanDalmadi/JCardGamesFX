@@ -7,33 +7,39 @@
       <Entity type="Class">
         <Name>Card</Name>
         <Access>Public</Access>
-        <Location left="548" top="634" />
-        <Size width="162" height="179" />
+        <Location left="548" top="584" />
+        <Size width="262" height="366" />
         <Collapsed>False</Collapsed>
-        <Member type="Field">protected boolean faceDown</Member>
-        <Member type="Constructor">protected Card(boolean faceDown)</Member>
+        <Member type="Field">private boolean faceDown</Member>
+        <Member type="Field">private Rank rank</Member>
+        <Member type="Field">private Suit suit</Member>
+        <Member type="Field">private List&lt;CardObserver&gt; views</Member>
+        <Member type="Constructor">public Card(boolean faceDown, Suit suit, Rank rank)</Member>
+        <Member type="Constructor">public Card(boolean faceDown)</Member>
+        <Member type="Method">public Suit getSuit()</Member>
+        <Member type="Method">public Rank getRank()</Member>
+        <Member type="Method">public String toString()</Member>
         <Member type="Method">public void flip()</Member>
         <Member type="Method">public void faceDown()</Member>
         <Member type="Method">public void faceUp()</Member>
         <Member type="Method">public boolean isFaceDown()</Member>
+        <Member type="Method">public void addView(CardObserver view)</Member>
+        <Member type="Method">public boolean removeView(CardObserver view)</Member>
+        <Member type="Method">public List&lt;CardObserver&gt; getViews()</Member>
+        <Member type="Method">private void updateViews()</Member>
         <Modifier>Abstract</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>FrenchCard</Name>
         <Access>Public</Access>
-        <Location left="548" top="889" />
-        <Size width="186" height="179" />
+        <Location left="548" top="1014" />
+        <Size width="186" height="94" />
         <Collapsed>False</Collapsed>
-        <Member type="Field">private Rank rank</Member>
-        <Member type="Field">private Suit suit</Member>
         <Member type="Constructor">public FrenchCard(boolean faceDown)</Member>
-        <Member type="Method">public Suit getSuit()</Member>
-        <Member type="Method">public Rank getRank()</Member>
-        <Member type="Method">public String toString()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Enum">
-        <Name>Suit</Name>
+        <Name>FrenchSuit</Name>
         <Access>Public</Access>
         <Location left="913" top="634" />
         <Size width="163" height="129" />
@@ -44,7 +50,7 @@
         <Value>Diamonds</Value>
       </Entity>
       <Entity type="Enum">
-        <Name>Rank</Name>
+        <Name>FrenchRank</Name>
         <Access>Public</Access>
         <Location left="913" top="776" />
         <Size width="163" height="282" />
@@ -90,22 +96,23 @@
         <Name>CardView</Name>
         <Access>Public</Access>
         <Location left="117" top="776" />
-        <Size width="224" height="315" />
+        <Size width="314" height="332" />
         <Collapsed>False</Collapsed>
-        <Member type="Field">protected static Image backFace</Member>
         <Member type="Field">protected Card card</Member>
         <Member type="Field">protected Image frontFace</Member>
+        <Member type="Field">protected Image backFace</Member>
         <Member type="Field">protected ImageView display</Member>
         <Member type="Constructor">protected CardView()</Member>
         <Member type="Constructor">protected CardView(Card card)</Member>
-        <Member type="Constructor">protected CardView(Card card, Image frontFace)</Member>
-        <Member type="Method">public static Image getBackFace()</Member>
-        <Member type="Method">public static void setBackFace(Image image)</Member>
+        <Member type="Constructor">protected CardView(Card card, Image frontFace, Image backFace)</Member>
+        <Member type="Method">public Image getBackFace()</Member>
+        <Member type="Method">public void setBackFace(Image image)</Member>
         <Member type="Method">public Card getCard()</Member>
         <Member type="Method">public void setCard(Card card)</Member>
         <Member type="Method">public ImageView getDisplay()</Member>
         <Member type="Method">public Image getFrontFace()</Member>
         <Member type="Method">public void setFrontFace(Image image)</Member>
+        <Member type="Method">void update()</Member>
         <Modifier>Abstract</Modifier>
       </Entity>
       <Entity type="Class">
@@ -122,7 +129,7 @@
       <Entity type="Class">
         <Name>KlondikeTableau</Name>
         <Access>Public</Access>
-        <Location left="899" top="1195" />
+        <Location left="690" top="1254" />
         <Size width="233" height="213" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private Deque&lt;FrenchCard&gt;[] foundations</Member>
@@ -147,7 +154,7 @@
       <Entity type="Class">
         <Name>KlondikeGame</Name>
         <Access>Public</Access>
-        <Location left="1144" top="481" />
+        <Location left="1009" top="1214" />
         <Size width="401" height="230" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private FrenchCardDeck deck</Member>
@@ -164,7 +171,7 @@
       <Entity type="Class">
         <Name>KlondikeTableauView</Name>
         <Access>Public</Access>
-        <Location left="883" top="1499" />
+        <Location left="677" top="1526" />
         <Size width="262" height="230" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private StackPane[] foundationViews</Member>
@@ -181,11 +188,33 @@
       <Entity type="Interface">
         <Name>Game</Name>
         <Access>Public</Access>
-        <Location left="1144" top="302" />
+        <Location left="1247" top="1053" />
         <Size width="162" height="111" />
         <Collapsed>False</Collapsed>
         <Member type="Method">void gameStatus()</Member>
         <Member type="Method">boolean isGameWon()</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>CardObserver</Name>
+        <Access>Public</Access>
+        <Location left="69" top="618" />
+        <Size width="163" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void update()</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>Suit</Name>
+        <Access>Public</Access>
+        <Location left="1134" top="634" />
+        <Size width="163" height="77" />
+        <Collapsed>False</Collapsed>
+      </Entity>
+      <Entity type="Interface">
+        <Name>Rank</Name>
+        <Access>Public</Access>
+        <Location left="1134" top="776" />
+        <Size width="163" height="77" />
+        <Collapsed>False</Collapsed>
       </Entity>
     </Entities>
     <Relationships>
@@ -194,26 +223,34 @@
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
           <X>628</X>
-          <Y>864</Y>
+          <Y>989</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
           <X>628</X>
-          <Y>856</Y>
+          <Y>993</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="1" second="2">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
           <X>768</X>
-          <Y>922</Y>
+          <Y>1047</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="1" second="3">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>820</X>
+          <Y>1077</Y>
+        </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
@@ -226,8 +263,6 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Association" first="6" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -238,8 +273,6 @@
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -250,8 +283,6 @@
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="7" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -260,26 +291,22 @@
         </BendPoint>
         <BendPoint relativeToStartShape="False">
           <X>579</X>
-          <Y>1096</Y>
+          <Y>1136</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="8" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
           <X>672</X>
-          <Y>1093</Y>
+          <Y>1133</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="9" second="7">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -290,13 +317,11 @@
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="5" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">
           <X>521</X>
-          <Y>943</Y>
+          <Y>1068</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
@@ -304,8 +329,14 @@
       <Relationship type="Realization" first="10" second="12">
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1323</X>
+          <Y>1189</Y>
+        </BendPoint>
       </Relationship>
       <Relationship type="Association" first="9" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -316,28 +347,86 @@
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="11" second="8">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="7" second="6">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
       </Relationship>
       <Relationship type="Association" first="10" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>701</X>
-          <Y>1111</Y>
+          <X>707</X>
+          <Y>1136</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Realization" first="6" second="13">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="0" second="13">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Dependency" first="2" second="14">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1101</X>
+          <Y>675</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1109</X>
+          <Y>675</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Dependency" first="3" second="15">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="0" second="14">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>835</X>
+          <Y>608</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1217</X>
+          <Y>608</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="0" second="15">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>767</X>
+          <Y>541</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1332</X>
+          <Y>815</Y>
+        </BendPoint>
       </Relationship>
     </Relationships>
   </ProjectItem>
