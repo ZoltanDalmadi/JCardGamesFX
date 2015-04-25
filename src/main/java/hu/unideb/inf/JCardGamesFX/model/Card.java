@@ -11,17 +11,15 @@ import java.util.List;
 public abstract class Card {
 
   /**
-   * Whether the card is facing down.
-   */
-  protected boolean faceDown;
-
-  protected Suit suit;
-  protected Rank rank;
-
-  /**
    * The list of views attached to this card.
    */
   List<CardObserver> views = new ArrayList<>();
+  /**
+   * Whether the card is facing down.
+   */
+  private boolean faceDown;
+  private Suit suit;
+  private Rank rank;
 
   public Card(boolean faceDown, Suit suit, Rank rank) {
     this.faceDown = faceDown;
@@ -131,7 +129,7 @@ public abstract class Card {
   /**
    * Updates all views attached to this card.
    */
-  protected void updateViews() {
+  private void updateViews() {
     views.forEach(CardObserver::update);
   }
 
