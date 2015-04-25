@@ -14,24 +14,24 @@ public class CardView implements CardObserver {
    * This field holds the Image object that will be
    * the back face of this card.
    */
-  protected Image backFace;
+  private Image backFace;
 
   /**
    * The {@link Card} object to be represented.
    */
-  protected Card card;
+  private Card card;
 
   /**
    * This field holds the Image object that will be the front face
    * of this card.
    */
-  protected Image frontFace;
+  private Image frontFace;
 
   /**
    * This field is responsible for actually displaying
    * the {@link Image} objects.
    */
-  protected ImageView display;
+  private ImageView display = new ImageView();
 
   /**
    * Constructs a {@link CardView} object for the given {@link Card} object
