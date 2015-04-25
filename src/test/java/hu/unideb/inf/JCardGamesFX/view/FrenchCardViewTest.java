@@ -37,6 +37,7 @@ public class FrenchCardViewTest {
     cardView.setCard(card);
     cardView.setFrontFace(frontFace);
     cardView.setBackFace(backFace);
+    card.addView(cardView);
   }
 
   @Test
@@ -46,16 +47,19 @@ public class FrenchCardViewTest {
 
   @Test
   public void testGetCard() {
+    assertEquals(FrenchRank.Queen, cardView.getCard().getRank());
+    assertEquals(FrenchSuit.Hearts, cardView.getCard().getSuit());
   }
 
   @Test
   public void testGetDisplay() {
-
+    assertEquals(130.0, cardView.getDisplay().getImage().getWidth(), 0.0);
+    assertEquals(180.0, cardView.getDisplay().getImage().getHeight(), 0.0);
   }
 
   @Test
   public void testGetFrontFace() {
-    assertEquals(180.0, cardView.getBackFace().getHeight(), 0.0);
+    assertEquals(180.0, cardView.getFrontFace().getHeight(), 0.0);
   }
 
   public static class TestApp extends Application {
