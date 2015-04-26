@@ -125,13 +125,29 @@ public class FrenchCardTest {
     assertEquals("QH", card.getId());
     card = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Ace);
     assertEquals("AC", card.getId());
-    card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Jack);
-    assertEquals("JS", card.getId());
-    card = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Seven);
-    assertEquals("7D", card.getId());
     card = new FrenchCard(true, FrenchSuit.Hearts, FrenchRank.Ten);
     assertEquals("10H", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Two);
+    assertEquals("2S", card.getId());
     card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Three);
     assertEquals("3S", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Hearts, FrenchRank.Four);
+    assertEquals("4H", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Five);
+    assertEquals("5C", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Six);
+    assertEquals("6D", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Seven);
+    assertEquals("7D", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Hearts, FrenchRank.Eight);
+    assertEquals("8H", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Nine);
+    assertEquals("9S", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Ten);
+    assertEquals("10C", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Jack);
+    assertEquals("JS", card.getId());
+    card = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.King);
+    assertEquals("KD", card.getId());
   }
 }
