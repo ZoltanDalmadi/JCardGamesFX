@@ -3,10 +3,11 @@ package hu.unideb.inf.JCardGamesFX.view;
 import hu.unideb.inf.JCardGamesFX.model.FrenchCard;
 import hu.unideb.inf.JCardGamesFX.model.FrenchRank;
 import hu.unideb.inf.JCardGamesFX.model.FrenchSuit;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import org.junit.BeforeClass;
+import org.json.simple.parser.ParseException;
+import org.junit.Rule;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -16,18 +17,18 @@ import static org.junit.Assert.*;
 public class FrenchCardViewFactoryTest {
 
   /**
-   * Creates a JavaFX thread to run the tests in.
+   * Rule for testing in a JavaFX thread.
    */
-  @BeforeClass
-  public static void initJFX() throws Exception {
-    Thread t = new Thread("JavaFX init thread") {
-      public void run() {
-        Application.launch(TestApp.class);
-      }
-    };
-    t.setDaemon(true);
-    t.start();
-    Thread.sleep(1000);
+  @Rule
+  public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
+
+  /**
+   * Tests instantiation for better coverage.
+   */
+  @Test
+  public void testInstantiate() {
+    FrenchCardViewFactory testObject = new FrenchCardViewFactory();
+    assertNotNull(testObject);
   }
 
   /**
@@ -46,7 +47,7 @@ public class FrenchCardViewFactoryTest {
    * Tests the static method <code>createCardView()</code>.
    */
   @Test
-  public void testCreateCardView() {
+  public void testCreateCardView() throws IOException, ParseException {
     CardTheme theme = new CardTheme("/cardfaces/classicTest/theme.json", "/test_back.png");
     FrenchCardViewFactory.setCardTheme(theme);
     FrenchCard card = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.King);
@@ -56,12 +57,4 @@ public class FrenchCardViewFactoryTest {
     assertSame(theme.getBackFace(), cardView.getDisplay().getImage());
   }
 
-  /**
-   * Needed class for the JavaFX thread.
-   */
-  public static class TestApp extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    }
-  }
 }

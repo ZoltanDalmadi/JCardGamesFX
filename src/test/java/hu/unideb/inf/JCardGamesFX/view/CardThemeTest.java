@@ -1,11 +1,12 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
-import javafx.application.Application;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -15,24 +16,15 @@ import static org.junit.Assert.*;
 public class CardThemeTest {
 
   /**
+   * Rule for testing in a JavaFX thread.
+   */
+  @Rule
+  public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
+
+  /**
    * Reference to the <code>CardTheme</code> object under test.
    */
   CardTheme theme;
-
-  /**
-   * Creates a JavaFX thread to run the tests in.
-   */
-  @BeforeClass
-  public static void initJFX() throws Exception {
-    Thread t = new Thread("JavaFX init thread") {
-      public void run() {
-        Application.launch(TestApp.class);
-      }
-    };
-    t.setDaemon(true);
-    t.start();
-    Thread.sleep(1000);
-  }
 
   /**
    * Instantiates a new <code>CardTheme</code> object before each test.
@@ -46,7 +38,7 @@ public class CardThemeTest {
    * Tests setter and getter for theme file path.
    */
   @Test
-  public void testThemeFileOperations() {
+  public void testThemeFileOperations() throws IOException, ParseException {
     theme.setThemeFile("/cardfaces/classicTest/theme.json");
     assertEquals("/cardfaces/classicTest/theme.json", theme.getThemeFile());
   }
@@ -77,7 +69,7 @@ public class CardThemeTest {
    * Tests theme parsing.
    */
   @Test
-  public void testParseTheme() {
+  public void testParseTheme() throws IOException, ParseException {
     theme.setBackFace(new Image("/test_back.png"));
     theme.setThemeFile("/cardfaces/classicTest/theme.json");
     assertEquals(13, theme.getImages().size());
@@ -85,12 +77,4 @@ public class CardThemeTest {
     assertEquals(180.0, theme.getFrontFace("QC").getHeight(), 0.0);
   }
 
-  /**
-   * Needed class for the JavaFX thread.
-   */
-  public static class TestApp extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    }
-  }
 }

@@ -3,11 +3,9 @@ package hu.unideb.inf.JCardGamesFX.view;
 import hu.unideb.inf.JCardGamesFX.model.FrenchCard;
 import hu.unideb.inf.JCardGamesFX.model.FrenchRank;
 import hu.unideb.inf.JCardGamesFX.model.FrenchSuit;
-import javafx.application.Application;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -19,24 +17,15 @@ import static org.junit.Assert.assertNotEquals;
 public class FrenchCardViewTest {
 
   /**
+   * Rule for testing in a JavaFX thread.
+   */
+  @Rule
+  public JavaFXThreadingRule jfxRule = new JavaFXThreadingRule();
+
+  /**
    * Reference to the <code>FrenchCardView</code> object under test.
    */
   FrenchCardView cardView;
-
-  /**
-   * Creates a JavaFX thread to run the tests in.
-   */
-  @BeforeClass
-  public static void initJFX() throws Exception {
-    Thread t = new Thread("JavaFX init thread") {
-      public void run() {
-        Application.launch(TestApp.class);
-      }
-    };
-    t.setDaemon(true);
-    t.start();
-    Thread.sleep(1000);
-  }
 
   /**
    * Sets up the needed objects for the unit tests.
@@ -101,14 +90,5 @@ public class FrenchCardViewTest {
     cardView.getCard().flip();
     Image afterFlipImage = cardView.getDisplay().getImage();
     assertNotEquals(displayedImage, afterFlipImage);
-  }
-
-  /**
-   * Needed class for the JavaFX thread.
-   */
-  public static class TestApp extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    }
   }
 }
