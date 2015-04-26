@@ -1,5 +1,6 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
+import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -10,20 +11,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CardTheme {
-  private Map<String, String> frontFacePaths = new HashMap<>();
-  private String backFacePath;
+  private Map<String, Image> frontFaces = new HashMap<>();
+  private Image backFace;
   private String themeFile;
 
   public CardTheme(String themeFile, String backFacePath) {
     this.themeFile = themeFile;
-    this.backFacePath = backFacePath;
+    this.backFace = new Image(backFacePath);
+    parseTheme();
   }
 
   public CardTheme() {
   }
 
   public CardTheme(String backFacePath) {
-    this.backFacePath = backFacePath;
+    this.backFace = new Image(backFacePath);
   }
 
   public String getThemeFile() {
@@ -32,30 +34,31 @@ public class CardTheme {
 
   public void setThemeFile(String themeFile) {
     this.themeFile = themeFile;
+    parseTheme();
   }
 
-  public String getBackFacePath() {
-    return backFacePath;
+  public Image getBackFace() {
+    return backFace;
   }
 
-  public void setBackFacePath(String backFacePath) {
-    this.backFacePath = backFacePath;
+  public void setBackFace(Image backFace) {
+    this.backFace = backFace;
   }
 
-  public String getFrontFacePathFor(String key) {
-    return frontFacePaths.get(key);
+  public Image getFrontFace(String key) {
+    return frontFaces.get(key);
   }
 
-  public void addFrontFacePathFor(String key, String value) {
-    frontFacePaths.put(key, value);
+  public void addFrontFace(String key, Image value) {
+    frontFaces.put(key, value);
   }
 
-  public void removeFrontFacePath(String key) {
-    frontFacePaths.remove(key);
+  public void removeFrontFace(String key) {
+    frontFaces.remove(key);
   }
 
-  public Map<String, String> getPaths() {
-    return frontFacePaths;
+  public Map<String, Image> getImages() {
+    return frontFaces;
   }
 
   public void parseTheme() {
@@ -67,7 +70,7 @@ public class CardTheme {
           getClass().getResource(themeFile).openStream()));
 
       for (Object key : jo.keySet()) {
-        frontFacePaths.put((String) key, (String) jo.get(key));
+        frontFaces.put((String) key, new Image((String) jo.get(key)));
       }
 
     } catch (IOException | ParseException e) {
