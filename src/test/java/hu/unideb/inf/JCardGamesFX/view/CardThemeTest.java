@@ -36,6 +36,9 @@ public class CardThemeTest {
 
   /**
    * Tests setter and getter for theme file path.
+   *
+   * @throws IOException    If an I/O error occurs.
+   * @throws ParseException If a parse error occurs.
    */
   @Test
   public void testThemeFileOperations() throws IOException, ParseException {
@@ -67,6 +70,9 @@ public class CardThemeTest {
 
   /**
    * Tests theme parsing.
+   *
+   * @throws IOException    If an I/O error occurs.
+   * @throws ParseException If a parse error occurs.
    */
   @Test
   public void testParseTheme() throws IOException, ParseException {

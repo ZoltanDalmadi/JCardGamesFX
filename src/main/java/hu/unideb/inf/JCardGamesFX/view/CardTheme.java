@@ -40,6 +40,8 @@ public class CardTheme {
    *
    * @param themeFile    Path to the theme json file.
    * @param backFacePath Path to the back face image file.
+   * @throws IOException    If an I/O error occurs.
+   * @throws ParseException If a parse error occurs.
    */
   public CardTheme(String themeFile, String backFacePath) throws IOException, ParseException {
     this.themeFile = themeFile;
@@ -68,6 +70,8 @@ public class CardTheme {
    * Sets the path for the theme file.
    *
    * @param themeFile The path for the theme file to be set.
+   * @throws IOException    If an I/O error occurs.
+   * @throws ParseException If a parse error occurs.
    */
   public void setThemeFile(String themeFile) throws IOException, ParseException {
     this.themeFile = themeFile;
@@ -133,6 +137,9 @@ public class CardTheme {
 
   /**
    * Parses the json file and creates the {@link Image} objects.
+   *
+   * @throws IOException    If an I/O error occurs.
+   * @throws ParseException If a parse error occurs.
    */
   public void parseTheme() throws IOException, ParseException {
     JSONParser jsonParser = new JSONParser();

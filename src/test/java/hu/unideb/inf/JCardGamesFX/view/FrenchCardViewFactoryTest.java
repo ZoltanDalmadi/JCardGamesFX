@@ -45,6 +45,9 @@ public class FrenchCardViewFactoryTest {
 
   /**
    * Tests the static method <code>createCardView()</code>.
+   *
+   * @throws IOException    If an I/O error occurs.
+   * @throws ParseException If a parse error occurs.
    */
   @Test
   public void testCreateCardView() throws IOException, ParseException {
