@@ -9,10 +9,19 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit test for class <code>CardTheme</code>.
+ */
 public class CardThemeTest {
 
+  /**
+   * Reference to the <code>CardTheme</code> object under test.
+   */
   CardTheme theme;
 
+  /**
+   * Creates a JavaFX thread to run the tests in.
+   */
   @BeforeClass
   public static void initJFX() throws Exception {
     Thread t = new Thread("JavaFX init thread") {
@@ -25,17 +34,26 @@ public class CardThemeTest {
     Thread.sleep(1000);
   }
 
+  /**
+   * Instantiates a new <code>CardTheme</code> object before each test.
+   */
   @Before
   public void setUp() {
     theme = new CardTheme();
   }
 
+  /**
+   * Tests setter and getter for theme file path.
+   */
   @Test
   public void testThemeFileOperations() {
     theme.setThemeFile("/cardfaces/classicTest/theme.json");
     assertEquals("/cardfaces/classicTest/theme.json", theme.getThemeFile());
   }
 
+  /**
+   * Tests getter and setter for field <code>backFace</code>.
+   */
   @Test
   public void testBackFacePathOperations() {
     Image testBackFace = new Image("/test_back.png");
@@ -43,6 +61,9 @@ public class CardThemeTest {
     assertSame(testBackFace, theme.getBackFace());
   }
 
+  /**
+   * Tests insertion and removal operations.
+   */
   @Test
   public void testMapOperations() {
     Image testFrontFace = new Image("/cardfaces/classicTest/10C.png");
@@ -52,6 +73,9 @@ public class CardThemeTest {
     assertTrue(theme.getImages().isEmpty());
   }
 
+  /**
+   * Tests theme parsing.
+   */
   @Test
   public void testParseTheme() {
     theme.setBackFace(new Image("/test_back.png"));
@@ -61,6 +85,9 @@ public class CardThemeTest {
     assertEquals(180.0, theme.getFrontFace("QC").getHeight(), 0.0);
   }
 
+  /**
+   * Needed class for the JavaFX thread.
+   */
   public static class TestApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {

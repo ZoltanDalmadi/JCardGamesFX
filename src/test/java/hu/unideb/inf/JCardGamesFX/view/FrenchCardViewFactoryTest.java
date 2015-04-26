@@ -10,8 +10,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit test for class <code>FrenchCardViewFactory</code>.
+ */
 public class FrenchCardViewFactoryTest {
 
+  /**
+   * Creates a JavaFX thread to run the tests in.
+   */
   @BeforeClass
   public static void initJFX() throws Exception {
     Thread t = new Thread("JavaFX init thread") {
@@ -24,6 +30,9 @@ public class FrenchCardViewFactoryTest {
     Thread.sleep(1000);
   }
 
+  /**
+   * Tests static setter and getter methods for the <code>theme</code> field.
+   */
   @Test
   public void testSetterGetter() {
     FrenchCardViewFactory.setCardTheme(null);
@@ -33,6 +42,9 @@ public class FrenchCardViewFactoryTest {
     assertEquals(theme, FrenchCardViewFactory.getCardTheme());
   }
 
+  /**
+   * Tests the static method <code>createCardView()</code>.
+   */
   @Test
   public void testCreateCardView() {
     CardTheme theme = new CardTheme("/cardfaces/classicTest/theme.json", "/test_back.png");
@@ -44,6 +56,9 @@ public class FrenchCardViewFactoryTest {
     assertSame(theme.getBackFace(), cardView.getDisplay().getImage());
   }
 
+  /**
+   * Needed class for the JavaFX thread.
+   */
   public static class TestApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
