@@ -1,7 +1,6 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
 import hu.unideb.inf.JCardGamesFX.model.FrenchCard;
-import javafx.scene.image.Image;
 
 public class FrenchCardViewFactory {
 
@@ -15,11 +14,11 @@ public class FrenchCardViewFactory {
     FrenchCardViewFactory.cardTheme = cardTheme;
   }
 
-  public static FrenchCardView createCardView(FrenchCard card, Image backFace) {
+  public static FrenchCardView createCardView(FrenchCard card) {
     FrenchCardView result = new FrenchCardView(card);
 
-    result.setFrontFace(new Image(cardTheme.getFrontFacePathFor(card.getId())));
-    result.setBackFace(backFace);
+    result.setFrontFace(cardTheme.getFrontFace(card.getId()));
+    result.setBackFace(cardTheme.getBackFace());
     card.addView(result);
 
     return result;
