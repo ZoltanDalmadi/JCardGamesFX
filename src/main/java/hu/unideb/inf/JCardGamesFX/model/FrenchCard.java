@@ -33,8 +33,8 @@ public class FrenchCard extends Card {
   @Override
   public String getId() {
 
-    String suitChar;
-    String rankChar;
+    String suitChar = null;
+    String rankChar = null;
 
     FrenchRank rank = (FrenchRank) this.getRank();
 
@@ -78,8 +78,6 @@ public class FrenchCard extends Card {
       case King:
         rankChar = "K";
         break;
-      default:
-        rankChar = "";
     }
 
     FrenchSuit suit = (FrenchSuit) this.getSuit();
@@ -97,8 +95,6 @@ public class FrenchCard extends Card {
       case Spades:
         suitChar = "S";
         break;
-      default:
-        suitChar = "";
     }
 
     return rankChar + suitChar;
