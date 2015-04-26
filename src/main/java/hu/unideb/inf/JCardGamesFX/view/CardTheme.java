@@ -5,8 +5,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +41,7 @@ public class CardTheme {
    * @param themeFile    Path to the theme json file.
    * @param backFacePath Path to the back face image file.
    */
-  public CardTheme(String themeFile, String backFacePath) {
+  public CardTheme(String themeFile, String backFacePath) throws IOException, ParseException {
     this.themeFile = themeFile;
     this.backFace = new Image(backFacePath);
     parseTheme();
@@ -66,7 +69,7 @@ public class CardTheme {
    *
    * @param themeFile The path for the theme file to be set.
    */
-  public void setThemeFile(String themeFile) {
+  public void setThemeFile(String themeFile) throws IOException, ParseException {
     this.themeFile = themeFile;
     parseTheme();
   }
@@ -131,20 +134,20 @@ public class CardTheme {
   /**
    * Parses the json file and creates the {@link Image} objects.
    */
-  public void parseTheme() {
+  public void parseTheme() throws IOException, ParseException {
     JSONParser jsonParser = new JSONParser();
 
-    try {
+    BufferedReader br = new BufferedReader(new InputStreamReader(
+        new FileInputStream(getClass().getResource(themeFile).getPath()),
+        Charset.forName("UTF-8")));
 
-      JSONObject jo = (JSONObject) jsonParser.parse(new InputStreamReader(
-          getClass().getResource(themeFile).openStream()));
+    JSONObject jo = (JSONObject) jsonParser.parse(br);
 
-      for (Object key : jo.keySet()) {
-        frontFaces.put((String) key, new Image((String) jo.get(key)));
-      }
-
-    } catch (IOException | ParseException e) {
-      e.printStackTrace();
+    for (Object entry : jo.entrySet()) {
+      String key = (String) ((Map.Entry) entry).getKey();
+      String value = (String) ((Map.Entry) entry).getValue();
+      frontFaces.put(key, new Image(value));
     }
   }
+
 }
