@@ -3,7 +3,9 @@ package hu.unideb.inf.JCardGamesFX.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
 
 import static org.junit.Assert.*;
 
@@ -62,6 +64,31 @@ public class CardPileTest {
     assertEquals(1, cardPile.numOfCards());
     assertEquals(3, cardPile1.numOfCards());
     assertTrue(cardsAbove.isEmpty());
+  }
+
+  @Test
+  public void testIteratorAndForEachAndSpliterator() {
+    Card card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Five);
+    Card card2 = new FrenchCard(false, FrenchSuit.Diamonds, FrenchRank.Four);
+    Card card3 = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.Three);
+    Card card4 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Two);
+
+    cardPile.addCard(card1);
+    cardPile.addCard(card2);
+    cardPile.addCard(card3);
+    cardPile.addCard(card4);
+
+    Iterator<Card> testIterator1 = cardPile.iterator();
+    assertSame(testIterator1.next(), cardPile.getCards().get(0));
+    assertSame(testIterator1.next(), cardPile.getCards().get(1));
+    assertSame(testIterator1.next(), cardPile.getCards().get(2));
+
+    Iterator<Card> testIterator2 = cardPile.iterator();
+    cardPile.forEach(card -> assertSame(card, testIterator2.next()));
+
+    Spliterator<Card> testSpliterator = cardPile.spliterator();
+    assertEquals(testSpliterator.characteristics(),
+        cardPile.spliterator().characteristics());
   }
 
 }

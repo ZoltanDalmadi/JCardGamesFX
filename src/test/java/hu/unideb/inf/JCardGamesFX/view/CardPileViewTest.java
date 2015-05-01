@@ -9,7 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
 
 import static org.junit.Assert.*;
 
@@ -90,5 +92,26 @@ public class CardPileViewTest {
     assertEquals(1, cardPileView.numOfCards());
     assertEquals(3, destPile.numOfCards());
     assertTrue(list.isEmpty());
+  }
+
+  @Test
+  public void testIterator() {
+    Iterator<CardView> testIterator = cardPileView.iterator();
+    assertSame(testIterator.next(), cardPileView.getCards().get(0));
+    assertSame(testIterator.next(), cardPileView.getCards().get(1));
+    assertSame(testIterator.next(), cardPileView.getCards().get(2));
+  }
+
+  @Test
+  public void testForEach() {
+    Iterator<CardView> testIterator = cardPileView.iterator();
+    cardPileView.forEach(cardView -> assertSame(cardView, testIterator.next()));
+  }
+
+  @Test
+  public void testSpliterator() {
+    Spliterator<CardView> testSpliterator = cardPileView.spliterator();
+    assertEquals(testSpliterator.characteristics(),
+        cardPileView.spliterator().characteristics());
   }
 }
