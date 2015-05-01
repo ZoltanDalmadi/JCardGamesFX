@@ -41,16 +41,16 @@ public class CardPile implements Iterable<Card> {
 
   @Override
   public Iterator<Card> iterator() {
-    return null;
+    return cards.iterator();
   }
 
   @Override
   public void forEach(Consumer<? super Card> action) {
-
+    cards.forEach(action);
   }
 
   @Override
   public Spliterator<Card> spliterator() {
-    return null;
+    return cards.spliterator();
   }
 }
