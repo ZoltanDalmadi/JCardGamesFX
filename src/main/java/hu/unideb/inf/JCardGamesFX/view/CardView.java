@@ -23,6 +23,11 @@ public class CardView extends ImageView {
   private Image frontFace;
 
   /**
+   * Short identifier.
+   */
+  private String shortID;
+
+  /**
    * Reference to the {@link CardPileView} that is currently containing this
    * {@link CardView}.
    */
@@ -34,10 +39,12 @@ public class CardView extends ImageView {
    *
    * @param frontFace The {@link Image} object for the front face.
    * @param backFace  The {@link Image} object for the back face.
+   * @param shortID   The short identifier.
    */
-  public CardView(Image frontFace, Image backFace) {
+  public CardView(Image frontFace, Image backFace, String shortID) {
     this.frontFace = frontFace;
     this.backFace = backFace;
+    this.shortID = shortID;
 
     setImage(frontFace);
   }
@@ -46,6 +53,24 @@ public class CardView extends ImageView {
    * Constructs an empty {@link CardView}.
    */
   public CardView() {
+  }
+
+  /**
+   * Returns the short identifier for the card that this view represents.
+   *
+   * @return The short identifier.
+   */
+  public String getShortID() {
+    return shortID;
+  }
+
+  /**
+   * Sets the short identifier.
+   *
+   * @param shortID The new short identifier.
+   */
+  public void setShortID(String shortID) {
+    this.shortID = shortID;
   }
 
   /**

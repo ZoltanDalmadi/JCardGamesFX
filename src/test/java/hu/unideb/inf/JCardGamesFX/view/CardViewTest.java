@@ -7,8 +7,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * Unit test for class {@link CardView}.
@@ -42,9 +41,15 @@ public class CardViewTest {
   @Test
   public void testParameterConstructor() {
     CardView cardView1 =
-        new CardView(theme.getFrontFace("QH"), theme.getBackFace());
+        new CardView(theme.getFrontFace("QH"), theme.getBackFace(), "QH");
 
     assertNotNull(cardView1);
+  }
+
+  @Test
+  public void testShortIDGetterSetter() {
+    cardView.setShortID("TEST");
+    assertSame("TEST", cardView.getShortID());
   }
 
   /**

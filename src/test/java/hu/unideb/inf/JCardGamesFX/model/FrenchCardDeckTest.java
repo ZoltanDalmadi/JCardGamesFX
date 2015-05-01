@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
 import java.util.StringJoiner;
 
 import static org.junit.Assert.*;
@@ -88,5 +90,24 @@ public class FrenchCardDeckTest {
       shuffledString.add(card.toString());
 
     assertNotEquals(originalString, shuffledString);
+  }
+
+  @Test
+  public void testIteratorAndForEachAndSpliterator() {
+    FrenchCardDeck standardDeck = FrenchCardDeck.createFrenchCardDeck();
+    Iterator<Card> testIterator = standardDeck.iterator();
+    standardDeck.forEach(card -> assertSame(card, testIterator.next()));
+
+    Spliterator<Card> testSpliterator = standardDeck.spliterator();
+    assertEquals(testSpliterator.characteristics(),
+        standardDeck.getCards().spliterator().characteristics());
+  }
+
+  @Test
+  public void testGetById() {
+    FrenchCardDeck standardDeck = FrenchCardDeck.createFrenchCardDeck();
+    assertSame(standardDeck.getCards().get(0), standardDeck.getById("AC"));
+    assertSame(standardDeck.getCards().get(34), standardDeck.getById("9H"));
+    assertNull(standardDeck.getById("N/A"));
   }
 }

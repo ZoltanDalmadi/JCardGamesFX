@@ -1,6 +1,6 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
-import hu.unideb.inf.JCardGamesFX.model.FrenchCard;
+import hu.unideb.inf.JCardGamesFX.model.Card;
 
 /**
  * Factory class for creating {@link CardView} objects.
@@ -32,16 +32,17 @@ public class CardViewFactory {
 
   /**
    * Creates a {@link CardView} object for the specified
-   * {@link FrenchCard} object.
+   * {@link Card} object.
    *
-   * @param card The {@link FrenchCard} object to create the view for.
+   * @param card The {@link Card} object to create the view for.
    * @return The created {@link CardView} object.
    */
-  public static CardView createCardView(FrenchCard card) {
+  public static CardView createCardView(Card card) {
     CardView result = new CardView();
 
     result.setFrontFace(cardTheme.getFrontFace(card.getId()));
     result.setBackFace(cardTheme.getBackFace());
+    result.setShortID(card.getId());
 
     return result;
   }

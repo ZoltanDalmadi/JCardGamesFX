@@ -24,18 +24,11 @@ public class FrenchCardTest {
   }
 
   /**
-   * Tests getter for field <code>suit</code>.
+   * Tests getters for fields <code>suit</code> and <code>rank</code>.
    */
   @Test
-  public void testGetSuit() {
+  public void testGetters() {
     assertEquals(FrenchSuit.Hearts, card.getSuit());
-  }
-
-  /**
-   * Tests getter for field <code>rank</code>.
-   */
-  @Test
-  public void testGetRank() {
     assertEquals(FrenchRank.Queen, card.getRank());
   }
 
@@ -45,17 +38,11 @@ public class FrenchCardTest {
   @Test
   public void testToString() {
     assertEquals("The Queen of Hearts", card.toString());
-    card = new FrenchCard(true);
-    card.setRank(FrenchRank.Ace);
-    card.setSuit(FrenchSuit.Clubs);
+    card = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Ace);
     assertEquals("The Ace of Clubs", card.toString());
-    card = new FrenchCard(true);
-    card.setRank(FrenchRank.Jack);
-    card.setSuit(FrenchSuit.Spades);
+    card = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Jack);
     assertEquals("The Jack of Spades", card.toString());
-    card = new FrenchCard(true);
-    card.setRank(FrenchRank.Seven);
-    card.setSuit(FrenchSuit.Diamonds);
+    card = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Seven);
     assertEquals("The Seven of Diamonds", card.toString());
   }
 
@@ -128,4 +115,5 @@ public class FrenchCardTest {
     card = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.King);
     assertEquals("KD", card.getId());
   }
+
 }
