@@ -8,15 +8,27 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit test for class {@link CardPile}.
+ */
 public class CardPileTest {
 
+  /**
+   * Reference to the {@link CardPile} object under test.
+   */
   CardPile cardPile;
 
+  /**
+   * Instantiates a new object before each test.
+   */
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     cardPile = new CardPile();
   }
 
+  /**
+   * Tests <code>addCard()</code> and <code>numOfCards()</code> methods.
+   */
   @Test
   public void testAddCardAndNumOfCards() {
     Card card = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Four);
@@ -24,11 +36,17 @@ public class CardPileTest {
     assertEquals(1, cardPile.numOfCards());
   }
 
+  /**
+   * Tests <code>isEmpty()</code> method.
+   */
   @Test
   public void testIsEmpty() {
     assertTrue(cardPile.isEmpty());
   }
 
+  /**
+   * Tests <code>getTopCard()</code> method.
+   */
   @Test
   public void testGetTopCard() {
     Card card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Four);
@@ -38,6 +56,9 @@ public class CardPileTest {
     assertSame(card2, cardPile.getTopCard());
   }
 
+  /**
+   * Tests <code>cardsAbove()</code> and <code>moveCardsToPile()</code> methods.
+   */
   @Test
   public void testCardsAboveAndMoveCardsToPile() {
     Card card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Five);
@@ -65,6 +86,9 @@ public class CardPileTest {
     assertTrue(cardsAbove.isEmpty());
   }
 
+  /**
+   * Tests <code>iterator()</code> and <code>forEach()</code> methods.
+   */
   @Test
   public void testIteratorAndForEach() {
     Card card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Five);
