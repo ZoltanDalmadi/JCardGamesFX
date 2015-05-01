@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Abstract class representing the concept of a deck of cards.
  */
-public abstract class CardDeck {
+public abstract class CardDeck implements Iterable<Card> {
 
   /**
    * A List holding the individual cards of this deck.
@@ -59,4 +59,16 @@ public abstract class CardDeck {
       Collections.shuffle(cards);
     }
   }
+
+  /**
+   * Finds the card in the deck by its short identifier.
+   *
+   * @param id The short identifier.
+   * @return The card object if found, null otherwise.
+   */
+  public Card getById(String id) {
+    return cards.stream()
+        .filter(card -> card.getId().equals(id)).findFirst().orElseGet(() -> null);
+  }
+
 }
