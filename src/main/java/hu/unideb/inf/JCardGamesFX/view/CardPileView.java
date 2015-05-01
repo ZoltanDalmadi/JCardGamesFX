@@ -27,8 +27,11 @@ public class CardPileView extends Pane implements Iterable<CardView> {
   }
 
   public List<CardView> getCards() {
-
     return cards;
+  }
+
+  public int getNumOfCards() {
+    return numOfCards;
   }
 
   public void addCard(CardView card) {
