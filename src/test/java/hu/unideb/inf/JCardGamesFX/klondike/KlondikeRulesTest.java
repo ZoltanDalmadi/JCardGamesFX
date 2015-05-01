@@ -41,11 +41,11 @@ public class KlondikeRulesTest {
   @Test
   public void testLookForPile() {
     List<CardPile> testStandardPiles = new ArrayList<>();
-    IntStream.range(0, 7).parallel()
+    IntStream.range(0, 7)
         .forEach(i -> testStandardPiles.add(new CardPile()));
 
     List<CardPile> testFoundations = new ArrayList<>();
-    IntStream.range(0, 4).parallel()
+    IntStream.range(0, 4)
         .forEach(i -> testFoundations.add(new CardPile()));
 
     CardPile testWaste = new CardPile();
@@ -71,10 +71,13 @@ public class KlondikeRulesTest {
     FrenchCard card4 = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.King);
     testStock.addCard(card4);
     assertEquals(testStock, klondikeRules.lookForPile(card4));
+
+    FrenchCard card5 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Queen);
+    assertNull(klondikeRules.lookForPile(card5));
   }
 
   @Test
-  public void testIsOppositeColorAndIsSameColor() {
+  public void testIsOppositeColorAndIsSameSuit() {
     FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Jack);
     FrenchCard card2 = new FrenchCard(false, FrenchSuit.Diamonds, FrenchRank.Ten);
     FrenchCard card3 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Six);
@@ -89,10 +92,17 @@ public class KlondikeRulesTest {
     assertTrue(klondikeRules.isOppositeColor(card1, card3));
     assertFalse(klondikeRules.isOppositeColor(card1, card4));
 
+    assertTrue(klondikeRules.isOppositeColor(card2, card1));
     assertFalse(klondikeRules.isOppositeColor(card2, card3));
     assertTrue(klondikeRules.isOppositeColor(card2, card4));
 
+    assertTrue(klondikeRules.isOppositeColor(card3, card1));
+    assertFalse(klondikeRules.isOppositeColor(card3, card2));
     assertTrue(klondikeRules.isOppositeColor(card3, card4));
+
+    assertFalse(klondikeRules.isOppositeColor(card4, card1));
+    assertTrue(klondikeRules.isOppositeColor(card4, card2));
+    assertTrue(klondikeRules.isOppositeColor(card4, card3));
 
     assertTrue(klondikeRules.isSameSuit(card1, card5));
     assertTrue(klondikeRules.isSameSuit(card2, card6));
@@ -100,8 +110,8 @@ public class KlondikeRulesTest {
     assertTrue(klondikeRules.isSameSuit(card4, card8));
 
     assertFalse(klondikeRules.isSameSuit(card1, card2));
-    assertFalse(klondikeRules.isSameSuit(card1, card3));
-    assertFalse(klondikeRules.isSameSuit(card1, card4));
+    assertFalse(klondikeRules.isSameSuit(card2, card3));
+    assertFalse(klondikeRules.isSameSuit(card3, card4));
   }
 
   @Test
@@ -118,19 +128,23 @@ public class KlondikeRulesTest {
   public void testIsSmallerByOneAndOppositeColor() {
     FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Ten);
     FrenchCard card2 = new FrenchCard(false, FrenchSuit.Diamonds, FrenchRank.Jack);
-    FrenchCard card3 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Six);
+    FrenchCard card3 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Ten);
 
     assertTrue(klondikeRules.isSmallerByOneAndOppositeColor(card1, card2));
-    assertFalse(klondikeRules.isSmallerByOneAndOppositeColor(card1, card3));
+    assertFalse(klondikeRules.isSmallerByOneAndOppositeColor(card2, card1));
+    assertFalse(klondikeRules.isSmallerByOneAndOppositeColor(card3, card1));
+    assertFalse(klondikeRules.isSmallerByOneAndOppositeColor(card3, card2));
   }
 
   @Test
   public void testIsSmallerByOneAndSameSuit() {
     FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Ten);
     FrenchCard card2 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Jack);
-    FrenchCard card3 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Six);
+    FrenchCard card3 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Ten);
 
     assertTrue(klondikeRules.isSmallerByOneAndSameSuit(card1, card2));
-    assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card1, card3));
+    assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card2, card1));
+    assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card3, card1));
+    assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card3, card2));
   }
 }
