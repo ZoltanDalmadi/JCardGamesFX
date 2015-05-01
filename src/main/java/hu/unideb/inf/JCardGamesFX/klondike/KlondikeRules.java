@@ -84,9 +84,10 @@ public class KlondikeRules {
   }
 
   public boolean isOppositeColor(FrenchCard card1, FrenchCard card2) {
+    FrenchSuit thisSuit = (FrenchSuit) card1.getSuit();
     FrenchSuit otherSuit = (FrenchSuit) card2.getSuit();
 
-    switch ((FrenchSuit) card1.getSuit()) {
+    switch (thisSuit) {
       case Spades:
         if (otherSuit == FrenchSuit.Hearts || otherSuit == FrenchSuit.Diamonds)
           return true;
