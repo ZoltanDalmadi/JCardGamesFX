@@ -131,21 +131,21 @@ public class CardMouseTool {
     pathTransition.play();
   }
 
-  public class MoveToAbs extends MoveTo {
+  private static class MoveToAbs extends MoveTo {
     public MoveToAbs(Node node, double x, double y) {
       super(x - node.getLayoutX() + node.getLayoutBounds().getWidth() / 2,
           y - node.getLayoutY() + node.getLayoutBounds().getHeight() / 2);
     }
   }
 
-  public class LineToAbs extends LineTo {
+  private static class LineToAbs extends LineTo {
     public LineToAbs(Node node, double x, double y) {
       super(x - node.getLayoutX() + node.getLayoutBounds().getWidth() / 2,
           y - node.getLayoutY() + node.getLayoutBounds().getHeight() / 2);
     }
   }
 
-  private class MousePos {
+  private static class MousePos {
     double x, y;
   }
 
