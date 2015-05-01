@@ -60,7 +60,7 @@ public class CardPileViewTest {
     CardView cardView = CardViewFactory.createCardView(card);
     cardPileView.addCard(cardView);
     assertEquals(cardPileView, cardView.getContainingPile());
-    assertEquals(5, cardPileView.getNumOfCards());
+    assertEquals(5, cardPileView.numOfCards());
     assertEquals(cardView, cardPileView.getTopCard());
   }
 
@@ -87,8 +87,8 @@ public class CardPileViewTest {
     List<CardView> list = cardPileView.cardsAbove(cardPileView.getCards().get(1));
 
     cardPileView.moveCardsToPile(list, destPile);
-    assertEquals(1, cardPileView.getNumOfCards());
-    assertEquals(3, destPile.getNumOfCards());
+    assertEquals(1, cardPileView.numOfCards());
+    assertEquals(3, destPile.numOfCards());
     assertTrue(list.isEmpty());
   }
 }

@@ -12,7 +12,6 @@ public class CardPileView extends Pane implements Iterable<CardView> {
 
   private List<CardView> cards = FXCollections.observableArrayList();
   private double cardGap;
-  private int numOfCards = 0;
 
   public CardPileView(double cardGap) {
     this.cardGap = cardGap;
@@ -30,15 +29,14 @@ public class CardPileView extends Pane implements Iterable<CardView> {
     return cards;
   }
 
-  public int getNumOfCards() {
-    return numOfCards;
+  public int numOfCards() {
+    return cards.size();
   }
 
   public void addCard(CardView card) {
     cards.add(card);
     card.setContainingPile(this);
     card.toFront();
-    numOfCards++;
     layoutCard(card);
   }
 
@@ -49,7 +47,7 @@ public class CardPileView extends Pane implements Iterable<CardView> {
     card.setTranslateX(0);
     card.setTranslateY(0);
     card.setLayoutX(getLayoutX());
-    card.setLayoutY(getLayoutY() + (numOfCards - 1) * cardGap);
+    card.setLayoutY(getLayoutY() + (cards.size() - 1) * cardGap);
   }
 
   public boolean isEmpty() {
@@ -65,7 +63,6 @@ public class CardPileView extends Pane implements Iterable<CardView> {
   }
 
   public void moveCardsToPile(List<CardView> cardsToMove, CardPileView destPile) {
-    numOfCards -= cardsToMove.size();
     cardsToMove.forEach(destPile::addCard);
     cardsToMove.clear();
   }
