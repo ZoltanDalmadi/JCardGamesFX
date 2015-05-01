@@ -15,12 +15,15 @@ import java.util.List;
 public class CardMouseTool {
 
   private final MousePos mousePos = new MousePos();
+  private List<CardView> draggedCards;
+  private List<CardPileView> piles;
+
   EventHandler<MouseEvent> onMousePressedHandler = e -> {
     // Store mouse click position
     mousePos.x = e.getSceneX();
     mousePos.y = e.getSceneY();
   };
-  private List<CardView> draggedCards;
+
   EventHandler<MouseEvent> onMouseDraggedHandler = e -> {
     // Calculate difference vector from clicked point
     double offsetX = e.getSceneX() - mousePos.x;
@@ -42,7 +45,7 @@ public class CardMouseTool {
       cardView.setTranslateY(offsetY);
     });
   };
-  private List<CardPileView> piles;
+
   EventHandler<MouseEvent> onMouseReleasedHandler = e -> {
     // Get the actual card
     CardView card = (CardView) e.getSource();
