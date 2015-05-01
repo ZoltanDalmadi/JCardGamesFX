@@ -54,7 +54,7 @@ public class CardPileView extends Pane implements Iterable<CardView> {
     return cards.isEmpty();
   }
 
-  public CardView getTopCard() {
+  public CardView getTopCardView() {
     return cards.get(cards.size() - 1);
   }
 

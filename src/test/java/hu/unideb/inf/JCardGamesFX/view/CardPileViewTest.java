@@ -61,7 +61,7 @@ public class CardPileViewTest {
     cardPileView.addCardView(cardView);
     assertEquals(cardPileView, cardView.getContainingPile());
     assertEquals(5, cardPileView.numOfCards());
-    assertEquals(cardView, cardPileView.getTopCard());
+    assertEquals(cardView, cardPileView.getTopCardView());
   }
 
   @Test

@@ -64,7 +64,7 @@ public class CardMouseTool {
           return;
         }
       } else {
-        if (card.getBoundsInParent().intersects(pile.getTopCard().getBoundsInParent())) {
+        if (card.getBoundsInParent().intersects(pile.getTopCardView().getBoundsInParent())) {
 //          slideToPile(draggedCards, pile);
           activePile.moveCardsToPile(draggedCards, pile);
           return;
@@ -109,8 +109,8 @@ public class CardMouseTool {
       targetX = destPile.getBoundsInParent().getMinX();
       targetY = destPile.getBoundsInParent().getMinY();
     } else {
-      targetX = destPile.getTopCard().getLayoutX();
-      targetY = destPile.getTopCard().getLayoutY();
+      targetX = destPile.getTopCardView().getLayoutX();
+      targetY = destPile.getTopCardView().getLayoutY();
     }
 
     draggedCards.forEach(card -> animateCardMovement(card, sourceX, sourceY, targetX, targetY, Duration.millis(150)));
