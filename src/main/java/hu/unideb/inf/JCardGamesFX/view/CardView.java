@@ -23,6 +23,12 @@ public class CardView extends ImageView {
   private Image frontFace;
 
   /**
+   * Reference to the {@link CardPileView} that is currently containing this
+   * {@link CardView}.
+   */
+  private CardPileView containingPile;
+
+  /**
    * Constructs a {@link CardView} object with the two {@link Image} objects
    * as a representation in the game.
    *
@@ -40,6 +46,25 @@ public class CardView extends ImageView {
    * Constructs an empty {@link CardView}.
    */
   public CardView() {
+  }
+
+  /**
+   * Returns the {@link CardPileView} object currently containing this card.
+   *
+   * @return the {@link CardPileView} object currently containing this card.
+   */
+  public CardPileView getContainingPile() {
+    return containingPile;
+  }
+
+  /**
+   * Sets the {@link CardPileView} object that will contain this card.
+   *
+   * @param containingPile the {@link CardPileView} object that will contain
+   *                       this card.
+   */
+  public void setContainingPile(CardPileView containingPile) {
+    this.containingPile = containingPile;
   }
 
   /**
