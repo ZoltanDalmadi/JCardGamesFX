@@ -33,21 +33,21 @@ public class CardPileView extends Pane implements Iterable<CardView> {
     return cards.size();
   }
 
-  public void addCard(CardView card) {
-    cards.add(card);
-    card.setContainingPile(this);
-    card.toFront();
-    layoutCard(card);
+  public void addCardView(CardView cardView) {
+    cards.add(cardView);
+    cardView.setContainingPile(this);
+    cardView.toFront();
+    layoutCard(cardView);
   }
 
-  private void layoutCard(CardView card) {
-    card.relocate(card.getLayoutX() + card.getTranslateX(),
-        card.getLayoutY() + card.getTranslateY());
+  private void layoutCard(CardView cardView) {
+    cardView.relocate(cardView.getLayoutX() + cardView.getTranslateX(),
+        cardView.getLayoutY() + cardView.getTranslateY());
 
-    card.setTranslateX(0);
-    card.setTranslateY(0);
-    card.setLayoutX(getLayoutX());
-    card.setLayoutY(getLayoutY() + (cards.size() - 1) * cardGap);
+    cardView.setTranslateX(0);
+    cardView.setTranslateY(0);
+    cardView.setLayoutX(getLayoutX());
+    cardView.setLayoutY(getLayoutY() + (cards.size() - 1) * cardGap);
   }
 
   public boolean isEmpty() {
@@ -58,12 +58,12 @@ public class CardPileView extends Pane implements Iterable<CardView> {
     return cards.get(cards.size() - 1);
   }
 
-  public List<CardView> cardsAbove(CardView card) {
-    return cards.subList(cards.indexOf(card), cards.size());
+  public List<CardView> cardsAbove(CardView cardView) {
+    return cards.subList(cards.indexOf(cardView), cards.size());
   }
 
   public void moveCardsToPile(List<CardView> cardsToMove, CardPileView destPile) {
-    cardsToMove.forEach(destPile::addCard);
+    cardsToMove.forEach(destPile::addCardView);
     cardsToMove.clear();
   }
 

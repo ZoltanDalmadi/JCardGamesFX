@@ -32,19 +32,19 @@ public class CardPileViewTest {
 
     FrenchCard card1 = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.Jack);
     CardView cardView1 = CardViewFactory.createCardView(card1);
-    cardPileView.addCard(cardView1);
+    cardPileView.addCardView(cardView1);
 
     FrenchCard card2 = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.Ten);
     CardView cardView2 = CardViewFactory.createCardView(card2);
-    cardPileView.addCard(cardView2);
+    cardPileView.addCardView(cardView2);
 
     FrenchCard card3 = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.Nine);
     CardView cardView3 = CardViewFactory.createCardView(card3);
-    cardPileView.addCard(cardView3);
+    cardPileView.addCardView(cardView3);
 
     FrenchCard card4 = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.Eight);
     CardView cardView4 = CardViewFactory.createCardView(card4);
-    cardPileView.addCard(cardView4);
+    cardPileView.addCardView(cardView4);
   }
 
   @Test
@@ -58,7 +58,7 @@ public class CardPileViewTest {
   public void testAddCardAndGetTopCard() {
     FrenchCard card = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.Seven);
     CardView cardView = CardViewFactory.createCardView(card);
-    cardPileView.addCard(cardView);
+    cardPileView.addCardView(cardView);
     assertEquals(cardPileView, cardView.getContainingPile());
     assertEquals(5, cardPileView.numOfCards());
     assertEquals(cardView, cardPileView.getTopCard());
