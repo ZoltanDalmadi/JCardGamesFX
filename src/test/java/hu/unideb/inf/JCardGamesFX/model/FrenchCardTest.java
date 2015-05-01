@@ -1,6 +1,5 @@
 package hu.unideb.inf.JCardGamesFX.model;
 
-import hu.unideb.inf.JCardGamesFX.view.FrenchCardView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -94,27 +93,6 @@ public class FrenchCardTest {
     card.flip();
     card.faceUp();
     assertFalse(card.isFaceDown());
-  }
-
-  /**
-   * Tests <code>addView()</code> method, which is defined in the superclass.
-   */
-  @Test
-  public void testAddView() {
-    FrenchCardView view = new FrenchCardView(card);
-    card.addView(view);
-    assertSame(view, card.getViews().get(0));
-  }
-
-  /**
-   * Tests <code>removeView()</code> method, which is defined in the superclass.
-   */
-  @Test
-  public void testRemoveView() {
-    FrenchCardView view = new FrenchCardView(card);
-    card.addView(view);
-    card.removeView(view);
-    assertTrue(card.getViews().isEmpty());
   }
 
   /**
