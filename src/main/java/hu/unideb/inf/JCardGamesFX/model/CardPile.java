@@ -22,6 +22,23 @@ public class CardPile implements Iterable<Card> {
     cards.add(card);
   }
 
+  public boolean isEmpty() {
+    return cards.isEmpty();
+  }
+
+  public Card getTopCard() {
+    return cards.get(cards.size() - 1);
+  }
+
+  public List<Card> cardsAbove(Card card) {
+    return cards.subList(cards.indexOf(card), cards.size());
+  }
+
+  public void moveCardsToPile(List<Card> cardsToMove, CardPile destPile) {
+    cardsToMove.forEach(destPile::addCard);
+    cardsToMove.clear();
+  }
+
   @Override
   public Iterator<Card> iterator() {
     return null;
