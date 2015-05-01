@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
 
 import static org.junit.Assert.*;
 
@@ -67,7 +66,7 @@ public class CardPileTest {
   }
 
   @Test
-  public void testIteratorAndForEachAndSpliterator() {
+  public void testIteratorAndForEach() {
     Card card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Five);
     Card card2 = new FrenchCard(false, FrenchSuit.Diamonds, FrenchRank.Four);
     Card card3 = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.Three);
@@ -85,10 +84,6 @@ public class CardPileTest {
 
     Iterator<Card> testIterator2 = cardPile.iterator();
     cardPile.forEach(card -> assertSame(card, testIterator2.next()));
-
-    Spliterator<Card> testSpliterator = cardPile.spliterator();
-    assertEquals(testSpliterator.characteristics(),
-        cardPile.spliterator().characteristics());
   }
 
 }

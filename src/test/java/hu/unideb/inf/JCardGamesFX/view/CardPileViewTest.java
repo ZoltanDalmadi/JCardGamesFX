@@ -11,7 +11,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
 
 import static org.junit.Assert.*;
 
@@ -108,10 +107,4 @@ public class CardPileViewTest {
     cardPileView.forEach(cardView -> assertSame(cardView, testIterator.next()));
   }
 
-  @Test
-  public void testSpliterator() {
-    Spliterator<CardView> testSpliterator = cardPileView.spliterator();
-    assertEquals(testSpliterator.characteristics(),
-        cardPileView.spliterator().characteristics());
-  }
 }

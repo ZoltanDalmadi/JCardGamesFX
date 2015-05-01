@@ -3,7 +3,6 @@ package hu.unideb.inf.JCardGamesFX.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
 import java.util.function.Consumer;
 
 /**
@@ -105,13 +104,4 @@ public class CardPile implements Iterable<Card> {
     cards.forEach(action);
   }
 
-  /**
-   * Returns a spliterator to the cards.
-   *
-   * @return The spliterator.
-   */
-  @Override
-  public Spliterator<Card> spliterator() {
-    return cards.spliterator();
-  }
 }
