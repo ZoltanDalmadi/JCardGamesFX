@@ -1,57 +1,67 @@
 package hu.unideb.inf.JCardGamesFX.klondike;
 
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import hu.unideb.inf.JCardGamesFX.model.Card;
+import hu.unideb.inf.JCardGamesFX.model.CardPile;
+import hu.unideb.inf.JCardGamesFX.model.FrenchCardDeck;
+import javafx.collections.FXCollections;
 
-public class KlondikeGame extends Application {
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.IntStream;
 
-  private static final double WIDTH = 1280;
-  private static final double HEIGHT = 720;
+public class KlondikeGame {
 
-  public static void main(String[] args) {
-    launch(args);
+  public static FrenchCardDeck deck;
+  public static CardPile stock;
+  public static CardPile waste;
+  public static List<CardPile> foundations;
+  public static List<CardPile> standardPiles;
+
+  private static KlondikeRules rules;
+
+  public KlondikeGame() {
+    // Create deck
+    deck = FrenchCardDeck.createFrenchCardDeck();
+
+    // create stock
+    stock = new CardPile();
+
+    // create waste
+    waste = new CardPile();
+
+    // create foundations
+    foundations = FXCollections.observableArrayList();
+    IntStream.range(0, 4)
+        .forEach(i -> foundations.add(new CardPile()));
+
+    // create standard piles
+    standardPiles = FXCollections.observableArrayList();
+    IntStream.range(0, 7)
+        .forEach(i -> standardPiles.add(new CardPile()));
+
+    // load rules
+    rules = new KlondikeRules(standardPiles, foundations, waste, stock);
   }
 
-  @Override
-  public void start(Stage primaryStage) {
-    // Game area
-    Pane gameArea = new Pane();
+  public void startNewGame() {
+    // shuffle cards
+    deck.shuffle();
 
-    Image tableaouBackground = new Image("/tableaous/green-felt.png");
+    // deal to piles
+    Iterator<Card> deckIterator = deck.iterator();
 
-    gameArea.setBackground(new Background(new BackgroundImage(tableaouBackground,
-        BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, null, null)));
+    int cardsToPut = 1;
 
-    // TODO: change to actual menubar class
-    MenuBar menuBar = new MenuBar(new Menu("Dummy Menu"));
+    for (CardPile standardPile : standardPiles) {
+      for (int i = 0; i < cardsToPut; i++)
+        standardPile.addCard(deckIterator.next());
 
-    // TODO: change to actual status bar class
-    HBox statusBar = new HBox(20, new Label("Dummy status bar text"));
-    statusBar.setPadding(new Insets(2));
+      standardPile.getTopCard().flip();
+      cardsToPut++;
+    }
 
-    // main element
-    BorderPane bord = new BorderPane();
-    bord.setCenter(gameArea);
-    bord.setTop(menuBar);
-    bord.setBottom(statusBar);
+    // put rest to stock
+    deckIterator.forEachRemaining(stock::addCard);
 
-    // scene
-    Scene scene = new Scene(bord, WIDTH, HEIGHT);
-
-    primaryStage.setTitle("JavaFX Klondike");
-    primaryStage.setScene(scene);
-    primaryStage.show();
   }
 }
