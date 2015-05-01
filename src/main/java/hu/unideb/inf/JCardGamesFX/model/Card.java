@@ -1,19 +1,10 @@
 package hu.unideb.inf.JCardGamesFX.model;
 
-import hu.unideb.inf.JCardGamesFX.view.CardObserver;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Abstract class representing the concept of a playing card.
  */
 public abstract class Card {
 
-  /**
-   * The list of views attached to this card.
-   */
-  List<CardObserver> views = new ArrayList<>();
   /**
    * Whether the card is facing down.
    */
@@ -54,6 +45,7 @@ public abstract class Card {
 
   /**
    * Sets the suit of this card.
+   *
    * @param suit The suit to be set.
    */
   public void setSuit(Suit suit) {
@@ -71,6 +63,7 @@ public abstract class Card {
 
   /**
    * Sets the rank of this card.
+   *
    * @param rank The rank to be set.
    */
   public void setRank(Rank rank) {
@@ -92,7 +85,6 @@ public abstract class Card {
    */
   public void flip() {
     faceDown = !faceDown;
-    updateViews();
   }
 
   /**
@@ -100,7 +92,6 @@ public abstract class Card {
    */
   public void faceDown() {
     faceDown = true;
-    updateViews();
   }
 
   /**
@@ -108,7 +99,6 @@ public abstract class Card {
    */
   public void faceUp() {
     faceDown = false;
-    updateViews();
   }
 
   /**
@@ -118,42 +108,6 @@ public abstract class Card {
    */
   public boolean isFaceDown() {
     return faceDown;
-  }
-
-  /**
-   * Adds a {@link CardObserver} to the list of views.
-   *
-   * @param view The {@link CardObserver} to be added.
-   */
-  public void addView(CardObserver view) {
-    views.add(view);
-    updateViews();
-  }
-
-  /**
-   * Removes a {@link CardObserver} from the list of views.
-   *
-   * @param view The {@link CardObserver} to be removed.
-   * @return true if successful, false otherwise.
-   */
-  public boolean removeView(CardObserver view) {
-    return views.remove(view);
-  }
-
-  /**
-   * Returns the list of views attached to this card.
-   *
-   * @return The list of views.
-   */
-  public List<CardObserver> getViews() {
-    return views;
-  }
-
-  /**
-   * Updates all views attached to this card.
-   */
-  private void updateViews() {
-    views.forEach(CardObserver::update);
   }
 
   public abstract String getId();
