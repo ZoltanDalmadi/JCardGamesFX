@@ -58,6 +58,7 @@ public class CardView extends ImageView {
    */
   public void setBackFace(Image backFace) {
     this.backFace = backFace;
+    setImage(this.backFace);
   }
 
   /**
@@ -76,6 +77,7 @@ public class CardView extends ImageView {
    */
   public void setFrontFace(Image frontFace) {
     this.frontFace = frontFace;
+    setImage(this.frontFace);
   }
 
   /**
