@@ -1,5 +1,7 @@
-package hu.unideb.inf.JCardGamesFX.view;
+package hu.unideb.inf.JCardGamesFX.klondike;
 
+import hu.unideb.inf.JCardGamesFX.view.CardPileView;
+import hu.unideb.inf.JCardGamesFX.view.CardView;
 import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
 import javafx.event.EventHandler;
@@ -12,7 +14,7 @@ import javafx.util.Duration;
 
 import java.util.List;
 
-public class CardMouseTool {
+public class KlondikeMouseUtil {
 
   private final MousePos mousePos = new MousePos();
   private List<CardView> draggedCards;
@@ -75,7 +77,7 @@ public class CardMouseTool {
     draggedCards.forEach(this::slideBack);
   };
 
-  public CardMouseTool(List<CardView> draggedCards, List<CardPileView> piles) {
+  public KlondikeMouseUtil(List<CardView> draggedCards, List<CardPileView> piles) {
     this.draggedCards = draggedCards;
     this.piles = piles;
   }
