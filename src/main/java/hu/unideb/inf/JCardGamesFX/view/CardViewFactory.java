@@ -3,9 +3,9 @@ package hu.unideb.inf.JCardGamesFX.view;
 import hu.unideb.inf.JCardGamesFX.model.FrenchCard;
 
 /**
- * Factory class for creating {@link FrenchCardView} objects.
+ * Factory class for creating {@link CardView} objects.
  */
-public class FrenchCardViewFactory {
+public class CardViewFactory {
 
   /**
    * Actual theme of the cards.
@@ -27,22 +27,21 @@ public class FrenchCardViewFactory {
    * @param cardTheme The {@link CardTheme} object to be set.
    */
   public static void setCardTheme(CardTheme cardTheme) {
-    FrenchCardViewFactory.cardTheme = cardTheme;
+    CardViewFactory.cardTheme = cardTheme;
   }
 
   /**
-   * Creates a {@link FrenchCardView} object for the specified
+   * Creates a {@link CardView} object for the specified
    * {@link FrenchCard} object.
    *
    * @param card The {@link FrenchCard} object to create the view for.
-   * @return The created {@link FrenchCardView} object.
+   * @return The created {@link CardView} object.
    */
-  public static FrenchCardView createCardView(FrenchCard card) {
-    FrenchCardView result = new FrenchCardView(card);
+  public static CardView createCardView(FrenchCard card) {
+    CardView result = new CardView();
 
     result.setFrontFace(cardTheme.getFrontFace(card.getId()));
     result.setBackFace(cardTheme.getBackFace());
-    card.addView(result);
 
     return result;
   }
