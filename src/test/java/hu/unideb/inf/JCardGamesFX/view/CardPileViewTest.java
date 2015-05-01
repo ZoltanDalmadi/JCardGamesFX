@@ -75,7 +75,7 @@ public class CardPileViewTest {
 
   @Test
   public void testCardsAbove() {
-    List<CardView> list = cardPileView.cardsAbove(cardPileView.getCards().get(1));
+    List<CardView> list = cardPileView.cardViewsAbove(cardPileView.getCards().get(1));
 
     assertEquals(cardPileView.getCards().get(1), list.get(0));
     assertEquals(cardPileView.getCards().get(2), list.get(1));
@@ -86,7 +86,7 @@ public class CardPileViewTest {
   public void testMoveCardsToPile() {
     CardPileView destPile = new CardPileView(40);
 
-    List<CardView> list = cardPileView.cardsAbove(cardPileView.getCards().get(1));
+    List<CardView> list = cardPileView.cardViewsAbove(cardPileView.getCards().get(1));
 
     cardPileView.moveCardViewsToPile(list, destPile);
     assertEquals(1, cardPileView.numOfCards());

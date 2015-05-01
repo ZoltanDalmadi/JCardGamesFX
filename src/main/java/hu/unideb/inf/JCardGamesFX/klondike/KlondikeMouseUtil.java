@@ -38,7 +38,7 @@ public class KlondikeMouseUtil {
     CardPileView activePile = card.getContainingPile();
 
     // Put this card and all above it to the list of dragged cards
-    draggedCards = activePile.cardsAbove(card);
+    draggedCards = activePile.cardViewsAbove(card);
 
     // Bring them to front & apply difference vector to dragged cards
     draggedCards.forEach(cardView -> {
