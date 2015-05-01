@@ -60,13 +60,13 @@ public class CardMouseTool {
       if (pile.isEmpty()) {
         if (card.getBoundsInParent().intersects(pile.getBoundsInParent())) {
 //          slideToPile(draggedCards, pile);
-          activePile.moveCardsToPile(draggedCards, pile);
+          activePile.moveCardViewsToPile(draggedCards, pile);
           return;
         }
       } else {
         if (card.getBoundsInParent().intersects(pile.getTopCardView().getBoundsInParent())) {
 //          slideToPile(draggedCards, pile);
-          activePile.moveCardsToPile(draggedCards, pile);
+          activePile.moveCardViewsToPile(draggedCards, pile);
           return;
         }
       }

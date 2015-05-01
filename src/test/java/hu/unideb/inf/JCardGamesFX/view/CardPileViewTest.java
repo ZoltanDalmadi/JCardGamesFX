@@ -86,7 +86,7 @@ public class CardPileViewTest {
 
     List<CardView> list = cardPileView.cardsAbove(cardPileView.getCards().get(1));
 
-    cardPileView.moveCardsToPile(list, destPile);
+    cardPileView.moveCardViewsToPile(list, destPile);
     assertEquals(1, cardPileView.numOfCards());
     assertEquals(3, destPile.numOfCards());
     assertTrue(list.isEmpty());

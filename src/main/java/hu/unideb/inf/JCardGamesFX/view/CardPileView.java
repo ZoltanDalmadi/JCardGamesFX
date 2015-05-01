@@ -62,7 +62,7 @@ public class CardPileView extends Pane implements Iterable<CardView> {
     return cards.subList(cards.indexOf(cardView), cards.size());
   }
 
-  public void moveCardsToPile(List<CardView> cardsToMove, CardPileView destPile) {
+  public void moveCardViewsToPile(List<CardView> cardsToMove, CardPileView destPile) {
     cardsToMove.forEach(destPile::addCardView);
     cardsToMove.clear();
   }
