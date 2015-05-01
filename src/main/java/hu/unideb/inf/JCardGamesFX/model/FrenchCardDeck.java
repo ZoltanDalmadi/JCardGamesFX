@@ -27,16 +27,31 @@ public class FrenchCardDeck extends CardDeck {
     return result;
   }
 
+  /**
+   * Returns an iterator to iterate through the cards.
+   *
+   * @return The iterator.
+   */
   @Override
   public Iterator<Card> iterator() {
     return cards.iterator();
   }
 
+  /**
+   * Performs the given action on all the cards.
+   *
+   * @param action the specified action.
+   */
   @Override
   public void forEach(Consumer<? super Card> action) {
     cards.forEach(action);
   }
 
+  /**
+   * Returns a spliterator for the cards.
+   *
+   * @return The spliterator.
+   */
   @Override
   public Spliterator<Card> spliterator() {
     return cards.spliterator();

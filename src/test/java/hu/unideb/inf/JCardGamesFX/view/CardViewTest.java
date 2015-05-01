@@ -46,6 +46,9 @@ public class CardViewTest {
     assertNotNull(cardView1);
   }
 
+  /**
+   * Tests getter and setter for <code>shortID</code> field.
+   */
   @Test
   public void testShortIDGetterSetter() {
     cardView.setShortID("TEST");

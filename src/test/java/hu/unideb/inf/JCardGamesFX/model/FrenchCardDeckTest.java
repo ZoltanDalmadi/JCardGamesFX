@@ -92,6 +92,9 @@ public class FrenchCardDeckTest {
     assertNotEquals(originalString, shuffledString);
   }
 
+  /**
+   * Tests Iterable interface methods.
+   */
   @Test
   public void testIteratorAndForEachAndSpliterator() {
     FrenchCardDeck standardDeck = FrenchCardDeck.createFrenchCardDeck();
@@ -103,6 +106,9 @@ public class FrenchCardDeckTest {
         standardDeck.getCards().spliterator().characteristics());
   }
 
+  /**
+   * Tests <code>getById()</code> method.
+   */
   @Test
   public void testGetById() {
     FrenchCardDeck standardDeck = FrenchCardDeck.createFrenchCardDeck();
