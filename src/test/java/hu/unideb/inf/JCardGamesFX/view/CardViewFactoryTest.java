@@ -12,9 +12,9 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 /**
- * Unit test for class <code>FrenchCardViewFactory</code>.
+ * Unit test for class <code>CardViewFactory</code>.
  */
-public class FrenchCardViewFactoryTest {
+public class CardViewFactoryTest {
 
   /**
    * Rule for testing in a JavaFX thread.
@@ -27,7 +27,7 @@ public class FrenchCardViewFactoryTest {
    */
   @Test
   public void testInstantiate() {
-    FrenchCardViewFactory testObject = new FrenchCardViewFactory();
+    CardViewFactory testObject = new CardViewFactory();
     assertNotNull(testObject);
   }
 
@@ -36,11 +36,11 @@ public class FrenchCardViewFactoryTest {
    */
   @Test
   public void testSetterGetter() {
-    FrenchCardViewFactory.setCardTheme(null);
-    assertNull(FrenchCardViewFactory.getCardTheme());
+    CardViewFactory.setCardTheme(null);
+    assertNull(CardViewFactory.getCardTheme());
     CardTheme theme = new CardTheme();
-    FrenchCardViewFactory.setCardTheme(theme);
-    assertEquals(theme, FrenchCardViewFactory.getCardTheme());
+    CardViewFactory.setCardTheme(theme);
+    assertEquals(theme, CardViewFactory.getCardTheme());
   }
 
   /**
@@ -52,12 +52,11 @@ public class FrenchCardViewFactoryTest {
   @Test
   public void testCreateCardView() throws IOException, ParseException {
     CardTheme theme = new CardTheme("/cardfaces/classicTest/theme.json", "/test_back.png");
-    FrenchCardViewFactory.setCardTheme(theme);
+    CardViewFactory.setCardTheme(theme);
     FrenchCard card = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.King);
-    FrenchCardView cardView = FrenchCardViewFactory.createCardView(card);
-    assertSame(theme.getFrontFace("KC"), cardView.getDisplay().getImage());
-    card.flip();
-    assertSame(theme.getBackFace(), cardView.getDisplay().getImage());
+    CardView cardView = CardViewFactory.createCardView(card);
+    assertSame(theme.getFrontFace("KC"), cardView.getFrontFace());
+    assertSame(theme.getBackFace(), cardView.getBackFace());
   }
 
 }
