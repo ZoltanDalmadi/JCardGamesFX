@@ -9,8 +9,21 @@ public abstract class Card {
    * Whether the card is facing down.
    */
   private boolean faceDown;
+
+  /**
+   * Suit of the card.
+   */
   private Suit suit;
+
+  /**
+   * Rank of the card.
+   */
   private Rank rank;
+
+  /**
+   * Short identifier.
+   */
+  protected String Id;
 
   /**
    * Constructs a {@link Card} object, with the specified suit and rank.
@@ -23,15 +36,16 @@ public abstract class Card {
     this.faceDown = faceDown;
     this.suit = suit;
     this.rank = rank;
+    this.Id = buildId();
   }
 
   /**
-   * Constructs a {@link Card} object.
+   * Returns a short identifier.
    *
-   * @param faceDown Whether the card is facing down.
+   * @return A short identifier as a String.
    */
-  public Card(boolean faceDown) {
-    this.faceDown = faceDown;
+  public String getId() {
+    return Id;
   }
 
   /**
@@ -44,30 +58,12 @@ public abstract class Card {
   }
 
   /**
-   * Sets the suit of this card.
-   *
-   * @param suit The suit to be set.
-   */
-  public void setSuit(Suit suit) {
-    this.suit = suit;
-  }
-
-  /**
    * Returns the rank of this card.
    *
    * @return The rank of this card.
    */
   public Rank getRank() {
     return rank;
-  }
-
-  /**
-   * Sets the rank of this card.
-   *
-   * @param rank The rank to be set.
-   */
-  public void setRank(Rank rank) {
-    this.rank = rank;
   }
 
   /**
@@ -110,6 +106,12 @@ public abstract class Card {
     return faceDown;
   }
 
-  public abstract String getId();
+  /**
+   * Abstract method whose purpose is to return a short string identifier.
+   * Subclasses of this class must implement this method.
+   *
+   * @return The short identifier.
+   */
+  protected abstract String buildId();
 
 }

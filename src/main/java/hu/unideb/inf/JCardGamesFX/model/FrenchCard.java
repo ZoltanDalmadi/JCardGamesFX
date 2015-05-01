@@ -6,15 +6,6 @@ package hu.unideb.inf.JCardGamesFX.model;
 public class FrenchCard extends Card {
 
   /**
-   * Constructs a {@link FrenchCard} object.
-   *
-   * @param faceDown Whether the card is facing down.
-   */
-  public FrenchCard(boolean faceDown) {
-    super(faceDown);
-  }
-
-  /**
    * Constructs a {@link FrenchCard} object, with the specified suit and rank.
    *
    * @param faceDown Whether the card is facing down.
@@ -26,12 +17,13 @@ public class FrenchCard extends Card {
   }
 
   /**
-   * Returns a short {@link String} identifier.
+   * Builds a short {@link String} identifier. This should be only called once,
+   * at the creation of the card object.
    *
    * @return The short identifier as a {@link String}.
    */
   @Override
-  public String getId() {
+  protected String buildId() {
 
     String suitChar = null;
     String rankChar = null;
