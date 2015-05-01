@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Unit test for class {@link CardView}.
@@ -36,6 +37,17 @@ public class CardViewTest {
   }
 
   /**
+   * Tests parameter constructor.
+   */
+  @Test
+  public void testParameterConstructor() {
+    CardView cardView1 =
+        new CardView(theme.getFrontFace("QH"), theme.getBackFace());
+
+    assertNotNull(cardView1);
+  }
+
+  /**
    * Tests all methods.
    */
   @Test
@@ -47,6 +59,8 @@ public class CardViewTest {
     assertEquals(theme.getFrontFace("KC"), cardView.getImage());
     cardView.flip();
     assertEquals(theme.getBackFace(), cardView.getImage());
+    cardView.flip();
+    assertEquals(theme.getFrontFace("KC"), cardView.getImage());
   }
 
 }
