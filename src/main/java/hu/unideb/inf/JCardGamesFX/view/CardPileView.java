@@ -1,6 +1,7 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
 
 import java.util.Iterator;
@@ -16,7 +17,7 @@ public class CardPileView extends Pane implements Iterable<CardView> {
    * The {@link List} containing the {@link CardView} objects,
    * which are lying on this pile.
    */
-  private List<CardView> cards = FXCollections.observableArrayList();
+  private ObservableList<CardView> cards = FXCollections.observableArrayList();
 
   /**
    * Vertical gap to lay out the cards.
@@ -90,7 +91,7 @@ public class CardPileView extends Pane implements Iterable<CardView> {
    *
    * @return The {@link List} of cards.
    */
-  public List<CardView> getCards() {
+  public ObservableList<CardView> getCards() {
     return cards;
   }
 
