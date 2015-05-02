@@ -281,8 +281,7 @@ public class KlondikeRules {
       if (destPile.isEmpty())
         return card.getRank() == FrenchRank.Ace;
       else
-        return isLargerByOneAndSameSuit(card, destPile.getTopCard()) &&
-            !destPile.getTopCard().isFaceDown();
+        return isLargerByOneAndSameSuit(card, destPile.getTopCard());
     }
 
     return false;
