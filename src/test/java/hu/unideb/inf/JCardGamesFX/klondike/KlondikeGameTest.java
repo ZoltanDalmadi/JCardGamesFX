@@ -62,8 +62,11 @@ public class KlondikeGameTest {
     FrenchCard threeDiamonds = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Three);
 
     testStandardPiles.get(0).addCard(jackSpades);
+    jackSpades.flip();
     testStandardPiles.get(2).addCard(queenHearts);
+    queenHearts.flip();
     testStandardPiles.get(3).addCard(threeDiamonds);
+    threeDiamonds.flip();
 
     klondikeGame.moveCard(testStandardPiles.get(0).cardsAbove(jackSpades),
         testStandardPiles.get(0), testStandardPiles.get(2));
