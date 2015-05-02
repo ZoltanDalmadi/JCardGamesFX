@@ -21,6 +21,7 @@ public class KlondikeApp extends Application {
 
   private KlondikeGame game;
   private KlondikeGameArea gameArea;
+  private KlondikeMouseUtil mouseUtil;
 
   public static void main(String[] args) {
     launch(args);
@@ -54,6 +55,7 @@ public class KlondikeApp extends Application {
 
     game = new KlondikeGame();
     game.startNewGame();
+    mouseUtil = new KlondikeMouseUtil(game, gameArea);
     prepareGameAreaForNewGame();
 
     primaryStage.setTitle("JavaFX Klondike");
@@ -71,9 +73,12 @@ public class KlondikeApp extends Application {
       for (int i = 0; i < cardsToPut; i++) {
         standardPileView.addCardView(CardViewFactory.createCardView(deckIterator.next()));
         gameArea.getChildren().add(standardPileView.getTopCardView());
+        mouseUtil.makeDraggable(standardPileView.getTopCardView());
+        standardPileView.getTopCardView().setMouseTransparent(true);
       }
 
       standardPileView.getTopCardView().flip();
+      standardPileView.getTopCardView().setMouseTransparent(false);
       cardsToPut++;
     }
 
