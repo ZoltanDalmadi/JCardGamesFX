@@ -16,6 +16,26 @@ public class CardPile implements Iterable<Card> {
   private List<Card> cards = new ArrayList<>();
 
   /**
+   * The type of the pile.
+   */
+  private Type type;
+
+  /**
+   * Constructs an empty pile.
+   */
+  public CardPile() {
+  }
+
+  /**
+   * Constructs a pile with the given type.
+   *
+   * @param type The type.
+   */
+  public CardPile(Type type) {
+    this.type = type;
+  }
+
+  /**
    * Returns the list of cards.
    *
    * @return The list of cards.
@@ -31,6 +51,24 @@ public class CardPile implements Iterable<Card> {
    */
   public int numOfCards() {
     return cards.size();
+  }
+
+  /**
+   * Returns the current type of the pile.
+   *
+   * @return The type of the pile.
+   */
+  public Type getType() {
+    return type;
+  }
+
+  /**
+   * Sets the type of the pile.
+   *
+   * @param type The type to be set.
+   */
+  public void setType(Type type) {
+    this.type = type;
   }
 
   /**
@@ -102,6 +140,16 @@ public class CardPile implements Iterable<Card> {
   @Override
   public void forEach(Consumer<? super Card> action) {
     cards.forEach(action);
+  }
+
+  /**
+   * Enumeration that holds the possible types of the pile.
+   */
+  public enum Type {
+    Klondike,
+    Stock,
+    Waste,
+    Foundation
   }
 
 }

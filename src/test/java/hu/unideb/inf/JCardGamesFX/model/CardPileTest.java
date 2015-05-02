@@ -26,6 +26,14 @@ public class CardPileTest {
     cardPile = new CardPile();
   }
 
+  @Test
+  public void testParameterConstructorAndGetterSetterForType() {
+    CardPile cardPile1 = new CardPile(CardPile.Type.Klondike);
+    assertEquals(CardPile.Type.Klondike, cardPile1.getType());
+    cardPile1.setType(CardPile.Type.Waste);
+    assertEquals(CardPile.Type.Waste, cardPile1.getType());
+  }
+
   /**
    * Tests <code>addCard()</code> and <code>numOfCards()</code> methods.
    */
