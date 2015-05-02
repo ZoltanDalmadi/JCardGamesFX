@@ -1,7 +1,6 @@
 package hu.unideb.inf.JCardGamesFX.model;
 
 import java.util.Iterator;
-import java.util.Spliterator;
 import java.util.function.Consumer;
 
 /**
@@ -45,16 +44,6 @@ public class FrenchCardDeck extends CardDeck {
   @Override
   public void forEach(Consumer<? super Card> action) {
     cards.forEach(action);
-  }
-
-  /**
-   * Returns a spliterator for the cards.
-   *
-   * @return The spliterator.
-   */
-  @Override
-  public Spliterator<Card> spliterator() {
-    return cards.spliterator();
   }
 
 }
