@@ -24,20 +24,20 @@ public class KlondikeGame {
     this.deck = FrenchCardDeck.createFrenchCardDeck();
 
     // create stock
-    this.stock = new CardPile(CardPile.Type.Stock);
+    this.stock = new CardPile(CardPile.Type.Stock, "S");
 
     // create waste
-    this.waste = new CardPile(CardPile.Type.Waste);
+    this.waste = new CardPile(CardPile.Type.Waste, "W");
 
     // create foundations
     this.foundations = FXCollections.observableArrayList();
     IntStream.range(0, 4)
-        .forEach(i -> foundations.add(new CardPile(CardPile.Type.Foundation)));
+        .forEach(i -> foundations.add(new CardPile(CardPile.Type.Foundation, "F" + i)));
 
     // create standard piles
     this.standardPiles = FXCollections.observableArrayList();
     IntStream.range(0, 7)
-        .forEach(i -> standardPiles.add(new CardPile(CardPile.Type.Klondike)));
+        .forEach(i -> standardPiles.add(new CardPile(CardPile.Type.Klondike, "K" + i)));
 
     // load rules
     this.rules = new KlondikeRules(standardPiles, foundations, waste, stock);
@@ -96,4 +96,29 @@ public class KlondikeGame {
   public boolean isGameWon() {
     return foundations.stream().allMatch(pile -> pile.numOfCards() == 13);
   }
+
+  public CardPile getPileById(String id) {
+    CardPile result;
+
+    result = standardPiles.stream()
+        .filter(pile -> pile.getId().equals(id)).findFirst().orElse(null);
+
+    if (result != null)
+      return result;
+
+    result = foundations.stream()
+        .filter(pile -> pile.getId().equals(id)).findFirst().orElse(null);
+
+    if (result != null)
+      return result;
+
+    if (waste.getId().equals(id))
+      return waste;
+
+    if (stock.getId().equals(id))
+      return stock;
+
+    return null;
+  }
+
 }

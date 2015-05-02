@@ -106,4 +106,20 @@ public class KlondikeGameTest {
 
     assertTrue(klondikeGame.isGameWon());
   }
+
+  @Test
+  public void testGetPileById() {
+    assertSame(klondikeGame.getStock(), klondikeGame.getPileById("S"));
+    assertSame(klondikeGame.getWaste(), klondikeGame.getPileById("W"));
+
+    IntStream.range(0, klondikeGame.getFoundations().size())
+        .forEach(i -> assertSame(klondikeGame.getFoundations().get(i),
+            klondikeGame.getPileById("F" + i)));
+
+    IntStream.range(0, klondikeGame.getStandardPiles().size())
+        .forEach(i -> assertSame(klondikeGame.getStandardPiles().get(i),
+            klondikeGame.getPileById("K" + i)));
+
+    assertNull(klondikeGame.getPileById("N/A"));
+  }
 }
