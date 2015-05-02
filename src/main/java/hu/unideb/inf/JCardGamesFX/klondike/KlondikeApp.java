@@ -1,18 +1,26 @@
 package hu.unideb.inf.JCardGamesFX.klondike;
 
+import hu.unideb.inf.JCardGamesFX.model.Card;
+import hu.unideb.inf.JCardGamesFX.view.CardPileView;
+import hu.unideb.inf.JCardGamesFX.view.CardTheme;
+import hu.unideb.inf.JCardGamesFX.view.CardViewFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
+import java.util.Iterator;
 
 public class KlondikeApp extends Application {
 
   private static final double WIDTH = 1280;
-  private static final double HEIGHT = 720;
+  private static final double HEIGHT = 800;
 
-//  private static CardTheme cardTheme;
-//  private static List<CardView> cardViews;
+  private KlondikeGame game;
+  private KlondikeGameArea gameArea;
 
   public static void main(String[] args) {
     launch(args);
@@ -22,8 +30,7 @@ public class KlondikeApp extends Application {
   public void start(Stage primaryStage) {
 
     // Game area
-    KlondikeGameArea gameArea =
-        new KlondikeGameArea(new Image("/tableaous/green-felt.png"));
+    gameArea = new KlondikeGameArea(new Image("/tableaous/green-felt.png"));
 
     // Menu bar
     KlondikeMenu menuBar = new KlondikeMenu();
@@ -39,24 +46,41 @@ public class KlondikeApp extends Application {
 
     Scene scene = new Scene(bord, WIDTH, HEIGHT);
 
-//    cardViews = FXCollections.observableArrayList();
+    try {
+      CardViewFactory.setCardTheme(new CardTheme("/cardfaces/classic/theme.json", "/backfaces/bb.png"));
+    } catch (IOException | ParseException e) {
+      e.printStackTrace();
+    }
 
-//    try {
-//      cardTheme = new CardTheme("/cardfaces/classic/theme.json", "/backfaces/bb.png");
-//    } catch (IOException | ParseException e) {
-//      e.printStackTrace(System.err);
-//      primaryStage.close();
-//    }
-
-//    CardViewFactory.setCardTheme(cardTheme);
-
-//    deck.forEach(card -> cardViews.add(CardViewFactory.createCardView(card)));
-
-    KlondikeGame game = new KlondikeGame();
+    game = new KlondikeGame();
     game.startNewGame();
+    prepareGameAreaForNewGame();
 
     primaryStage.setTitle("JavaFX Klondike");
     primaryStage.setScene(scene);
     primaryStage.show();
   }
+
+  private void prepareGameAreaForNewGame() {
+    // deal to piles
+    Iterator<Card> deckIterator = game.getDeck().iterator();
+
+    int cardsToPut = 1;
+
+    for (CardPileView standardPileView : gameArea.getStandardPileViews()) {
+      for (int i = 0; i < cardsToPut; i++) {
+        standardPileView.addCardView(CardViewFactory.createCardView(deckIterator.next()));
+        gameArea.getChildren().add(standardPileView.getTopCardView());
+      }
+
+      standardPileView.getTopCardView().flip();
+      cardsToPut++;
+    }
+
+    deckIterator.forEachRemaining(card -> {
+      gameArea.getStockView().addCardView(CardViewFactory.createCardView(card));
+      gameArea.getChildren().add(gameArea.getStockView().getTopCardView());
+    });
+  }
+
 }
