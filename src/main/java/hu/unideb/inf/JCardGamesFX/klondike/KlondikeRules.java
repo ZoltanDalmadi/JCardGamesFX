@@ -2,7 +2,6 @@ package hu.unideb.inf.JCardGamesFX.klondike;
 
 import hu.unideb.inf.JCardGamesFX.model.Card;
 import hu.unideb.inf.JCardGamesFX.model.CardPile;
-import hu.unideb.inf.JCardGamesFX.model.FrenchCard;
 import hu.unideb.inf.JCardGamesFX.model.FrenchRank;
 import hu.unideb.inf.JCardGamesFX.model.FrenchSuit;
 
@@ -269,7 +268,7 @@ public class KlondikeRules {
    * @return <code>true</code> if the move is valid,
    * <code>false</code> otherwise.
    */
-  public boolean isMoveValid(FrenchCard card, CardPile destPile) {
+  public boolean isMoveValid(Card card, CardPile destPile) {
     if (destPile.getType() == CardPile.Type.Klondike) {
       if (destPile.isEmpty())
         return card.getRank() == FrenchRank.King;
