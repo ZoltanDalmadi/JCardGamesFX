@@ -27,8 +27,8 @@ public class KlondikeGameArea extends Pane {
   public KlondikeGameArea() {
     this.standardPileViews = FXCollections.observableArrayList();
     this.foundationPileViews = FXCollections.observableArrayList();
-    this.stockView = new CardPileView(1);
-    this.wasteView = new CardPileView(1);
+    this.stockView = new CardPileView(1, "S");
+    this.wasteView = new CardPileView(1, "W");
     initGameArea();
   }
 
@@ -85,7 +85,7 @@ public class KlondikeGameArea extends Pane {
     GaussianBlur gaussianBlur = new GaussianBlur(10);
 
     IntStream.range(0, 4).forEach(i -> {
-      foundationPileViews.add(new CardPileView(cardGap));
+      foundationPileViews.add(new CardPileView(cardGap, "F" + i));
       foundationPileViews.get(i).setPrefSize(130, 180);
       foundationPileViews.get(i).setBackground(background);
       foundationPileViews.get(i).setLayoutX(560 + i * 160);
@@ -104,7 +104,7 @@ public class KlondikeGameArea extends Pane {
     GaussianBlur gaussianBlur = new GaussianBlur(10);
 
     IntStream.range(0, 7).forEach(i -> {
-      standardPileViews.add(new CardPileView(cardGap));
+      standardPileViews.add(new CardPileView(cardGap, "K" + i));
       standardPileViews.get(i).setPrefSize(130, 180);
       standardPileViews.get(i).setBackground(background);
       standardPileViews.get(i).setLayoutX(80 + i * 160);
