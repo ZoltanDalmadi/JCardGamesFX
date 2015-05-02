@@ -13,15 +13,27 @@ import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit test for class {@link KlondikeRules}.
+ */
 public class KlondikeRulesTest {
 
+  /**
+   * Reference to an object of the class {@link KlondikeRules}.
+   */
   KlondikeRules klondikeRules;
 
+  /**
+   * Instantiates a new {@link KlondikeRules} object before each test.
+   */
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     klondikeRules = new KlondikeRules();
   }
 
+  /**
+   * Tests the parameter constructor.
+   */
   @Test
   public void testParameterConstructor() {
     List<CardPile> testStandardPiles = new ArrayList<>();
@@ -38,6 +50,9 @@ public class KlondikeRulesTest {
     assertEquals(testStock, klondikeRules1.getStock());
   }
 
+  /**
+   * Tests the <code>lookForPile()</code> method.
+   */
   @Test
   public void testLookForPile() {
     List<CardPile> testStandardPiles = new ArrayList<>();
@@ -76,6 +91,10 @@ public class KlondikeRulesTest {
     assertNull(klondikeRules.lookForPile(card5));
   }
 
+  /**
+   * Tests the <code>isOppositeColor()</code> and <code>isSameSuit()</code>
+   * methods.
+   */
   @Test
   public void testIsOppositeColorAndIsSameSuit() {
     FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Jack);
@@ -114,6 +133,9 @@ public class KlondikeRulesTest {
     assertFalse(klondikeRules.isSameSuit(card3, card4));
   }
 
+  /**
+   * Tests the <code>isSmallerByOne()</code> method.
+   */
   @Test
   public void testIsSmallerByOne() {
     FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Ten);
@@ -124,6 +146,9 @@ public class KlondikeRulesTest {
     assertFalse(klondikeRules.isSmallerByOne(card1, card3));
   }
 
+  /**
+   * Tests the <code>isSmallerByOneAndOppositeColor()</code> method.
+   */
   @Test
   public void testIsSmallerByOneAndOppositeColor() {
     FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Ten);
@@ -136,6 +161,9 @@ public class KlondikeRulesTest {
     assertFalse(klondikeRules.isSmallerByOneAndOppositeColor(card3, card2));
   }
 
+  /**
+   * Tests the <code>isSmallerByOneAndSameSuit()</code> method.
+   */
   @Test
   public void testIsSmallerByOneAndSameSuit() {
     FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Ten);
@@ -147,4 +175,5 @@ public class KlondikeRulesTest {
     assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card3, card1));
     assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card3, card2));
   }
+
 }
