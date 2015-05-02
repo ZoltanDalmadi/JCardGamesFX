@@ -24,6 +24,12 @@ public class CardPileViewTest {
 
   CardPileView cardPileView;
 
+  /**
+   * Sets up the test environment before each test.
+   *
+   * @throws IOException    if an I/O error occurs.
+   * @throws ParseException if a parse error occurs.
+   */
   @Before
   public void setUp() throws IOException, ParseException {
     cardPileView = new CardPileView(40);
@@ -48,6 +54,21 @@ public class CardPileViewTest {
     cardPileView.addCardView(cardView4);
   }
 
+  /**
+   * Tests two parameter constructor and getter/setter
+   * for <code>shortID</code> field.
+   */
+  @Test
+  public void testTwoParameterConstructorAndGetSetShortID() {
+    CardPileView cardPileView1 = new CardPileView(40, "TEST ID");
+    assertEquals("TEST ID", cardPileView1.getShortID());
+    cardPileView1.setShortID("CHANGED");
+    assertEquals("CHANGED", cardPileView1.getShortID());
+  }
+
+  /**
+   * Tests <code>getCardGap()</code> and <code>setCardGap()</code> methods.
+   */
   @Test
   public void testGetSetCardGap() {
     assertEquals(40, cardPileView.getCardGap(), 0);
@@ -55,6 +76,9 @@ public class CardPileViewTest {
     assertEquals(30, cardPileView.getCardGap(), 0);
   }
 
+  /**
+   * Tests <code>addCard()</code> and <code>getTopCard()</code> methods.
+   */
   @Test
   public void testAddCardAndGetTopCard() {
     FrenchCard card = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.Seven);
@@ -65,6 +89,9 @@ public class CardPileViewTest {
     assertEquals(cardView, cardPileView.getTopCardView());
   }
 
+  /**
+   * Tests the <code>isEmpty()</code> method.
+   */
   @Test
   public void testIsEmpty() {
     assertFalse(cardPileView.isEmpty());
@@ -72,6 +99,9 @@ public class CardPileViewTest {
     assertTrue(cardPileView.isEmpty());
   }
 
+  /**
+   * Tests the <code>cardsAbove()</code> method.
+   */
   @Test
   public void testCardsAbove() {
     List<CardView> list = cardPileView.cardViewsAbove(cardPileView.getCards().get(1));
@@ -81,6 +111,9 @@ public class CardPileViewTest {
     assertEquals(cardPileView.getCards().get(3), list.get(2));
   }
 
+  /**
+   * Tests the <code>moveCardsToPile()</code> method.
+   */
   @Test
   public void testMoveCardsToPile() {
     CardPileView destPile = new CardPileView(40);
@@ -93,6 +126,9 @@ public class CardPileViewTest {
     assertTrue(list.isEmpty());
   }
 
+  /**
+   * Tests the <code>iterator()</code> method.
+   */
   @Test
   public void testIterator() {
     Iterator<CardView> testIterator = cardPileView.iterator();
@@ -101,6 +137,9 @@ public class CardPileViewTest {
     assertSame(testIterator.next(), cardPileView.getCards().get(2));
   }
 
+  /**
+   * Tests the <code>forEach()</code> method.
+   */
   @Test
   public void testForEach() {
     Iterator<CardView> testIterator = cardPileView.iterator();

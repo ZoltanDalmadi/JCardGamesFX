@@ -21,6 +21,11 @@ public class CardPile implements Iterable<Card> {
   private Type type;
 
   /**
+   * Identifier of the pile.
+   */
+  private String id;
+
+  /**
    * Constructs an empty pile.
    */
   public CardPile() {
@@ -33,6 +38,17 @@ public class CardPile implements Iterable<Card> {
    */
   public CardPile(Type type) {
     this.type = type;
+  }
+
+  /**
+   * Constructs a pile with the given type and identifier.
+   *
+   * @param type The type.
+   * @param id   The identifier.
+   */
+  public CardPile(Type type, String id) {
+    this.type = type;
+    this.id = id;
   }
 
   /**
@@ -69,6 +85,24 @@ public class CardPile implements Iterable<Card> {
    */
   public void setType(Type type) {
     this.type = type;
+  }
+
+  /**
+   * Returns the pile identifier.
+   *
+   * @return The pile identifier.
+   */
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * Sets the pile identifier.
+   *
+   * @param id The new identifier to be set.
+   */
+  public void setId(String id) {
+    this.id = id;
   }
 
   /**

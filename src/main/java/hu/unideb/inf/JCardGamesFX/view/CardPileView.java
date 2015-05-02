@@ -24,12 +24,29 @@ public class CardPileView extends Pane implements Iterable<CardView> {
   private double cardGap;
 
   /**
+   * The identifier of the pile.
+   */
+  private String shortID;
+
+  /**
    * Constructs a {@link CardPileView} object, with the given gap.
    *
    * @param cardGap The vertical gap to lay out the cards.
    */
   public CardPileView(double cardGap) {
     this.cardGap = cardGap;
+  }
+
+  /**
+   * Constructs a {@link CardPileView} object, with the given gap
+   * and identifier.
+   *
+   * @param cardGap The vertical gap to lay out the cards.
+   * @param shortID The short identifier of the pile.
+   */
+  public CardPileView(double cardGap, String shortID) {
+    this.cardGap = cardGap;
+    this.shortID = shortID;
   }
 
   /**
@@ -48,6 +65,24 @@ public class CardPileView extends Pane implements Iterable<CardView> {
    */
   public void setCardGap(double cardGap) {
     this.cardGap = cardGap;
+  }
+
+  /**
+   * Returns the short identifier.
+   *
+   * @return The short identifier.
+   */
+  public String getShortID() {
+    return shortID;
+  }
+
+  /**
+   * Sets the short identifier.
+   *
+   * @param shortID The new short identifier to be set.
+   */
+  public void setShortID(String shortID) {
+    this.shortID = shortID;
   }
 
   /**

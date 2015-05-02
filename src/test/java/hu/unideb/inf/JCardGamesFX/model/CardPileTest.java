@@ -26,12 +26,28 @@ public class CardPileTest {
     cardPile = new CardPile();
   }
 
+  /**
+   * Tests one parameter constructor and getter / setter for <code>type</code>
+   * field.
+   */
   @Test
-  public void testParameterConstructorAndGetterSetterForType() {
+  public void testOneParameterConstructorAndGetterSetterForType() {
     CardPile cardPile1 = new CardPile(CardPile.Type.Klondike);
     assertEquals(CardPile.Type.Klondike, cardPile1.getType());
     cardPile1.setType(CardPile.Type.Waste);
     assertEquals(CardPile.Type.Waste, cardPile1.getType());
+  }
+
+  /**
+   * Tests two parameter constructor and getter / setter for <code>id</code>
+   * field.
+   */
+  @Test
+  public void testTwoParameterConstructorAndGetterSetterForId() {
+    CardPile cardPile1 = new CardPile(CardPile.Type.Klondike, "TEST ID");
+    assertEquals("TEST ID", cardPile1.getId());
+    cardPile1.setId("CHANGED TEST ID");
+    assertEquals("CHANGED TEST ID", cardPile1.getId());
   }
 
   /**
