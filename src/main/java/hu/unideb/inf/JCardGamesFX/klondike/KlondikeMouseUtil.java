@@ -56,6 +56,9 @@ public class KlondikeMouseUtil {
   };
 
   EventHandler<MouseEvent> onMouseReleasedHandler = e -> {
+    if (draggedCards == null && draggedCardViews == null)
+      return;
+
     // Get the actual card
     CardView cardView = (CardView) e.getSource();
     Card card = game.getDeck().getById(cardView.getShortID());
@@ -92,6 +95,8 @@ public class KlondikeMouseUtil {
     }
 
     draggedCardViews.forEach(this::slideBack);
+    draggedCards = null;
+    draggedCardViews = null;
   };
 
   public KlondikeMouseUtil(KlondikeGame game, KlondikeGameArea gameArea) {
