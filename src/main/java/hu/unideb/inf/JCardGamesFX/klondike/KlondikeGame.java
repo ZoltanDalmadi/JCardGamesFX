@@ -24,20 +24,20 @@ public class KlondikeGame {
     deck = FrenchCardDeck.createFrenchCardDeck();
 
     // create stock
-    stock = new CardPile();
+    stock = new CardPile(CardPile.Type.Stock);
 
     // create waste
-    waste = new CardPile();
+    waste = new CardPile(CardPile.Type.Waste);
 
     // create foundations
     foundations = FXCollections.observableArrayList();
     IntStream.range(0, 4)
-        .forEach(i -> foundations.add(new CardPile()));
+        .forEach(i -> foundations.add(new CardPile(CardPile.Type.Foundation)));
 
     // create standard piles
     standardPiles = FXCollections.observableArrayList();
     IntStream.range(0, 7)
-        .forEach(i -> standardPiles.add(new CardPile()));
+        .forEach(i -> standardPiles.add(new CardPile(CardPile.Type.Klondike)));
 
     // load rules
     rules = new KlondikeRules(standardPiles, foundations, waste, stock);
