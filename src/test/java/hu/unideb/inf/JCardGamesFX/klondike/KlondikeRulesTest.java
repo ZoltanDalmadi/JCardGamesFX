@@ -147,6 +147,19 @@ public class KlondikeRulesTest {
   }
 
   /**
+   * Tests the <code>isLargerByOne()</code> method.
+   */
+  @Test
+  public void testIsLargerByOne() {
+    FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Five);
+    FrenchCard card2 = new FrenchCard(false, FrenchSuit.Diamonds, FrenchRank.Four);
+    FrenchCard card3 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Ten);
+
+    assertTrue(klondikeRules.isLargerByOne(card1, card2));
+    assertFalse(klondikeRules.isLargerByOne(card1, card3));
+  }
+
+  /**
    * Tests the <code>isSmallerByOneAndOppositeColor()</code> method.
    */
   @Test
@@ -162,18 +175,18 @@ public class KlondikeRulesTest {
   }
 
   /**
-   * Tests the <code>isSmallerByOneAndSameSuit()</code> method.
+   * Tests the <code>isLargerByOneAndSameSuit()</code> method.
    */
   @Test
-  public void testIsSmallerByOneAndSameSuit() {
-    FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Ten);
-    FrenchCard card2 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Jack);
-    FrenchCard card3 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Ten);
+  public void testIsLargerByOneAndSameSuit() {
+    FrenchCard card1 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Jack);
+    FrenchCard card2 = new FrenchCard(false, FrenchSuit.Spades, FrenchRank.Ten);
+    FrenchCard card3 = new FrenchCard(false, FrenchSuit.Hearts, FrenchRank.Jack);
 
-    assertTrue(klondikeRules.isSmallerByOneAndSameSuit(card1, card2));
-    assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card2, card1));
-    assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card3, card1));
-    assertFalse(klondikeRules.isSmallerByOneAndSameSuit(card3, card2));
+    assertTrue(klondikeRules.isLargerByOneAndSameSuit(card1, card2));
+    assertFalse(klondikeRules.isLargerByOneAndSameSuit(card2, card1));
+    assertFalse(klondikeRules.isLargerByOneAndSameSuit(card3, card1));
+    assertFalse(klondikeRules.isLargerByOneAndSameSuit(card3, card2));
   }
 
 }
