@@ -189,4 +189,55 @@ public class KlondikeRulesTest {
     assertFalse(klondikeRules.isLargerByOneAndSameSuit(card3, card2));
   }
 
+  /**
+   * Tests the <code>isMoveValid()</code> method.
+   */
+  @Test
+  public void testIsMoveValid() {
+    List<CardPile> testStandardPiles = new ArrayList<>();
+    IntStream.range(0, 7)
+        .forEach(i -> testStandardPiles.add(new CardPile(CardPile.Type.Klondike)));
+
+    List<CardPile> testFoundations = new ArrayList<>();
+    IntStream.range(0, 4)
+        .forEach(i -> testFoundations.add(new CardPile(CardPile.Type.Foundation)));
+
+    FrenchCard jackSpades = new FrenchCard(true, FrenchSuit.Spades, FrenchRank.Jack);
+    FrenchCard queenHearts = new FrenchCard(true, FrenchSuit.Hearts, FrenchRank.Queen);
+    FrenchCard twoClubs = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Two);
+    FrenchCard threeDiamonds = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Three);
+    FrenchCard aceClubs = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Ace);
+    FrenchCard kingDiamonds = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.King);
+
+    testStandardPiles.get(0).addCard(jackSpades);
+    testStandardPiles.get(2).addCard(queenHearts);
+    testStandardPiles.get(3).addCard(threeDiamonds);
+
+    assertTrue(klondikeRules.isMoveValid(jackSpades, testStandardPiles.get(2)));
+    assertFalse(klondikeRules.isMoveValid(jackSpades, testStandardPiles.get(3)));
+    assertFalse(klondikeRules.isMoveValid(queenHearts, testStandardPiles.get(1)));
+    assertTrue(klondikeRules.isMoveValid(kingDiamonds, testStandardPiles.get(1)));
+    assertFalse(klondikeRules.isMoveValid(kingDiamonds, testStandardPiles.get(0)));
+
+    testStandardPiles.get(5).addCard(twoClubs);
+    testStandardPiles.get(6).addCard(aceClubs);
+
+    assertTrue(klondikeRules.isMoveValid(aceClubs, testFoundations.get(0)));
+    assertTrue(klondikeRules.isMoveValid(aceClubs, testFoundations.get(1)));
+    assertTrue(klondikeRules.isMoveValid(aceClubs, testFoundations.get(2)));
+    assertTrue(klondikeRules.isMoveValid(aceClubs, testFoundations.get(3)));
+
+    assertFalse(klondikeRules.isMoveValid(twoClubs, testFoundations.get(0)));
+    assertFalse(klondikeRules.isMoveValid(twoClubs, testFoundations.get(1)));
+    assertFalse(klondikeRules.isMoveValid(twoClubs, testFoundations.get(2)));
+    assertFalse(klondikeRules.isMoveValid(twoClubs, testFoundations.get(3)));
+
+    testFoundations.get(0).addCard(aceClubs);
+
+    assertTrue(klondikeRules.isMoveValid(twoClubs, testFoundations.get(0)));
+    assertFalse(klondikeRules.isMoveValid(threeDiamonds, testFoundations.get(0)));
+
+    CardPile testWaste = new CardPile(CardPile.Type.Waste);
+    assertFalse(klondikeRules.isMoveValid(kingDiamonds, testWaste));
+  }
 }

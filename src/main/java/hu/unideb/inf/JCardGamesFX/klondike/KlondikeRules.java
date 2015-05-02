@@ -166,7 +166,7 @@ public class KlondikeRules {
    * @return <code>true</code> if the colors of the two cards are opposite,
    * <code>false</code> otherwise.
    */
-  public boolean isOppositeColor(FrenchCard card1, FrenchCard card2) {
+  public boolean isOppositeColor(Card card1, Card card2) {
     FrenchSuit thisSuit = (FrenchSuit) card1.getSuit();
     FrenchSuit otherSuit = (FrenchSuit) card2.getSuit();
 
@@ -203,7 +203,7 @@ public class KlondikeRules {
    * @return <code>true</code> if the two cards are in the same suit,
    * <code>false</code> otherwise.
    */
-  public boolean isSameSuit(FrenchCard card1, FrenchCard card2) {
+  public boolean isSameSuit(Card card1, Card card2) {
     return card1.getSuit() == card2.getSuit();
   }
 
@@ -216,7 +216,7 @@ public class KlondikeRules {
    * @return <code>true</code> if the first card is smaller by one rank than
    * the second card, <code>false</code> otherwise.
    */
-  public boolean isSmallerByOne(FrenchCard card1, FrenchCard card2) {
+  public boolean isSmallerByOne(Card card1, Card card2) {
     return ((FrenchRank) card1.getRank())
         .compareTo((FrenchRank) card2.getRank()) == -1;
   }
@@ -230,7 +230,7 @@ public class KlondikeRules {
    * @return <code>true</code> if the first card is larger by one rank than
    * the second card, <code>false</code> otherwise.
    */
-  public boolean isLargerByOne(FrenchCard card1, FrenchCard card2) {
+  public boolean isLargerByOne(Card card1, Card card2) {
     return ((FrenchRank) card1.getRank())
         .compareTo((FrenchRank) card2.getRank()) == 1;
   }
@@ -244,7 +244,7 @@ public class KlondikeRules {
    * @return <code>true</code> if the first card is smaller by one rank than
    * the second card and is opposite color, <code>false</code> otherwise.
    */
-  public boolean isSmallerByOneAndOppositeColor(FrenchCard card1, FrenchCard card2) {
+  public boolean isSmallerByOneAndOppositeColor(Card card1, Card card2) {
     return isSmallerByOne(card1, card2) && isOppositeColor(card1, card2);
   }
 
@@ -257,33 +257,32 @@ public class KlondikeRules {
    * @return <code>true</code> if the first card is smaller by one rank than
    * the second card and is in the same suit, <code>false</code> otherwise.
    */
-  public boolean isLargerByOneAndSameSuit(FrenchCard card1, FrenchCard card2) {
+  public boolean isLargerByOneAndSameSuit(Card card1, Card card2) {
     return isLargerByOne(card1, card2) && isSameSuit(card1, card2);
   }
 
+  /**
+   * Checks if moving the current card to the destination pile is valid.
+   *
+   * @param card     The card to check.
+   * @param destPile The destination pile.
+   * @return <code>true</code> if the move is valid,
+   * <code>false</code> otherwise.
+   */
   public boolean isMoveValid(FrenchCard card, CardPile destPile) {
-    // check if destPile is the same as the pile the card is currently in
-    //   |- yes, return false
+    if (destPile.getType() == CardPile.Type.Klondike) {
+      if (destPile.isEmpty())
+        return card.getRank() == FrenchRank.King;
+      else
+        return isSmallerByOneAndOppositeColor(card, destPile.getTopCard());
+    }
 
-    // check if destPile is a standard pile.
-    //   |- yes, check if destPile is empty.
-    //     |- yes, check if card have rank King.
-    //       |- yes, return true
-    //       |- no, return false
-    //     |- no, check if card is smaller by one and opposite color than the top card
-    //       |- yes, return true
-    //       |- no, return false
-
-    // check if destPile is a foundation pile.
-    //   |- yes, check if pile is empty
-    //       |- yes, check if card have rank Ace
-    //          |- no, return false;
-    //          |- yes, return true;
-    //       |- no, check if card is larger by one and same suit as the top card
-    //          |- yes, return true
-    //          |- no, return false
-
-    // if all above fails, return false
+    if (destPile.getType() == CardPile.Type.Foundation) {
+      if (destPile.isEmpty())
+        return card.getRank() == FrenchRank.Ace;
+      else
+        return isLargerByOneAndSameSuit(card, destPile.getTopCard());
+    }
 
     return false;
   }
