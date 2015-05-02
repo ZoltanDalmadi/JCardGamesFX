@@ -23,7 +23,7 @@ public abstract class Card {
   /**
    * Short identifier.
    */
-  protected String Id;
+  protected String id;
 
   /**
    * Constructs a {@link Card} object, with the specified suit and rank.
@@ -36,7 +36,7 @@ public abstract class Card {
     this.faceDown = faceDown;
     this.suit = suit;
     this.rank = rank;
-    this.Id = buildId();
+    this.id = buildId();
   }
 
   /**
@@ -45,7 +45,7 @@ public abstract class Card {
    * @return A short identifier as a String.
    */
   public String getId() {
-    return Id;
+    return id;
   }
 
   /**

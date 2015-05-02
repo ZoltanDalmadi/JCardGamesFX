@@ -98,9 +98,9 @@ public class CardTheme {
 
   /**
    * Returns the {@link Image} object that holds the front face
-   * for the specific Id.
+   * for the specific id.
    *
-   * @param key The Id of the card.
+   * @param key The id of the card.
    * @return The {@link Image} object that holds the front face of the card.
    */
   public Image getFrontFace(String key) {
@@ -110,7 +110,7 @@ public class CardTheme {
   /**
    * Adds an {@link Image} object to the theme with the specified key.
    *
-   * @param key   The Id as a key.
+   * @param key   The id as a key.
    * @param value The {@link Image} object for the key.
    */
   public void addFrontFace(String key, Image value) {
@@ -120,7 +120,7 @@ public class CardTheme {
   /**
    * Removes an {@link Image} object from the theme with the specified key.
    *
-   * @param key The Id of the {@link Image} object to be removed.
+   * @param key The id of the {@link Image} object to be removed.
    */
   public void removeFrontFace(String key) {
     frontFaces.remove(key);
