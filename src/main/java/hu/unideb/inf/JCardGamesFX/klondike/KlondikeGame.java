@@ -11,36 +11,60 @@ import java.util.stream.IntStream;
 
 public class KlondikeGame {
 
-  public static FrenchCardDeck deck;
-  public static CardPile stock;
-  public static CardPile waste;
-  public static List<CardPile> foundations;
-  public static List<CardPile> standardPiles;
+  private FrenchCardDeck deck;
+  private CardPile stock;
+  private CardPile waste;
+  private List<CardPile> foundations;
+  private List<CardPile> standardPiles;
 
-  private static KlondikeRules rules;
+  private KlondikeRules rules;
 
   public KlondikeGame() {
     // Create deck
-    deck = FrenchCardDeck.createFrenchCardDeck();
+    this.deck = FrenchCardDeck.createFrenchCardDeck();
 
     // create stock
-    stock = new CardPile(CardPile.Type.Stock);
+    this.stock = new CardPile(CardPile.Type.Stock);
 
     // create waste
-    waste = new CardPile(CardPile.Type.Waste);
+    this.waste = new CardPile(CardPile.Type.Waste);
 
     // create foundations
-    foundations = FXCollections.observableArrayList();
+    this.foundations = FXCollections.observableArrayList();
     IntStream.range(0, 4)
         .forEach(i -> foundations.add(new CardPile(CardPile.Type.Foundation)));
 
     // create standard piles
-    standardPiles = FXCollections.observableArrayList();
+    this.standardPiles = FXCollections.observableArrayList();
     IntStream.range(0, 7)
         .forEach(i -> standardPiles.add(new CardPile(CardPile.Type.Klondike)));
 
     // load rules
-    rules = new KlondikeRules(standardPiles, foundations, waste, stock);
+    this.rules = new KlondikeRules(standardPiles, foundations, waste, stock);
+  }
+
+  public FrenchCardDeck getDeck() {
+    return deck;
+  }
+
+  public CardPile getStock() {
+    return stock;
+  }
+
+  public CardPile getWaste() {
+    return waste;
+  }
+
+  public List<CardPile> getFoundations() {
+    return foundations;
+  }
+
+  public List<CardPile> getStandardPiles() {
+    return standardPiles;
+  }
+
+  public KlondikeRules getRules() {
+    return rules;
   }
 
   public void startNewGame() {
@@ -62,6 +86,14 @@ public class KlondikeGame {
 
     // put rest to stock
     deckIterator.forEachRemaining(stock::addCard);
+  }
 
+  public void moveCard(List<Card> cardsToMove, CardPile from, CardPile to) {
+    if (rules.isMoveValid(cardsToMove.get(0), to))
+      from.moveCardsToPile(cardsToMove, to);
+  }
+
+  public boolean isGameWon() {
+    return foundations.stream().allMatch(pile -> pile.numOfCards() == 13);
   }
 }
