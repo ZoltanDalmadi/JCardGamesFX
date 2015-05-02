@@ -1,5 +1,7 @@
 package hu.unideb.inf.JCardGamesFX.klondike;
 
+import hu.unideb.inf.JCardGamesFX.model.Card;
+import hu.unideb.inf.JCardGamesFX.model.CardPile;
 import hu.unideb.inf.JCardGamesFX.view.CardPileView;
 import hu.unideb.inf.JCardGamesFX.view.CardView;
 import javafx.animation.Interpolator;
@@ -17,8 +19,10 @@ import java.util.List;
 public class KlondikeMouseUtil {
 
   private final MousePos mousePos = new MousePos();
-  private List<CardView> draggedCards;
-  private List<CardPileView> piles;
+  private List<Card> draggedCards;
+  private List<CardView> draggedCardViews;
+  private KlondikeGame game;
+  private KlondikeGameArea gameArea;
 
   EventHandler<MouseEvent> onMousePressedHandler = e -> {
     // Store mouse click position
@@ -32,57 +36,70 @@ public class KlondikeMouseUtil {
     double offsetY = e.getSceneY() - mousePos.y;
 
     // Get the actual card
-    CardView card = (CardView) e.getSource();
+    CardView cardView = (CardView) e.getSource();
+    Card card = game.getDeck().getById(cardView.getShortID());
 
     // Get the pile that contained the actual card
-    CardPileView activePile = card.getContainingPile();
+    CardPileView activePileView = cardView.getContainingPile();
+    CardPile activePile = game.getPileById(activePileView.getShortID());
 
     // Put this card and all above it to the list of dragged cards
-    draggedCards = activePile.cardViewsAbove(card);
+    draggedCardViews = activePileView.cardViewsAbove(cardView);
+    draggedCards = activePile.cardsAbove(card);
 
     // Bring them to front & apply difference vector to dragged cards
-    draggedCards.forEach(cardView -> {
-      cardView.toFront();
-      cardView.setTranslateX(offsetX);
-      cardView.setTranslateY(offsetY);
+    draggedCardViews.forEach(cw -> {
+      cw.toFront();
+      cw.setTranslateX(offsetX);
+      cw.setTranslateY(offsetY);
     });
   };
 
   EventHandler<MouseEvent> onMouseReleasedHandler = e -> {
     // Get the actual card
-    CardView card = (CardView) e.getSource();
+    CardView cardView = (CardView) e.getSource();
+    Card card = game.getDeck().getById(cardView.getShortID());
 
     // Get the pile that contained the actual card
-    CardPileView activePile = card.getContainingPile();
+    CardPileView activePileView = cardView.getContainingPile();
+    CardPile activePile = game.getPileById(activePileView.getShortID());
 
-    for (CardPileView pile : piles) {
-      if (pile.equals(activePile))
+    for (CardPileView pileView : gameArea.getStandardPileViews()) {
+      if (pileView.equals(activePileView))
         continue;
 
-      if (pile.isEmpty()) {
-        if (card.getBoundsInParent().intersects(pile.getBoundsInParent())) {
-//          slideToPile(draggedCards, pile);
-          activePile.moveCardViewsToPile(draggedCards, pile);
-          return;
+      if (pileView.isEmpty()) {
+        if (cardView.getBoundsInParent().intersects(pileView.getBoundsInParent())) {
+          CardPile pile = game.getPileById(pileView.getShortID());
+
+          if (game.getRules().isMoveValid(card, pile)) {
+            game.moveCard(draggedCards, activePile, pile);
+            activePileView.moveCardViewsToPile(draggedCardViews, pileView);
+            return;
+          }
         }
       } else {
-        if (card.getBoundsInParent().intersects(pile.getTopCardView().getBoundsInParent())) {
-//          slideToPile(draggedCards, pile);
-          activePile.moveCardViewsToPile(draggedCards, pile);
-          return;
+        if (cardView.getBoundsInParent().intersects(pileView.getTopCardView().getBoundsInParent())) {
+          CardPile pile = game.getPileById(pileView.getShortID());
+
+          if (game.getRules().isMoveValid(card, pile)) {
+            game.moveCard(draggedCards, activePile, pile);
+            activePileView.moveCardViewsToPile(draggedCardViews, pileView);
+            return;
+          }
         }
       }
     }
 
-    draggedCards.forEach(this::slideBack);
+    draggedCardViews.forEach(this::slideBack);
   };
 
-  public KlondikeMouseUtil(List<CardView> draggedCards, List<CardPileView> piles) {
-    this.draggedCards = draggedCards;
-    this.piles = piles;
+  public KlondikeMouseUtil(KlondikeGame game, KlondikeGameArea gameArea) {
+    this.game = game;
+    this.gameArea = gameArea;
   }
 
-  public void makeDraggable(final CardView card) {
+  public void makeDraggable(CardView card) {
     card.setOnMousePressed(onMousePressedHandler);
     card.setOnMouseDragged(onMouseDraggedHandler);
     card.setOnMouseReleased(onMouseReleasedHandler);
