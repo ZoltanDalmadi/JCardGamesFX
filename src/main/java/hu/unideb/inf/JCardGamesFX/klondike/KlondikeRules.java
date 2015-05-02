@@ -273,14 +273,16 @@ public class KlondikeRules {
       if (destPile.isEmpty())
         return card.getRank() == FrenchRank.King;
       else
-        return isSmallerByOneAndOppositeColor(card, destPile.getTopCard());
+        return isSmallerByOneAndOppositeColor(card, destPile.getTopCard()) &&
+            !destPile.getTopCard().isFaceDown();
     }
 
     if (destPile.getType() == CardPile.Type.Foundation) {
       if (destPile.isEmpty())
         return card.getRank() == FrenchRank.Ace;
       else
-        return isLargerByOneAndSameSuit(card, destPile.getTopCard());
+        return isLargerByOneAndSameSuit(card, destPile.getTopCard()) &&
+            !destPile.getTopCard().isFaceDown();
     }
 
     return false;
