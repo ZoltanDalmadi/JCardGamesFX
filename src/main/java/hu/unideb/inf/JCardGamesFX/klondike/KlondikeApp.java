@@ -1,10 +1,13 @@
 package hu.unideb.inf.JCardGamesFX.klondike;
 
 import hu.unideb.inf.JCardGamesFX.model.Card;
+import hu.unideb.inf.JCardGamesFX.model.CardPile;
 import hu.unideb.inf.JCardGamesFX.view.CardPileView;
 import hu.unideb.inf.JCardGamesFX.view.CardTheme;
+import hu.unideb.inf.JCardGamesFX.view.CardView;
 import hu.unideb.inf.JCardGamesFX.view.CardViewFactory;
 import javafx.application.Application;
+import javafx.collections.ListChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -13,6 +16,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.stream.IntStream;
 
 public class KlondikeApp extends Application {
 
@@ -57,6 +61,28 @@ public class KlondikeApp extends Application {
     game.startNewGame();
     mouseUtil = new KlondikeMouseUtil(game, gameArea);
     prepareGameAreaForNewGame();
+
+    // auto-flip cards
+    IntStream.range(0, game.getStandardPiles().size()).forEach(i -> {
+      CardPileView actPileView = gameArea.getStandardPileViews().get(i);
+      CardPile actPile = game.getPileById(actPileView.getShortID());
+
+      actPileView.getCards().addListener(
+          (ListChangeListener<CardView>) c -> {
+            while (c.next()) {
+              if (c.wasRemoved()) {
+                if (!actPileView.isEmpty()) {
+                  CardView toFlip = actPileView.getTopCardView();
+                  toFlip.setMouseTransparent(false);
+                  toFlip.flip();
+                }
+                if (!actPile.isEmpty())
+                  actPile.getTopCard().flip();
+              }
+            }
+          });
+    });
+
 
     primaryStage.setTitle("JavaFX Klondike");
     primaryStage.setScene(scene);
