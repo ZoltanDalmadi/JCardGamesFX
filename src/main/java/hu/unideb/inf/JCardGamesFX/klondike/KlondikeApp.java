@@ -1,6 +1,5 @@
 package hu.unideb.inf.JCardGamesFX.klondike;
 
-import hu.unideb.inf.JCardGamesFX.view.CardTheme;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -12,7 +11,7 @@ public class KlondikeApp extends Application {
   private static final double WIDTH = 1280;
   private static final double HEIGHT = 720;
 
-  private static CardTheme cardTheme;
+//  private static CardTheme cardTheme;
 //  private static List<CardView> cardViews;
 
   public static void main(String[] args) {
