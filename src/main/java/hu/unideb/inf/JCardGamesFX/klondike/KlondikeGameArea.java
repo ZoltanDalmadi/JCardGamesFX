@@ -54,7 +54,7 @@ public class KlondikeGameArea extends Pane {
 
     stockView.setPrefSize(130, 180);
     stockView.setBackground(background);
-    stockView.setLayoutX(80);
+    stockView.setLayoutX(95);
     stockView.setLayoutY(20);
     stockView.setEffect(gaussianBlur);
     getChildren().add(stockView);
@@ -70,7 +70,7 @@ public class KlondikeGameArea extends Pane {
 
     wasteView.setPrefSize(130, 180);
     wasteView.setBackground(background);
-    wasteView.setLayoutX(240);
+    wasteView.setLayoutX(255);
     wasteView.setLayoutY(20);
     wasteView.setEffect(gaussianBlur);
     getChildren().add(wasteView);
@@ -88,7 +88,7 @@ public class KlondikeGameArea extends Pane {
       foundationPileViews.add(new CardPileView(0, "F" + i));
       foundationPileViews.get(i).setPrefSize(130, 180);
       foundationPileViews.get(i).setBackground(background);
-      foundationPileViews.get(i).setLayoutX(560 + i * 160);
+      foundationPileViews.get(i).setLayoutX(575 + i * 160);
       foundationPileViews.get(i).setLayoutY(20);
       foundationPileViews.get(i).setEffect(gaussianBlur);
       getChildren().add(foundationPileViews.get(i));
@@ -107,7 +107,7 @@ public class KlondikeGameArea extends Pane {
       standardPileViews.add(new CardPileView(cardGap, "K" + i));
       standardPileViews.get(i).setPrefSize(130, 180);
       standardPileViews.get(i).setBackground(background);
-      standardPileViews.get(i).setLayoutX(80 + i * 160);
+      standardPileViews.get(i).setLayoutX(95 + i * 160);
       standardPileViews.get(i).setLayoutY(240);
       standardPileViews.get(i).setEffect(gaussianBlur);
       getChildren().add(standardPileViews.get(i));
