@@ -208,6 +208,7 @@ public class KlondikeRulesTest {
     FrenchCard threeDiamonds = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.Three);
     FrenchCard aceClubs = new FrenchCard(true, FrenchSuit.Clubs, FrenchRank.Ace);
     FrenchCard kingDiamonds = new FrenchCard(true, FrenchSuit.Diamonds, FrenchRank.King);
+    FrenchCard aceHearts = new FrenchCard(true, FrenchSuit.Hearts, FrenchRank.Ace);
 
     testStandardPiles.get(0).addCard(jackSpades);
     jackSpades.flip();
@@ -226,7 +227,11 @@ public class KlondikeRulesTest {
     assertFalse(klondikeRules.isMoveValid(kingDiamonds, testStandardPiles.get(0)));
 
     testStandardPiles.get(5).addCard(twoClubs);
+    twoClubs.flip();
     testStandardPiles.get(6).addCard(aceClubs);
+    aceClubs.flip();
+    testStandardPiles.get(1).addCard(aceHearts);
+    aceHearts.flip();
 
     assertTrue(klondikeRules.isMoveValid(aceClubs, testFoundations.get(0)));
     assertTrue(klondikeRules.isMoveValid(aceClubs, testFoundations.get(1)));
@@ -237,6 +242,8 @@ public class KlondikeRulesTest {
     assertFalse(klondikeRules.isMoveValid(twoClubs, testFoundations.get(1)));
     assertFalse(klondikeRules.isMoveValid(twoClubs, testFoundations.get(2)));
     assertFalse(klondikeRules.isMoveValid(twoClubs, testFoundations.get(3)));
+
+    assertFalse(klondikeRules.isMoveValid(aceHearts, testStandardPiles.get(5)));
 
     testFoundations.get(0).addCard(aceClubs);
     aceClubs.flip();

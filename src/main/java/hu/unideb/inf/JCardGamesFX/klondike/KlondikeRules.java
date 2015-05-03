@@ -274,7 +274,8 @@ public class KlondikeRules {
         return card.getRank() == FrenchRank.King;
       else
         return isSmallerByOneAndOppositeColor(card, destPile.getTopCard()) &&
-            !destPile.getTopCard().isFaceDown();
+            !destPile.getTopCard().isFaceDown() &&
+            destPile.getTopCard().getRank() != FrenchRank.Two;
     }
 
     if (destPile.getType() == CardPile.Type.Foundation) {
