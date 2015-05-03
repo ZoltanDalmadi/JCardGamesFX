@@ -128,4 +128,14 @@ public class KlondikeGameTest {
 
     assertNull(klondikeGame.getPileById("N/A"));
   }
+
+  @Test
+  public void testDrawFromStock() {
+    klondikeGame.startNewGame();
+    int stockCards = klondikeGame.getStock().numOfCards();
+    klondikeGame.drawFromStock(klondikeGame.getStock().getTopCard());
+
+    assertEquals(stockCards - 1, klondikeGame.getStock().numOfCards());
+    assertEquals(1, klondikeGame.getWaste().numOfCards());
+  }
 }

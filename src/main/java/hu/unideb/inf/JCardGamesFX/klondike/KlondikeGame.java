@@ -96,6 +96,11 @@ public class KlondikeGame {
       from.moveCardsToPile(cardsToMove, to);
   }
 
+  public void drawFromStock(Card card) {
+    stock.moveCardToPile(card, waste);
+    card.flip();
+  }
+
   public boolean isGameWon() {
     return foundations.stream().allMatch(pile -> pile.numOfCards() == 13);
   }
