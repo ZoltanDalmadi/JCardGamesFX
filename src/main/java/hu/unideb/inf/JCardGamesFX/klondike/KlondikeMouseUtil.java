@@ -96,10 +96,17 @@ public class KlondikeMouseUtil {
       Card card, CardView cardView, CardPile activePile,
       CardPileView activePileView) {
 
-    return checkPiles(card, cardView, activePile,
-        activePileView, gameArea.getStandardPileViews()) ||
-        checkPiles(card, cardView, activePile,
-            activePileView, gameArea.getFoundationPileViews());
+    boolean result = false;
+
+    if (checkPiles(card, cardView, activePile,
+        activePileView, gameArea.getStandardPileViews()))
+      result = true;
+
+    if (checkPiles(card, cardView, activePile,
+        activePileView, gameArea.getFoundationPileViews()))
+      result = true;
+
+    return result;
   }
 
   private boolean checkPiles(
