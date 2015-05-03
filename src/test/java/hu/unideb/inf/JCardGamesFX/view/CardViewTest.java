@@ -71,6 +71,8 @@ public class CardViewTest {
     cardView.flip();
     assertFalse(cardView.isFaceDown());
     assertEquals(theme.getFrontFace("KC"), cardView.getImage());
+
+    assertEquals(2, cardView.getDropShadow().getRadius(), 0);
   }
 
 }

@@ -1,8 +1,10 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
 import hu.unideb.inf.JCardGamesFX.model.Card;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 /**
  * This abstract class provides a base for classes that implements various
@@ -39,6 +41,11 @@ public class CardView extends ImageView {
   private boolean faceDown;
 
   /**
+   * Drop shadow effect of the card.
+   */
+  private DropShadow dropShadow;
+
+  /**
    * Constructs a {@link CardView} object with the two {@link Image} objects
    * as a representation in the game.
    *
@@ -47,10 +54,10 @@ public class CardView extends ImageView {
    * @param shortID   The short identifier.
    */
   public CardView(Image frontFace, Image backFace, String shortID) {
+    this();
     this.frontFace = frontFace;
     this.backFace = backFace;
     this.shortID = shortID;
-
     setImage(frontFace);
   }
 
@@ -58,6 +65,17 @@ public class CardView extends ImageView {
    * Constructs an empty {@link CardView}.
    */
   public CardView() {
+    this.dropShadow = new DropShadow(2, Color.gray(0, 0.5));
+    setEffect(dropShadow);
+  }
+
+  /**
+   * Returns the {@link DropShadow} object associated with this card.
+   *
+   * @return The {@link DropShadow} object.
+   */
+  public DropShadow getDropShadow() {
+    return dropShadow;
   }
 
   /**
