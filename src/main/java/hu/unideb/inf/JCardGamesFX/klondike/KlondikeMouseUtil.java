@@ -6,6 +6,7 @@ import hu.unideb.inf.JCardGamesFX.view.CardPileView;
 import hu.unideb.inf.JCardGamesFX.view.CardView;
 import javafx.animation.Interpolator;
 import javafx.animation.PathTransition;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -77,7 +78,9 @@ public class KlondikeMouseUtil {
 
           if (game.getRules().isMoveValid(card, pile)) {
             game.moveCards(draggedCards, activePile, pile);
-            activePileView.moveCardViewsToPile(draggedCardViews, pileView);
+            slideToPile(draggedCardViews, activePileView, pileView);
+            draggedCards = null;
+            draggedCardViews = null;
             return;
           }
         }
@@ -87,7 +90,9 @@ public class KlondikeMouseUtil {
 
           if (game.getRules().isMoveValid(card, pile)) {
             game.moveCards(draggedCards, activePile, pile);
-            activePileView.moveCardViewsToPile(draggedCardViews, pileView);
+            slideToPile(draggedCardViews, activePileView, pileView);
+            draggedCards = null;
+            draggedCardViews = null;
             return;
           }
         }
@@ -117,14 +122,11 @@ public class KlondikeMouseUtil {
     double targetX = card.getLayoutX();
     double targetY = card.getLayoutY();
 
-    animateCardMovement(card, sourceX, sourceY, targetX, targetY, Duration.millis(150));
+    animateCardMovement(card, sourceX, sourceY, targetX, targetY, Duration.millis(150), null);
   }
 
-  private void slideToPile(List<CardView> draggedCards, CardPileView destPile) {
-    double sourceX =
-        draggedCards.get(0).getLayoutX() + draggedCards.get(0).getTranslateX();
-    double sourceY =
-        draggedCards.get(0).getLayoutY() + draggedCards.get(0).getTranslateY();
+  private void slideToPile(List<CardView> cardsToSlide, CardPileView sourcePile, CardPileView destPile) {
+    double destCardGap = destPile.getCardGap();
 
     double targetX;
     double targetY;
@@ -137,12 +139,20 @@ public class KlondikeMouseUtil {
       targetY = destPile.getTopCardView().getLayoutY();
     }
 
-    draggedCards.forEach(card -> animateCardMovement(card, sourceX, sourceY, targetX, targetY, Duration.millis(150)));
+    for (int i = 0; i < cardsToSlide.size(); i++) {
+      CardView currentCardView = cardsToSlide.get(i);
+      double sourceX = currentCardView.getLayoutX() + currentCardView.getTranslateX();
+      double sourceY = currentCardView.getLayoutY() + currentCardView.getTranslateY();
+
+      animateCardMovement(currentCardView, sourceX, sourceY, targetX,
+          targetY + ((i + 1) * destCardGap), Duration.millis(150),
+          e -> sourcePile.moveCardViewToPile(currentCardView, destPile));
+    }
   }
 
   private void animateCardMovement(
       CardView card, double sourceX, double sourceY,
-      double targetX, double targetY, Duration duration) {
+      double targetX, double targetY, Duration duration, EventHandler<ActionEvent> doAfter) {
 
     Path path = new Path();
     path.getElements().add(new MoveToAbs(card, sourceX, sourceY));
@@ -151,6 +161,7 @@ public class KlondikeMouseUtil {
     PathTransition pathTransition =
         new PathTransition(duration, path, card);
     pathTransition.setInterpolator(Interpolator.EASE_IN);
+    pathTransition.setOnFinished(doAfter);
 
     pathTransition.play();
   }
