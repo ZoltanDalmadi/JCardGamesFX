@@ -85,7 +85,7 @@ public class KlondikeGameArea extends Pane {
     GaussianBlur gaussianBlur = new GaussianBlur(10);
 
     IntStream.range(0, 4).forEach(i -> {
-      foundationPileViews.add(new CardPileView(cardGap, "F" + i));
+      foundationPileViews.add(new CardPileView(0, "F" + i));
       foundationPileViews.get(i).setPrefSize(130, 180);
       foundationPileViews.get(i).setBackground(background);
       foundationPileViews.get(i).setLayoutX(560 + i * 160);
