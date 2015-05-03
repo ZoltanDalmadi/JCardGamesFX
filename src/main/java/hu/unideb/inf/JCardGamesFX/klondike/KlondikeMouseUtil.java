@@ -69,25 +69,9 @@ public class KlondikeMouseUtil {
     CardPileView activePileView = cardView.getContainingPile();
     CardPile activePile = game.getPileById(activePileView.getShortID());
 
-    // check if dropped card(s) are intersecting with any of the standard piles
-    for (CardPileView pileView : gameArea.getStandardPileViews()) {
-      if (pileView.equals(activePileView))
-        continue;
-
-      if (isOverPile(cardView, pileView) &&
-          handleValidMove(card, activePile, activePileView, pileView))
-        return;
-    }
-
-    // check if dropped card(s) are intersecting with any of the foundation piles
-    for (CardPileView pileView : gameArea.getFoundationPileViews()) {
-      if (pileView.equals(activePileView))
-        continue;
-
-      if (isOverPile(cardView, pileView) &&
-          handleValidMove(card, activePile, activePileView, pileView))
-        return;
-    }
+    // check if card(s) are intersecting with any of the piles
+    if (checkAllPiles(card, cardView, activePile, activePileView))
+      return;
 
     // if not intersecting with any valid pile, slide them back
     draggedCardViews.forEach(this::slideBack);
@@ -96,13 +80,6 @@ public class KlondikeMouseUtil {
     draggedCards = null;
     draggedCardViews = null;
   };
-
-  private boolean isOverPile(CardView cardView, CardPileView pileView) {
-    if (pileView.isEmpty())
-      return cardView.getBoundsInParent().intersects(pileView.getBoundsInParent());
-    else
-      return cardView.getBoundsInParent().intersects(pileView.getTopCardView().getBoundsInParent());
-  }
 
   public KlondikeMouseUtil(KlondikeGame game, KlondikeGameArea gameArea) {
     this.game = game;
@@ -113,6 +90,43 @@ public class KlondikeMouseUtil {
     card.setOnMousePressed(onMousePressedHandler);
     card.setOnMouseDragged(onMouseDraggedHandler);
     card.setOnMouseReleased(onMouseReleasedHandler);
+  }
+
+  private boolean checkAllPiles(
+      Card card, CardView cardView, CardPile activePile,
+      CardPileView activePileView) {
+
+    return checkPiles(card, cardView, activePile,
+        activePileView, gameArea.getStandardPileViews()) ||
+        checkPiles(card, cardView, activePile,
+            activePileView, gameArea.getFoundationPileViews());
+  }
+
+  private boolean checkPiles(
+      Card card, CardView cardView, CardPile activePile,
+      CardPileView activePileView, List<CardPileView> pileViews) {
+
+    boolean result = false;
+
+    for (CardPileView pileView : pileViews) {
+      // skip checking the same pile
+      if (pileView.equals(activePileView))
+        continue;
+
+      // check for intersection
+      if (isOverPile(cardView, pileView) &&
+          handleValidMove(card, activePile, activePileView, pileView))
+        result = true;
+    }
+
+    return result;
+  }
+
+  private boolean isOverPile(CardView cardView, CardPileView pileView) {
+    if (pileView.isEmpty())
+      return cardView.getBoundsInParent().intersects(pileView.getBoundsInParent());
+    else
+      return cardView.getBoundsInParent().intersects(pileView.getTopCardView().getBoundsInParent());
   }
 
   private boolean handleValidMove(Card card, CardPile sourcePile,
