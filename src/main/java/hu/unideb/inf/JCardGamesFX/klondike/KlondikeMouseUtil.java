@@ -57,6 +57,7 @@ public class KlondikeMouseUtil {
   };
 
   EventHandler<MouseEvent> onMouseReleasedHandler = e -> {
+    // if no cards are dragged, return immediately
     if (draggedCards == null && draggedCardViews == null)
       return;
 
@@ -68,41 +69,40 @@ public class KlondikeMouseUtil {
     CardPileView activePileView = cardView.getContainingPile();
     CardPile activePile = game.getPileById(activePileView.getShortID());
 
+    // check if dropped card(s) are intersecting with any of the standard piles
     for (CardPileView pileView : gameArea.getStandardPileViews()) {
       if (pileView.equals(activePileView))
         continue;
 
-      if (pileView.isEmpty()) {
-        if (cardView.getBoundsInParent().intersects(pileView.getBoundsInParent())) {
-          CardPile pile = game.getPileById(pileView.getShortID());
-
-          if (game.getRules().isMoveValid(card, pile)) {
-            game.moveCards(draggedCards, activePile, pile);
-            slideToPile(draggedCardViews, activePileView, pileView);
-            draggedCards = null;
-            draggedCardViews = null;
-            return;
-          }
-        }
-      } else {
-        if (cardView.getBoundsInParent().intersects(pileView.getTopCardView().getBoundsInParent())) {
-          CardPile pile = game.getPileById(pileView.getShortID());
-
-          if (game.getRules().isMoveValid(card, pile)) {
-            game.moveCards(draggedCards, activePile, pile);
-            slideToPile(draggedCardViews, activePileView, pileView);
-            draggedCards = null;
-            draggedCardViews = null;
-            return;
-          }
-        }
-      }
+      if (isOverPile(cardView, pileView) &&
+          handleValidMove(card, activePile, activePileView, pileView))
+        return;
     }
 
+    // check if dropped card(s) are intersecting with any of the foundation piles
+    for (CardPileView pileView : gameArea.getFoundationPileViews()) {
+      if (pileView.equals(activePileView))
+        continue;
+
+      if (isOverPile(cardView, pileView) &&
+          handleValidMove(card, activePile, activePileView, pileView))
+        return;
+    }
+
+    // if not intersecting with any valid pile, slide them back
     draggedCardViews.forEach(this::slideBack);
+
+    // throw away dragged cards info
     draggedCards = null;
     draggedCardViews = null;
   };
+
+  private boolean isOverPile(CardView cardView, CardPileView pileView) {
+    if (pileView.isEmpty())
+      return cardView.getBoundsInParent().intersects(pileView.getBoundsInParent());
+    else
+      return cardView.getBoundsInParent().intersects(pileView.getTopCardView().getBoundsInParent());
+  }
 
   public KlondikeMouseUtil(KlondikeGame game, KlondikeGameArea gameArea) {
     this.game = game;
@@ -115,6 +115,22 @@ public class KlondikeMouseUtil {
     card.setOnMouseReleased(onMouseReleasedHandler);
   }
 
+  private boolean handleValidMove(Card card, CardPile sourcePile,
+                                  CardPileView sourcePileView,
+                                  CardPileView destPileView) {
+    CardPile destPile = game.getPileById(destPileView.getShortID());
+
+    if (game.getRules().isMoveValid(card, destPile)) {
+      game.moveCards(draggedCards, sourcePile, destPile);
+      slideToPile(draggedCardViews, sourcePileView, destPileView);
+      draggedCards = null;
+      draggedCardViews = null;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   private void slideBack(CardView card) {
     double sourceX = card.getLayoutX() + card.getTranslateX();
     double sourceY = card.getLayoutY() + card.getTranslateY();
@@ -122,18 +138,20 @@ public class KlondikeMouseUtil {
     double targetX = card.getLayoutX();
     double targetY = card.getLayoutY();
 
-    animateCardMovement(card, sourceX, sourceY, targetX, targetY, Duration.millis(150), null);
+    animateCardMovement(card, sourceX, sourceY,
+        targetX, targetY, Duration.millis(150), null);
   }
 
-  private void slideToPile(List<CardView> cardsToSlide, CardPileView sourcePile, CardPileView destPile) {
+  private void slideToPile(List<CardView> cardsToSlide, CardPileView sourcePile,
+                           CardPileView destPile) {
     double destCardGap = destPile.getCardGap();
 
     double targetX;
     double targetY;
 
     if (destPile.isEmpty()) {
-      targetX = destPile.getBoundsInParent().getMinX();
-      targetY = destPile.getBoundsInParent().getMinY();
+      targetX = destPile.getLayoutX();
+      targetY = destPile.getLayoutY();
     } else {
       targetX = destPile.getTopCardView().getLayoutX();
       targetY = destPile.getTopCardView().getLayoutY();
@@ -141,18 +159,22 @@ public class KlondikeMouseUtil {
 
     for (int i = 0; i < cardsToSlide.size(); i++) {
       CardView currentCardView = cardsToSlide.get(i);
-      double sourceX = currentCardView.getLayoutX() + currentCardView.getTranslateX();
-      double sourceY = currentCardView.getLayoutY() + currentCardView.getTranslateY();
+      double sourceX =
+          currentCardView.getLayoutX() + currentCardView.getTranslateX();
+      double sourceY =
+          currentCardView.getLayoutY() + currentCardView.getTranslateY();
 
       animateCardMovement(currentCardView, sourceX, sourceY, targetX,
-          targetY + ((i + 1) * destCardGap), Duration.millis(150),
+          targetY + ((destPile.isEmpty() ? i : i + 1) * destCardGap),
+          Duration.millis(150),
           e -> sourcePile.moveCardViewToPile(currentCardView, destPile));
     }
   }
 
   private void animateCardMovement(
       CardView card, double sourceX, double sourceY,
-      double targetX, double targetY, Duration duration, EventHandler<ActionEvent> doAfter) {
+      double targetX, double targetY, Duration duration,
+      EventHandler<ActionEvent> doAfter) {
 
     Path path = new Path();
     path.getElements().add(new MoveToAbs(card, sourceX, sourceY));
