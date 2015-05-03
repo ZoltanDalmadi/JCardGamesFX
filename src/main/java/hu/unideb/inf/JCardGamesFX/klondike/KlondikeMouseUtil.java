@@ -5,7 +5,11 @@ import hu.unideb.inf.JCardGamesFX.model.CardPile;
 import hu.unideb.inf.JCardGamesFX.view.CardPileView;
 import hu.unideb.inf.JCardGamesFX.view.CardView;
 import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -39,6 +43,10 @@ public class KlondikeMouseUtil {
     // Get the actual card
     CardView cardView = (CardView) e.getSource();
     Card card = game.getDeck().getById(cardView.getShortID());
+
+    cardView.getDropShadow().setRadius(20);
+    cardView.getDropShadow().setOffsetX(10);
+    cardView.getDropShadow().setOffsetY(10);
 
     // Get the pile that contained the actual card
     CardPileView activePileView = cardView.getContainingPile();
@@ -157,7 +165,11 @@ public class KlondikeMouseUtil {
     double targetY = card.getLayoutY();
 
     animateCardMovement(card, sourceX, sourceY,
-        targetX, targetY, Duration.millis(150), null);
+        targetX, targetY, Duration.millis(150), e -> {
+          card.getDropShadow().setRadius(2);
+          card.getDropShadow().setOffsetX(0);
+          card.getDropShadow().setOffsetY(0);
+        });
   }
 
   private void slideToPile(List<CardView> cardsToSlide, CardPileView sourcePile,
@@ -188,7 +200,12 @@ public class KlondikeMouseUtil {
       animateCardMovement(currentCardView, sourceX, sourceY, targetX,
           targetY + ((destPile.isEmpty() ? i : i + 1) * destCardGap),
           Duration.millis(150),
-          e -> sourcePile.moveCardViewToPile(currentCardView, destPile));
+          e -> {
+            sourcePile.moveCardViewToPile(currentCardView, destPile);
+            currentCardView.getDropShadow().setRadius(2);
+            currentCardView.getDropShadow().setOffsetX(0);
+            currentCardView.getDropShadow().setOffsetY(0);
+          });
     }
   }
 
@@ -206,7 +223,15 @@ public class KlondikeMouseUtil {
     pathTransition.setInterpolator(Interpolator.EASE_IN);
     pathTransition.setOnFinished(doAfter);
 
-    pathTransition.play();
+    Timeline blurReset = new Timeline();
+    KeyValue bx = new KeyValue(card.getDropShadow().offsetXProperty(), 0, Interpolator.EASE_IN);
+    KeyValue by = new KeyValue(card.getDropShadow().offsetYProperty(), 0, Interpolator.EASE_IN);
+    KeyValue br = new KeyValue(card.getDropShadow().radiusProperty(), 2, Interpolator.EASE_IN);
+    KeyFrame bKeyFrame = new KeyFrame(duration, bx, by, br);
+    blurReset.getKeyFrames().add(bKeyFrame);
+
+    ParallelTransition pt = new ParallelTransition(card, pathTransition, blurReset);
+    pt.play();
   }
 
   private static class MoveToAbs extends MoveTo {
