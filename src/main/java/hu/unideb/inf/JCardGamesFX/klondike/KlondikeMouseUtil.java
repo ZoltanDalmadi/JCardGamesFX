@@ -29,6 +29,18 @@ public class KlondikeMouseUtil {
   private KlondikeGame game;
   private KlondikeGameArea gameArea;
 
+  EventHandler<MouseEvent> onMouseClickedHandler = e -> {
+    // put card from stock to waste and flip them
+    CardView cardView = (CardView) e.getSource();
+    Card card = game.getDeck().getById(cardView.getShortID());
+
+    game.drawFromStock(card);
+    gameArea.getStockView().moveCardViewToPile(cardView, gameArea.getWasteView());
+    cardView.flip();
+    cardView.setMouseTransparent(false);
+    makeDraggable(cardView);
+  };
+
   EventHandler<MouseEvent> onMousePressedHandler = e -> {
     // Store mouse click position
     mousePos.x = e.getSceneX();
@@ -44,6 +56,7 @@ public class KlondikeMouseUtil {
     CardView cardView = (CardView) e.getSource();
     Card card = game.getDeck().getById(cardView.getShortID());
 
+    // Setup drop shadow
     cardView.getDropShadow().setRadius(20);
     cardView.getDropShadow().setOffsetX(10);
     cardView.getDropShadow().setOffsetY(10);
@@ -95,9 +108,17 @@ public class KlondikeMouseUtil {
   }
 
   public void makeDraggable(CardView card) {
+    card.setOnMouseClicked(null);
     card.setOnMousePressed(onMousePressedHandler);
     card.setOnMouseDragged(onMouseDraggedHandler);
     card.setOnMouseReleased(onMouseReleasedHandler);
+  }
+
+  public void makeClickable(CardView card) {
+    card.setOnMousePressed(null);
+    card.setOnMouseDragged(null);
+    card.setOnMouseReleased(null);
+    card.setOnMouseClicked(onMouseClickedHandler);
   }
 
   private boolean checkAllPiles(
