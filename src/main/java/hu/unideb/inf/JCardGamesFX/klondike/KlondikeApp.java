@@ -77,7 +77,8 @@ public class KlondikeApp extends Application {
                     toFlip.flip();
                 }
                 if (!actPile.isEmpty())
-                  actPile.getTopCard().flip();
+                  if (actPile.getTopCard().isFaceDown())
+                    actPile.getTopCard().flip();
               }
             }
           });
