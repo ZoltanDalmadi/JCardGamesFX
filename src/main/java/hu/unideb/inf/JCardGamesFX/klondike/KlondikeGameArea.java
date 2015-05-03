@@ -22,7 +22,7 @@ public class KlondikeGameArea extends Pane {
   private List<CardPileView> foundationPileViews;
   private CardPileView stockView;
   private CardPileView wasteView;
-  private double cardGap = 40;
+  private double cardGap = 30;
 
   public KlondikeGameArea() {
     this.standardPileViews = FXCollections.observableArrayList();
