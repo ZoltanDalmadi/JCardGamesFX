@@ -14,6 +14,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit test for class {@link CardPileView}.
+ */
 public class CardPileViewTest {
 
   /**
@@ -124,6 +127,18 @@ public class CardPileViewTest {
     assertEquals(1, cardPileView.numOfCards());
     assertEquals(3, destPile.numOfCards());
     assertTrue(list.isEmpty());
+  }
+
+  /**
+   * Tests the <code>moveCardToPile()</code> method.
+   */
+  @Test
+  public void testMoveCardViewToPile() {
+    CardPileView destPile = new CardPileView(40);
+    cardPileView.moveCardViewToPile(cardPileView.getTopCardView(), destPile);
+
+    assertEquals(3, cardPileView.numOfCards());
+    assertEquals(1, destPile.numOfCards());
   }
 
   /**

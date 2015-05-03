@@ -162,7 +162,7 @@ public class CardPileView extends Pane implements Iterable<CardView> {
   }
 
   /**
-   * Move cards to another pile. Intended to be used in conjunction with
+   * Moves cards to another pile. Intended to be used in conjunction with
    * <code>cardViewsAbove()</code>.
    *
    * @param cardsToMove The list of cards to move to the destination pile.
@@ -171,6 +171,17 @@ public class CardPileView extends Pane implements Iterable<CardView> {
   public void moveCardViewsToPile(List<CardView> cardsToMove, CardPileView destPile) {
     cardsToMove.forEach(destPile::addCardView);
     cardsToMove.clear();
+  }
+
+  /**
+   * Moves a single card to another pile.
+   *
+   * @param cardToMove The card to move to the destination pile.
+   * @param destPile   The destination pile.
+   */
+  public void moveCardViewToPile(CardView cardToMove, CardPileView destPile) {
+    destPile.addCardView(cardToMove);
+    cards.remove(cardToMove);
   }
 
   /**
