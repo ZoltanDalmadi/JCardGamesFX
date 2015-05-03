@@ -88,7 +88,7 @@ public class KlondikeGame {
     deckIterator.forEachRemaining(stock::addCard);
   }
 
-  public void moveCard(List<Card> cardsToMove, CardPile from, CardPile to) {
+  public void moveCards(List<Card> cardsToMove, CardPile from, CardPile to) {
     if (rules.isMoveValid(cardsToMove.get(0), to))
       from.moveCardsToPile(cardsToMove, to);
   }

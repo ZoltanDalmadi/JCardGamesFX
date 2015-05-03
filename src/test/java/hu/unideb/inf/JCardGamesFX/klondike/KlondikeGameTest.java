@@ -68,12 +68,12 @@ public class KlondikeGameTest {
     testStandardPiles.get(3).addCard(threeDiamonds);
     threeDiamonds.flip();
 
-    klondikeGame.moveCard(testStandardPiles.get(0).cardsAbove(jackSpades),
+    klondikeGame.moveCards(testStandardPiles.get(0).cardsAbove(jackSpades),
         testStandardPiles.get(0), testStandardPiles.get(2));
 
     assertSame(testStandardPiles.get(2).getTopCard(), jackSpades);
 
-    klondikeGame.moveCard(testStandardPiles.get(2).cardsAbove(jackSpades),
+    klondikeGame.moveCards(testStandardPiles.get(2).cardsAbove(jackSpades),
         testStandardPiles.get(0), testStandardPiles.get(3));
 
     assertSame(testStandardPiles.get(2).getTopCard(), jackSpades);

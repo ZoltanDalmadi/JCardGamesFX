@@ -76,7 +76,7 @@ public class KlondikeMouseUtil {
           CardPile pile = game.getPileById(pileView.getShortID());
 
           if (game.getRules().isMoveValid(card, pile)) {
-            game.moveCard(draggedCards, activePile, pile);
+            game.moveCards(draggedCards, activePile, pile);
             activePileView.moveCardViewsToPile(draggedCardViews, pileView);
             return;
           }
@@ -86,7 +86,7 @@ public class KlondikeMouseUtil {
           CardPile pile = game.getPileById(pileView.getShortID());
 
           if (game.getRules().isMoveValid(card, pile)) {
-            game.moveCard(draggedCards, activePile, pile);
+            game.moveCards(draggedCards, activePile, pile);
             activePileView.moveCardViewsToPile(draggedCardViews, pileView);
             return;
           }
