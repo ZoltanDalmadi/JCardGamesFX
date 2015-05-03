@@ -16,7 +16,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.stream.IntStream;
 
 public class KlondikeApp extends Application {
 
@@ -63,7 +62,7 @@ public class KlondikeApp extends Application {
     prepareGameAreaForNewGame();
 
     // auto-flip cards
-    IntStream.range(0, game.getStandardPiles().size()).forEach(i -> {
+    for (int i = 0; i < game.getStandardPiles().size(); i++) {
       CardPileView actPileView = gameArea.getStandardPileViews().get(i);
       CardPile actPile = game.getPileById(actPileView.getShortID());
 
@@ -82,7 +81,7 @@ public class KlondikeApp extends Application {
               }
             }
           });
-    });
+    }
 
 
     primaryStage.setTitle("JavaFX Klondike");
