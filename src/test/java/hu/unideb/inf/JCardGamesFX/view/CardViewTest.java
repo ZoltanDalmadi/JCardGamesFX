@@ -67,7 +67,9 @@ public class CardViewTest {
     assertEquals(theme.getFrontFace("KC"), cardView.getImage());
     cardView.flip();
     assertEquals(theme.getBackFace(), cardView.getImage());
+    assertTrue(cardView.isFaceDown());
     cardView.flip();
+    assertFalse(cardView.isFaceDown());
     assertEquals(theme.getFrontFace("KC"), cardView.getImage());
   }
 

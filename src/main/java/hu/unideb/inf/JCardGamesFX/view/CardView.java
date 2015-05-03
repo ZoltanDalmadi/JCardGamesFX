@@ -34,6 +34,11 @@ public class CardView extends ImageView {
   private CardPileView containingPile;
 
   /**
+   * Whether the {@link CardView} is facing down.
+   */
+  private boolean faceDown;
+
+  /**
    * Constructs a {@link CardView} object with the two {@link Image} objects
    * as a representation in the game.
    *
@@ -53,6 +58,15 @@ public class CardView extends ImageView {
    * Constructs an empty {@link CardView}.
    */
   public CardView() {
+  }
+
+  /**
+   * Returns whether the {@link CardView} is facing down.
+   *
+   * @return true if the {@link CardView} is facing down, false otherwise.
+   */
+  public boolean isFaceDown() {
+    return faceDown;
   }
 
   /**
@@ -131,10 +145,12 @@ public class CardView extends ImageView {
   }
 
   /**
-   * Swaps the displayed image of the card.
+   * Swaps the displayed image of the card
+   * and negates the field <code>faceDown</code>.
    */
   public void flip() {
     setImage(getImage().equals(frontFace) ? backFace : frontFace);
+    faceDown = !faceDown;
   }
 
 }
