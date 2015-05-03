@@ -89,6 +89,9 @@ public class KlondikeGame {
   }
 
   public void moveCards(List<Card> cardsToMove, CardPile from, CardPile to) {
+    if (cardsToMove == null)
+      return;
+
     if (rules.isMoveValid(cardsToMove.get(0), to))
       from.moveCardsToPile(cardsToMove, to);
   }

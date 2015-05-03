@@ -162,6 +162,9 @@ public class KlondikeMouseUtil {
 
   private void slideToPile(List<CardView> cardsToSlide, CardPileView sourcePile,
                            CardPileView destPile) {
+    if (cardsToSlide == null)
+      return;
+
     double destCardGap = destPile.getCardGap();
 
     double targetX;
