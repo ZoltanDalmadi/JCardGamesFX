@@ -111,6 +111,7 @@ public class KlondikeApp extends Application {
 
     deckIterator.forEachRemaining(card -> {
       gameArea.getStockView().addCardView(CardViewFactory.createCardView(card));
+      mouseUtil.makeClickable(gameArea.getStockView().getTopCardView());
       gameArea.getChildren().add(gameArea.getStockView().getTopCardView());
     });
   }
