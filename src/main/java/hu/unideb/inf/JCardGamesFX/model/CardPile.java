@@ -145,7 +145,18 @@ public class CardPile implements Iterable<Card> {
   }
 
   /**
-   * Move cards to another pile. Intended to be used in conjunction with
+   * Moves a single card to another pile.
+   *
+   * @param cardToMove The card to move to the destination pile.
+   * @param destPile   The destination pile.
+   */
+  public void moveCardToPile(Card cardToMove, CardPile destPile) {
+    destPile.addCard(cardToMove);
+    cards.remove(cardToMove);
+  }
+
+  /**
+   * Moves cards to another pile. Intended to be used in conjunction with
    * <code>cardsAbove()</code>.
    *
    * @param cardsToMove The list of cards to move to the destination pile.

@@ -81,7 +81,8 @@ public class CardPileTest {
   }
 
   /**
-   * Tests <code>cardsAbove()</code> and <code>moveCardsToPile()</code> methods.
+   * Tests <code>cardsAbove()</code>, <code>moveCardsToPile()</code> and
+   * <code>moveCardToPile()</code> methods.
    */
   @Test
   public void testCardsAboveAndMoveCardsToPile() {
@@ -108,6 +109,10 @@ public class CardPileTest {
     assertEquals(1, cardPile.numOfCards());
     assertEquals(3, cardPile1.numOfCards());
     assertTrue(cardsAbove.isEmpty());
+
+    cardPile.moveCardToPile(cardPile.getTopCard(), cardPile1);
+    assertEquals(0, cardPile.numOfCards());
+    assertEquals(4, cardPile1.numOfCards());
   }
 
   /**
