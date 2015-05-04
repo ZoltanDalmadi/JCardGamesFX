@@ -78,9 +78,6 @@ public class KlondikeGameTest {
 
     klondikeGame.moveCards(null,
         testStandardPiles.get(0), testStandardPiles.get(3));
-
-    assertSame(testStandardPiles.get(2).getTopCard(), jackSpades);
-    assertSame(testStandardPiles.get(3).getTopCard(), threeDiamonds);
   }
 
   @Test
@@ -137,5 +134,21 @@ public class KlondikeGameTest {
 
     assertEquals(stockCards - 1, klondikeGame.getStock().numOfCards());
     assertEquals(1, klondikeGame.getWaste().numOfCards());
+  }
+
+  @Test
+  public void testRefillStockFromWaste() {
+    klondikeGame.startNewGame();
+
+    while (klondikeGame.getStock().numOfCards() > 0) {
+      klondikeGame.drawFromStock(klondikeGame.getStock().getTopCard());
+    }
+
+    assertEquals(0, klondikeGame.getStock().numOfCards());
+    assertEquals(24, klondikeGame.getWaste().numOfCards());
+
+    klondikeGame.refillStockFromWaste();
+    assertEquals(24, klondikeGame.getStock().numOfCards());
+    assertEquals(0, klondikeGame.getWaste().numOfCards());
   }
 }
