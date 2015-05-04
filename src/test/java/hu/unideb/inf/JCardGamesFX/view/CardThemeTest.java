@@ -1,12 +1,9 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
 import javafx.scene.image.Image;
-import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -36,12 +33,9 @@ public class CardThemeTest {
 
   /**
    * Tests setter and getter for theme file path.
-   *
-   * @throws IOException    If an I/O error occurs.
-   * @throws ParseException If a parse error occurs.
    */
   @Test
-  public void testThemeFileOperations() throws IOException, ParseException {
+  public void testThemeFileOperations() {
     theme.setThemeFile("/cardfaces/classicTest/theme.json");
     assertEquals("/cardfaces/classicTest/theme.json", theme.getThemeFile());
   }
@@ -70,12 +64,9 @@ public class CardThemeTest {
 
   /**
    * Tests theme parsing.
-   *
-   * @throws IOException    If an I/O error occurs.
-   * @throws ParseException If a parse error occurs.
    */
   @Test
-  public void testParseTheme() throws IOException, ParseException {
+  public void testParseTheme() {
     theme.setBackFace(new Image("/test_back.png"));
     theme.setThemeFile("/cardfaces/classicTest/theme.json");
     assertEquals(13, theme.getImages().size());

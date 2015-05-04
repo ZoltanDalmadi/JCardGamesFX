@@ -1,12 +1,11 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import javafx.scene.image.Image;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -40,10 +39,8 @@ public class CardTheme {
    *
    * @param themeFile    Path to the theme json file.
    * @param backFacePath Path to the back face image file.
-   * @throws IOException    If an I/O error occurs.
-   * @throws ParseException If a parse error occurs.
    */
-  public CardTheme(String themeFile, String backFacePath) throws IOException, ParseException {
+  public CardTheme(String themeFile, String backFacePath) {
     this.themeFile = themeFile;
     this.backFace = new Image(backFacePath);
     parseTheme();
@@ -70,10 +67,8 @@ public class CardTheme {
    * Sets the path for the theme file.
    *
    * @param themeFile The path for the theme file to be set.
-   * @throws IOException    If an I/O error occurs.
-   * @throws ParseException If a parse error occurs.
    */
-  public void setThemeFile(String themeFile) throws IOException, ParseException {
+  public void setThemeFile(String themeFile) {
     this.themeFile = themeFile;
     parseTheme();
   }
@@ -137,23 +132,24 @@ public class CardTheme {
 
   /**
    * Parses the json file and creates the {@link Image} objects.
-   *
-   * @throws IOException    If an I/O error occurs.
-   * @throws ParseException If a parse error occurs.
    */
-  public void parseTheme() throws IOException, ParseException {
-    JSONParser jsonParser = new JSONParser();
+  public void parseTheme() {
+    Gson gson = new Gson();
+    JsonObject jo;
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(
-        new FileInputStream(getClass().getResource(themeFile).getPath()),
-        Charset.forName("UTF-8")));
+    try (BufferedReader br
+             = new BufferedReader(new InputStreamReader(
+        getClass().getResourceAsStream(themeFile), Charset.forName("UTF-8")))) {
 
-    JSONObject jo = (JSONObject) jsonParser.parse(br);
+      jo = gson.fromJson(br, JsonObject.class);
 
-    for (Object entry : jo.entrySet()) {
-      String key = (String) ((Map.Entry) entry).getKey();
-      String value = (String) ((Map.Entry) entry).getValue();
-      frontFaces.put(key, new Image(value));
+    } catch (IOException e) {
+      System.err.println("Theme file cannot be read: " + themeFile);
+      return;
+    }
+
+    for (Map.Entry<String, JsonElement> elem : jo.entrySet()) {
+      frontFaces.put(elem.getKey(), new Image(elem.getValue().getAsString()));
     }
   }
 
