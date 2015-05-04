@@ -109,8 +109,12 @@ public class KlondikeMouseUtil {
     CardPile activePile = game.getPileById(activePileView.getShortID());
 
     // check if card(s) are intersecting with any of the piles
-    if (checkAllPiles(card, cardView, activePile, activePileView))
+    if (checkAllPiles(card, cardView, activePile, activePileView)) {
+      if (game.isGameWon())
+        System.out.println("You have won the game!");
+
       return;
+    }
 
     // if not intersecting with any valid pile, slide them back
     draggedCardViews.forEach(this::slideBack);
