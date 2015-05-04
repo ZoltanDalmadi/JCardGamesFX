@@ -12,9 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
 import java.util.Iterator;
 
 public class KlondikeApp extends Application {
@@ -50,11 +48,7 @@ public class KlondikeApp extends Application {
 
     Scene scene = new Scene(bord, WIDTH, HEIGHT);
 
-    try {
-      CardViewFactory.setCardTheme(new CardTheme("/cardfaces/classic/theme.json", "/backfaces/bb.png"));
-    } catch (IOException | ParseException e) {
-      e.printStackTrace();
-    }
+    CardViewFactory.setCardTheme(new CardTheme("/cardfaces/classic/theme.json", "/backfaces/bb.png"));
 
     game = new KlondikeGame();
     game.startNewGame();

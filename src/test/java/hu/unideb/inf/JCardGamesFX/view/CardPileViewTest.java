@@ -3,12 +3,10 @@ package hu.unideb.inf.JCardGamesFX.view;
 import hu.unideb.inf.JCardGamesFX.model.FrenchCard;
 import hu.unideb.inf.JCardGamesFX.model.FrenchRank;
 import hu.unideb.inf.JCardGamesFX.model.FrenchSuit;
-import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -29,12 +27,9 @@ public class CardPileViewTest {
 
   /**
    * Sets up the test environment before each test.
-   *
-   * @throws IOException    if an I/O error occurs.
-   * @throws ParseException if a parse error occurs.
    */
   @Before
-  public void setUp() throws IOException, ParseException {
+  public void setUp() {
     cardPileView = new CardPileView(40);
 
     CardTheme theme = new CardTheme("/cardfaces/classicTest/theme.json", "/test_back.png");

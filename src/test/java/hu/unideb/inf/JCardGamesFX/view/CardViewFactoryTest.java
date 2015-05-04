@@ -3,11 +3,8 @@ package hu.unideb.inf.JCardGamesFX.view;
 import hu.unideb.inf.JCardGamesFX.model.FrenchCard;
 import hu.unideb.inf.JCardGamesFX.model.FrenchRank;
 import hu.unideb.inf.JCardGamesFX.model.FrenchSuit;
-import org.json.simple.parser.ParseException;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -45,12 +42,9 @@ public class CardViewFactoryTest {
 
   /**
    * Tests the static method <code>createCardView()</code>.
-   *
-   * @throws IOException    If an I/O error occurs.
-   * @throws ParseException If a parse error occurs.
    */
   @Test
-  public void testCreateCardView() throws IOException, ParseException {
+  public void testCreateCardView() {
     CardTheme theme = new CardTheme("/cardfaces/classicTest/theme.json", "/test_back.png");
     CardViewFactory.setCardTheme(theme);
     FrenchCard card = new FrenchCard(false, FrenchSuit.Clubs, FrenchRank.King);

@@ -1,11 +1,8 @@
 package hu.unideb.inf.JCardGamesFX.view;
 
-import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -28,11 +25,7 @@ public class CardViewTest {
   @Before
   public void setUp() {
     cardView = new CardView();
-    try {
-      theme = new CardTheme("/cardfaces/classicTest/theme.json", "/test_back.png");
-    } catch (IOException | ParseException e) {
-      e.printStackTrace();
-    }
+    theme = new CardTheme("/cardfaces/classicTest/theme.json", "/test_back.png");
   }
 
   /**
