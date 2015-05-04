@@ -108,6 +108,8 @@ public class KlondikeApp extends Application {
       mouseUtil.makeClickable(gameArea.getStockView().getTopCardView());
       gameArea.getChildren().add(gameArea.getStockView().getTopCardView());
     });
+
+    gameArea.getStockView().setOnMouseClicked(mouseUtil.stockReverseCardsHandler);
   }
 
 }

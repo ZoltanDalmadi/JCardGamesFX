@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.IntStream;
 
 public class KlondikeGame {
@@ -92,13 +93,24 @@ public class KlondikeGame {
     if (cardsToMove == null)
       return;
 
-    if (rules.isMoveValid(cardsToMove.get(0), to))
-      from.moveCardsToPile(cardsToMove, to);
+    from.moveCardsToPile(cardsToMove, to);
   }
 
   public void drawFromStock(Card card) {
     stock.moveCardToPile(card, waste);
     card.flip();
+  }
+
+  public void refillStockFromWaste() {
+    ListIterator<Card> revIt =
+        waste.getCards().listIterator(waste.numOfCards());
+
+    while (revIt.hasPrevious()) {
+      Card currentCard = revIt.previous();
+      currentCard.flip();
+      stock.addCard(currentCard);
+      revIt.remove();
+    }
   }
 
   public boolean isGameWon() {

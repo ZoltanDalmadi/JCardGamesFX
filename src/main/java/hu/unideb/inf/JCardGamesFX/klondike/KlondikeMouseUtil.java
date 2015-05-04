@@ -20,6 +20,7 @@ import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.util.List;
+import java.util.ListIterator;
 
 public class KlondikeMouseUtil {
 
@@ -39,6 +40,23 @@ public class KlondikeMouseUtil {
     cardView.flip();
     cardView.setMouseTransparent(false);
     makeDraggable(cardView);
+  };
+
+  EventHandler<MouseEvent> stockReverseCardsHandler = e -> {
+    // put all cards on waste back to stock and flip them
+    game.refillStockFromWaste();
+    CardPileView wasteView = gameArea.getWasteView();
+    CardPileView stockView = gameArea.getStockView();
+
+    ListIterator<CardView> revIt = wasteView.getCards().listIterator(wasteView.numOfCards());
+
+    while (revIt.hasPrevious()) {
+      CardView currentCardView = revIt.previous();
+      currentCardView.flip();
+      makeClickable(currentCardView);
+      stockView.addCardView(currentCardView);
+      revIt.remove();
+    }
   };
 
   EventHandler<MouseEvent> onMousePressedHandler = e -> {
