@@ -70,14 +70,13 @@ public class KlondikeApp extends Application {
                   if (!toFlip.isFaceDown())
                     toFlip.flip();
                 }
-                if (!actPile.isEmpty())
-                  if (actPile.getTopCard().isFaceDown())
-                    actPile.getTopCard().flip();
+
+                if (!actPile.isEmpty() && actPile.getTopCard().isFaceDown())
+                  actPile.getTopCard().flip();
               }
             }
           });
     }
-
 
     primaryStage.setTitle("JavaFX Klondike");
     primaryStage.setScene(scene);
