@@ -23,6 +23,7 @@ public class KlondikeApp extends Application {
   KlondikeGame game;
   KlondikeGameArea gameArea;
   KlondikeMouseUtil mouseUtil;
+  CardTheme cardTheme;
 
   public static void main(String[] args) {
     launch(args);
@@ -48,7 +49,8 @@ public class KlondikeApp extends Application {
 
     Scene scene = new Scene(bord, WIDTH, HEIGHT);
 
-    CardViewFactory.setCardTheme(new CardTheme("/cardfaces/classic/theme.json", "/backfaces/bb_fancy.png"));
+    cardTheme = new CardTheme("/cardfaces/classic/theme.json", "/backfaces/bb.png");
+    CardViewFactory.setCardTheme(cardTheme);
 
     game = new KlondikeGame();
     game.startNewGame();
@@ -93,6 +95,7 @@ public class KlondikeApp extends Application {
       for (int i = 0; i < cardsToPut; i++) {
         standardPileView.addCardView(CardViewFactory.createCardView(deckIterator.next()));
         gameArea.getChildren().add(standardPileView.getTopCardView());
+        gameArea.cardViewList.add(standardPileView.getTopCardView());
         mouseUtil.makeDraggable(standardPileView.getTopCardView());
         standardPileView.getTopCardView().setMouseTransparent(true);
       }
@@ -104,6 +107,7 @@ public class KlondikeApp extends Application {
     deckIterator.forEachRemaining(card -> {
       gameArea.getStockView().addCardView(CardViewFactory.createCardView(card));
       mouseUtil.makeClickable(gameArea.getStockView().getTopCardView());
+      gameArea.cardViewList.add(gameArea.getStockView().getTopCardView());
       gameArea.getChildren().add(gameArea.getStockView().getTopCardView());
     });
 

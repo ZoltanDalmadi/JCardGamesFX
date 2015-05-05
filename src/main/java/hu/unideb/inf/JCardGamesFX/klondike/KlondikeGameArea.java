@@ -1,6 +1,8 @@
 package hu.unideb.inf.JCardGamesFX.klondike;
 
 import hu.unideb.inf.JCardGamesFX.view.CardPileView;
+import hu.unideb.inf.JCardGamesFX.view.CardTheme;
+import hu.unideb.inf.JCardGamesFX.view.CardView;
 import javafx.collections.FXCollections;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
@@ -13,11 +15,13 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class KlondikeGameArea extends Pane {
 
+  List<CardView> cardViewList = new ArrayList<>();
   private List<CardPileView> standardPileViews;
   private List<CardPileView> foundationPileViews;
   private CardPileView stockView;
@@ -144,4 +148,7 @@ public class KlondikeGameArea extends Pane {
         BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
   }
 
+  public void updateCardViews(CardTheme cardTheme) {
+    cardViewList.forEach(cardView -> cardView.setBackFace(cardTheme.getBackFace()));
+  }
 }
