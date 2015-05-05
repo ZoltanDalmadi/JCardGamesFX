@@ -49,6 +49,7 @@ public class CardView extends ImageView {
    * Constructs a {@link CardView} object with the two {@link Image} objects
    * as a representation in the game.
    *
+   * @param faceDown  Whether the card is facing down.
    * @param frontFace The {@link Image} object for the front face.
    * @param backFace  The {@link Image} object for the back face.
    * @param shortID   The short identifier.
@@ -63,6 +64,8 @@ public class CardView extends ImageView {
 
   /**
    * Constructs an empty {@link CardView}.
+   *
+   * @param faceDown Whether the card is facing down.
    */
   public CardView(boolean faceDown) {
     this.dropShadow = new DropShadow(2, Color.gray(0, 0.75));
