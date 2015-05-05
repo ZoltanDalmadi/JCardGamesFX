@@ -20,9 +20,9 @@ public class KlondikeApp extends Application {
   private static final double WIDTH = 1280;
   private static final double HEIGHT = 800;
 
-  private KlondikeGame game;
-  private KlondikeGameArea gameArea;
-  private KlondikeMouseUtil mouseUtil;
+  KlondikeGame game;
+  KlondikeGameArea gameArea;
+  KlondikeMouseUtil mouseUtil;
 
   public static void main(String[] args) {
     launch(args);
@@ -35,7 +35,7 @@ public class KlondikeApp extends Application {
     gameArea = new KlondikeGameArea(new Image("/tableaous/green-felt.png"));
 
     // Menu bar
-    KlondikeMenu menuBar = new KlondikeMenu();
+    KlondikeMenu menuBar = new KlondikeMenu(this);
 
     // Status bar
     KlondikeStatusBar statusBar = new KlondikeStatusBar();
@@ -111,4 +111,7 @@ public class KlondikeApp extends Application {
     gameArea.getStockView().setOnMouseClicked(mouseUtil.stockReverseCardsHandler);
   }
 
+  public void newGame() {
+
+  }
 }
