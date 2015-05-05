@@ -191,9 +191,21 @@ public class CardPile implements Iterable<Card> {
    * Enumeration that holds the possible types of the pile.
    */
   public enum Type {
+    /**
+     * Standard pile for Klondike games.
+     */
     Klondike,
+    /**
+     * Remaining cards from the deck.
+     */
     Stock,
+    /**
+     * Cards put there from the stock.
+     */
     Waste,
+    /**
+     * Cards collected here by suits.
+     */
     Foundation
   }
 
