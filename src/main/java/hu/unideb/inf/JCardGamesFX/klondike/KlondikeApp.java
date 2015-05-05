@@ -48,7 +48,7 @@ public class KlondikeApp extends Application {
 
     Scene scene = new Scene(bord, WIDTH, HEIGHT);
 
-    CardViewFactory.setCardTheme(new CardTheme("/cardfaces/classic/theme.json", "/backfaces/bb.png"));
+    CardViewFactory.setCardTheme(new CardTheme("/cardfaces/classic/theme.json", "/backfaces/bb_fancy.png"));
 
     game = new KlondikeGame();
     game.startNewGame();
