@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import javafx.scene.image.Image;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.HashMap;
@@ -135,18 +134,12 @@ public class CardTheme {
    */
   public void parseTheme() {
     Gson gson = new Gson();
-    JsonObject jo;
 
-    try (BufferedReader br
-             = new BufferedReader(new InputStreamReader(
-        getClass().getResourceAsStream(themeFile), Charset.forName("UTF-8")))) {
+    BufferedReader br
+        = new BufferedReader(new InputStreamReader(
+        getClass().getResourceAsStream(themeFile), Charset.forName("UTF-8")));
 
-      jo = gson.fromJson(br, JsonObject.class);
-
-    } catch (IOException e) {
-      System.err.println("Theme file cannot be read: " + themeFile);
-      return;
-    }
+    JsonObject jo = gson.fromJson(br, JsonObject.class);
 
     for (Map.Entry<String, JsonElement> elem : jo.entrySet()) {
       frontFaces.put(elem.getKey(), new Image(elem.getValue().getAsString()));
