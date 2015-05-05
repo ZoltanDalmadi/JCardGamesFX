@@ -5,55 +5,55 @@ package hu.unideb.inf.JCardGamesFX.model;
  */
 public enum FrenchRank implements Rank {
   /**
-   * A
+   * Symbol "A" on the cards.
    */
   Ace,
   /**
-   * 2
+   * Symbol "2" on the cards.
    */
   Two,
   /**
-   * 3
+   * Symbol "3" on the cards.
    */
   Three,
   /**
-   * 4
+   * Symbol "4" on the cards.
    */
   Four,
   /**
-   * 5
+   * Symbol "5" on the cards.
    */
   Five,
   /**
-   * 6
+   * Symbol "6" on the cards.
    */
   Six,
   /**
-   * 7
+   * Symbol "7" on the cards.
    */
   Seven,
   /**
-   * 8
+   * Symbol "8" on the cards.
    */
   Eight,
   /**
-   * 9
+   * Symbol "9" on the cards.
    */
   Nine,
   /**
-   * 10
+   * Symbol "10" on the cards.
    */
   Ten,
   /**
-   * J
+   * Symbol "J" on the cards.
    */
   Jack,
   /**
-   * Q
+   * Symbol "Q" on the cards.
    */
   Queen,
   /**
-   * K
+   * Symbol "K" on the cards.
    */
   King
 }
