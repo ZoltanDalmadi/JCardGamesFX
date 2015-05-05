@@ -24,7 +24,7 @@ public class CardViewTest {
    */
   @Before
   public void setUp() {
-    cardView = new CardView();
+    cardView = new CardView(true);
     theme = new CardTheme("/cardfaces/classicTest/theme.json", "/test_back.png");
   }
 
@@ -34,7 +34,7 @@ public class CardViewTest {
   @Test
   public void testParameterConstructor() {
     CardView cardView1 =
-        new CardView(theme.getFrontFace("QH"), theme.getBackFace(), "QH");
+        new CardView(false, theme.getFrontFace("QH"), theme.getBackFace(), "QH");
 
     assertNotNull(cardView1);
   }
@@ -57,13 +57,13 @@ public class CardViewTest {
     assertEquals(theme.getBackFace(), cardView.getBackFace());
     cardView.setFrontFace(theme.getFrontFace("KC"));
     assertEquals(theme.getFrontFace("KC"), cardView.getFrontFace());
-    assertEquals(theme.getFrontFace("KC"), cardView.getImage());
-    cardView.flip();
     assertEquals(theme.getBackFace(), cardView.getImage());
-    assertTrue(cardView.isFaceDown());
     cardView.flip();
-    assertFalse(cardView.isFaceDown());
     assertEquals(theme.getFrontFace("KC"), cardView.getImage());
+    assertFalse(cardView.isFaceDown());
+    cardView.flip();
+    assertTrue(cardView.isFaceDown());
+    assertEquals(theme.getBackFace(), cardView.getImage());
 
     assertEquals(2, cardView.getDropShadow().getRadius(), 0);
   }

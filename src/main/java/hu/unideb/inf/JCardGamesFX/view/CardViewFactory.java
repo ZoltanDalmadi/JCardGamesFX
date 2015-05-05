@@ -38,7 +38,7 @@ public class CardViewFactory {
    * @return The created {@link CardView} object.
    */
   public static CardView createCardView(Card card) {
-    CardView result = new CardView();
+    CardView result = new CardView(card.isFaceDown());
 
     result.setFrontFace(cardTheme.getFrontFace(card.getId()));
     result.setBackFace(cardTheme.getBackFace());

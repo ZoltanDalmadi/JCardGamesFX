@@ -53,19 +53,20 @@ public class CardView extends ImageView {
    * @param backFace  The {@link Image} object for the back face.
    * @param shortID   The short identifier.
    */
-  public CardView(Image frontFace, Image backFace, String shortID) {
-    this();
+  public CardView(boolean faceDown, Image frontFace, Image backFace, String shortID) {
+    this(faceDown);
     this.frontFace = frontFace;
     this.backFace = backFace;
     this.shortID = shortID;
-    setImage(frontFace);
+    setImage(backFace);
   }
 
   /**
    * Constructs an empty {@link CardView}.
    */
-  public CardView() {
-    this.dropShadow = new DropShadow(2, Color.gray(0, 0.5));
+  public CardView(boolean faceDown) {
+    this.dropShadow = new DropShadow(2, Color.gray(0, 0.75));
+    this.faceDown = faceDown;
     setEffect(dropShadow);
   }
 
@@ -140,7 +141,8 @@ public class CardView extends ImageView {
    */
   public void setBackFace(Image backFace) {
     this.backFace = backFace;
-    setImage(this.backFace);
+    if (faceDown)
+      setImage(this.backFace);
   }
 
   /**
@@ -159,7 +161,8 @@ public class CardView extends ImageView {
    */
   public void setFrontFace(Image frontFace) {
     this.frontFace = frontFace;
-    setImage(this.frontFace);
+    if (!faceDown)
+      setImage(this.frontFace);
   }
 
   /**
@@ -167,8 +170,8 @@ public class CardView extends ImageView {
    * and negates the field <code>faceDown</code>.
    */
   public void flip() {
-    setImage(getImage().equals(frontFace) ? backFace : frontFace);
     faceDown = !faceDown;
+    setImage(faceDown ? backFace : frontFace);
   }
 
 }

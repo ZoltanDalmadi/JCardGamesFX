@@ -67,7 +67,7 @@ public class KlondikeApp extends Application {
                 if (!actPileView.isEmpty()) {
                   CardView toFlip = actPileView.getTopCardView();
                   toFlip.setMouseTransparent(false);
-                  if (!toFlip.isFaceDown())
+                  if (toFlip.isFaceDown())
                     toFlip.flip();
                 }
 
@@ -97,7 +97,6 @@ public class KlondikeApp extends Application {
         standardPileView.getTopCardView().setMouseTransparent(true);
       }
 
-      standardPileView.getTopCardView().flip();
       standardPileView.getTopCardView().setMouseTransparent(false);
       cardsToPut++;
     }
