@@ -16,7 +16,7 @@ public class KlondikeStatusBar extends HBox {
   /**
    * Label which displays elapsed time.
    */
-  private Label statusText;
+  private Label elapsedTimeText;
 
   /**
    * Helper variable for time.
@@ -32,9 +32,10 @@ public class KlondikeStatusBar extends HBox {
    * Constructs a new {@link KlondikeStatusBar} object.
    */
   public KlondikeStatusBar() {
-    this.statusText = new Label();
+    this.elapsedTimeText = new Label();
     setPadding(new Insets(2));
-    getChildren().add(statusText);
+
+    getChildren().add(elapsedTimeText);
 
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateStatusText()));
     timeline.setCycleCount(Animation.INDEFINITE);
@@ -55,7 +56,7 @@ public class KlondikeStatusBar extends HBox {
     if (minutes > 0)
       mins = minutes + " minutes ";
 
-    statusText.setText("Elapsed time: " + mins + (seconds++) + " seconds");
+    elapsedTimeText.setText("Elapsed time: " + mins + (seconds++) + " seconds");
   }
 
 }
