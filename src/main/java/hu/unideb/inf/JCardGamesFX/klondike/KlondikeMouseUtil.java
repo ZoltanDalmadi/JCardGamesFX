@@ -13,6 +13,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -60,7 +61,7 @@ public class KlondikeMouseUtil {
     // put card from stock to waste and flip them
     /** get current cardView. */
     CardView cardView = (CardView) e.getSource();
-    /** get current deck. */
+    /** get current card. */
     Card card = game.getDeck().getById(cardView.getShortID());
 
     game.drawFromStock(card);
@@ -68,6 +69,7 @@ public class KlondikeMouseUtil {
     cardView.flip();
     cardView.setMouseTransparent(false);
     makeDraggable(cardView);
+    KlondikeApp.LOG.info("Placed {} to the waste.", card);
   };
 
   /**
@@ -95,6 +97,8 @@ public class KlondikeMouseUtil {
       stockView.addCardView(currentCardView);
       revIt.remove();
     }
+
+    KlondikeApp.LOG.info("Refilled stock from waste.");
   };
 
   /**
@@ -170,8 +174,16 @@ public class KlondikeMouseUtil {
 
     // check if card(s) are intersecting with any of the piles
     if (checkAllPiles(card, cardView, activePile, activePileView)) {
-      if (game.isGameWon())
-        System.out.println("You have won the game!");
+      if (game.isGameWon()) {
+        KlondikeApp.LOG.info("The game has been won.");
+
+        /** Alert dialog box informing the player that he/she has won. */
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("JCardGamesFX");
+        alert.setHeaderText(null);
+        alert.setContentText("Congratulations, you have won the game!");
+        alert.showAndWait();
+      }
 
       return;
     }
@@ -186,7 +198,7 @@ public class KlondikeMouseUtil {
 
   /**
    * Constructs a {@link KlondikeMouseUtil} object for the given
-   * {@link KlondikeGame} and {@link KlondikeGameArea objects}.
+   * {@link KlondikeGame} and {@link KlondikeGameArea} objects.
    *
    * @param game     The {@link KlondikeGame object}.
    * @param gameArea The {@link KlondikeGameArea} object.
@@ -303,12 +315,42 @@ public class KlondikeMouseUtil {
     CardPile destPile = game.getPileById(destPileView.getShortID());
 
     if (game.getRules().isMoveValid(card, destPile)) {
+      String msg = null;
+
+      if (destPile.isEmpty()) {
+        if (destPile.getType().equals(CardPile.Type.Foundation))
+          msg = String.format("Placed %s to the foundation.", card);
+
+        if (destPile.getType().equals(CardPile.Type.Klondike))
+          msg = String.format("Placed %s to a new pile.", card);
+      } else {
+        msg = String.format("Placed %s to %s.",
+            card, destPile.getTopCard());
+      }
+
+      KlondikeApp.LOG.info(msg);
+
       game.moveCards(draggedCards, sourcePile, destPile);
       slideToPile(draggedCardViews, sourcePileView, destPileView);
       draggedCards = null;
       draggedCardViews = null;
       return true;
     } else {
+      String msg = null;
+
+      if (destPile.isEmpty()) {
+        if (destPile.getType().equals(CardPile.Type.Foundation))
+          msg = String.format("%s is not an Ace!", card);
+
+        if (destPile.getType().equals(CardPile.Type.Klondike))
+          msg = String.format("%s is not a King!", card);
+
+      } else {
+        msg = String.format("Cannot place %s to %s.", card, destPile.getTopCard());
+      }
+
+      KlondikeApp.LOG.warn(msg);
+
       return false;
     }
   }

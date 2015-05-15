@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
@@ -49,6 +51,11 @@ public class KlondikeApp extends Application {
    * The current theme of the cards.
    */
   CardTheme cardTheme;
+
+  /**
+   * Logger instance.
+   */
+  static Logger LOG = LoggerFactory.getLogger(KlondikeApp.class);
 
   /**
    * Main function of the application.
@@ -109,8 +116,10 @@ public class KlondikeApp extends Application {
                     toFlip.flip();
                 }
 
-                if (!actPile.isEmpty() && actPile.getTopCard().isFaceDown())
+                if (!actPile.isEmpty() && actPile.getTopCard().isFaceDown()) {
                   actPile.getTopCard().flip();
+                  LOG.info("Flipped {}", actPile.getTopCard());
+                }
               }
             }
           });
