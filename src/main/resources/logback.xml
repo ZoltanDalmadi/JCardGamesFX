@@ -1,0 +1,28 @@
+<configuration scan="false" debug="false">
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss} %-5level: %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE1" class="ch.qos.logback.core.FileAppender">
+    <file>messages.log</file>
+    <append>false</append>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+    <encoder>
+      <pattern>%d{HH:mm:ss} %-5level: %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="ALL">
+    <appender-ref ref="FILE1"/>
+  </root>
+
+  <logger name="hu.unideb.inf.JCardGamesFX.klondike.KlondikeApp" level="ALL"
+          additivity="true">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+</configuration>
