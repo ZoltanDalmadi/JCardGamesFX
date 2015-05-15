@@ -133,6 +133,26 @@ public class KlondikeMenu extends MenuBar {
         piatnikLuxuryBack1, piatnikLuxuryBack2);
 
     cardBackToggleGroup.selectToggle(cardBackToggleGroup.getToggles().get(0));
-    settingsMenu.getItems().addAll(cardThemeSettingsMenu, cardBackSettingsMenu);
+
+    // tableaou backgrounds
+    Menu tableaouBackgroundsMenu = new Menu("Select tableaou background");
+    ToggleGroup tableaouToggleGroup = new ToggleGroup();
+
+    RadioMenuItem greenFeltBGItem = new RadioMenuItem("Green felt");
+    greenFeltBGItem.setToggleGroup(tableaouToggleGroup);
+    greenFeltBGItem.setOnAction(e ->
+        klondikeApp.gameArea.setTableauBackground(new Image("/tableaous/green-felt.png")));
+
+    RadioMenuItem woodBGItem = new RadioMenuItem("Wood desk");
+    woodBGItem.setToggleGroup(tableaouToggleGroup);
+    woodBGItem.setOnAction(e ->
+        klondikeApp.gameArea.setTableauBackground(new Image("/tableaous/wood.jpg")));
+
+    tableaouBackgroundsMenu.getItems().addAll(greenFeltBGItem, woodBGItem);
+
+    tableaouToggleGroup.selectToggle(tableaouToggleGroup.getToggles().get(0));
+
+    settingsMenu.getItems().addAll(cardThemeSettingsMenu, cardBackSettingsMenu,
+        tableaouBackgroundsMenu);
   }
 }
