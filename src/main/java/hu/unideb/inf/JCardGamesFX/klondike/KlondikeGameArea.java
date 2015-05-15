@@ -232,6 +232,9 @@ public class KlondikeGameArea extends Pane {
    * @param cardTheme The current card theme to update from.
    */
   public void updateCardViews(CardTheme cardTheme) {
-    cardViewList.forEach(cardView -> cardView.setBackFace(cardTheme.getBackFace()));
+    cardViewList.forEach(cardView -> {
+      cardView.setFrontFace(cardTheme.getFrontFace(cardView.getShortID()));
+      cardView.setBackFace(cardTheme.getBackFace());
+    });
   }
 }

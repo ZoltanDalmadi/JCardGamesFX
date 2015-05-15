@@ -30,6 +30,30 @@ public class KlondikeMenu extends MenuBar {
 
     gameMenu.getItems().addAll(newGameMenuItem, exitGameMenuItem);
 
+    // card themes
+    Menu cardThemeSettingsMenu = new Menu("Select card theme");
+    ToggleGroup cardThemeToggleGroup = new ToggleGroup();
+
+    RadioMenuItem classicMenuItem = new RadioMenuItem("Classic");
+    classicMenuItem.setToggleGroup(cardThemeToggleGroup);
+    classicMenuItem.setOnAction(e -> {
+      klondikeApp.cardTheme.setThemeFile("/cardfaces/classic/theme.json");
+      klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
+    });
+
+    RadioMenuItem piatnikImperialMenuItem = new RadioMenuItem("Piatnik Imperial");
+    piatnikImperialMenuItem.setToggleGroup(cardThemeToggleGroup);
+    piatnikImperialMenuItem.setOnAction(e -> {
+      klondikeApp.cardTheme.setThemeFile("/cardfaces/piatnik_imperial/theme.json");
+      klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
+    });
+
+    cardThemeSettingsMenu.getItems().addAll(classicMenuItem,
+        piatnikImperialMenuItem);
+
+    cardThemeToggleGroup.selectToggle(cardThemeToggleGroup.getToggles().get(0));
+
+    // card backs
     Menu cardBackSettingsMenu = new Menu("Select card back");
     ToggleGroup cardBackToggleGroup = new ToggleGroup();
 
@@ -68,10 +92,25 @@ public class KlondikeMenu extends MenuBar {
       klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
     });
 
+    RadioMenuItem piatnikImperialBack1 = new RadioMenuItem("Piatnik Imperial 1");
+    piatnikImperialBack1.setToggleGroup(cardBackToggleGroup);
+    piatnikImperialBack1.setOnAction(e -> {
+      klondikeApp.cardTheme.setBackFace(new Image("/backfaces/piatnik_imperial_1.png"));
+      klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
+    });
+
+    RadioMenuItem piatnikImperialBack2 = new RadioMenuItem("Piatnik Imperial 2");
+    piatnikImperialBack2.setToggleGroup(cardBackToggleGroup);
+    piatnikImperialBack2.setOnAction(e -> {
+      klondikeApp.cardTheme.setBackFace(new Image("/backfaces/piatnik_imperial_2.png"));
+      klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
+    });
+
     cardBackSettingsMenu.getItems().addAll(classicBlueMenuItem,
-        classicRedMenuItem, fancyBlueMenuItem, fancyRedMenuItem, hearthStoneMenuItem);
+        classicRedMenuItem, fancyBlueMenuItem, fancyRedMenuItem,
+        hearthStoneMenuItem, piatnikImperialBack1, piatnikImperialBack2);
 
     cardBackToggleGroup.selectToggle(cardBackToggleGroup.getToggles().get(0));
-    settingsMenu.getItems().add(cardBackSettingsMenu);
+    settingsMenu.getItems().addAll(cardThemeSettingsMenu, cardBackSettingsMenu);
   }
 }
