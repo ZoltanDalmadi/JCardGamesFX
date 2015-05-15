@@ -8,12 +8,29 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+/**
+ * This class represents the status bar for the application.
+ */
 public class KlondikeStatusBar extends HBox {
 
+  /**
+   * Label which displays elapsed time.
+   */
   private Label statusText;
+
+  /**
+   * Helper variable for time.
+   */
   private int seconds = 0;
+
+  /**
+   * Same.
+   */
   private int minutes = 0;
 
+  /**
+   * Constructs a new {@link KlondikeStatusBar} object.
+   */
   public KlondikeStatusBar() {
     this.statusText = new Label();
     setPadding(new Insets(2));
@@ -24,6 +41,9 @@ public class KlondikeStatusBar extends HBox {
     timeline.play();
   }
 
+  /**
+   * Updates the status text periodically with the elapsed time.
+   */
   private void updateStatusText() {
     if (seconds > 59) {
       minutes++;

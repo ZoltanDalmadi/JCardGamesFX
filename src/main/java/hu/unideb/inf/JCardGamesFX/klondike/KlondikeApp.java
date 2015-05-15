@@ -15,20 +15,56 @@ import javafx.stage.Stage;
 
 import java.util.Iterator;
 
+/**
+ * This class serves as the entry point of the application.
+ */
 public class KlondikeApp extends Application {
 
+  /**
+   * Width of the main window.
+   */
   private static final double WIDTH = 1280;
+
+  /**
+   * Height of the main window.
+   */
   private static final double HEIGHT = 800;
 
+  /**
+   * Reference to a {@link KlondikeGame} instance.
+   */
   KlondikeGame game;
+
+  /**
+   * Reference to a {@link KlondikeGameArea} instance.
+   */
   KlondikeGameArea gameArea;
+
+  /**
+   * Reference to a {@link KlondikeMouseUtil} instance.
+   */
   KlondikeMouseUtil mouseUtil;
+
+  /**
+   * The current theme of the cards.
+   */
   CardTheme cardTheme;
 
+  /**
+   * Main function of the application.
+   *
+   * @param args Command line arguments.
+   */
   public static void main(String[] args) {
     launch(args);
   }
 
+  /**
+   * The main function effectively launches this method, as in all
+   * JavaFX applications.
+   *
+   * @param primaryStage Reference to the main {@link Stage} object.
+   */
   @Override
   public void start(Stage primaryStage) {
 
@@ -85,6 +121,9 @@ public class KlondikeApp extends Application {
     primaryStage.show();
   }
 
+  /**
+   * Sets up the {@link KlondikeGameArea} object for a new game.
+   */
   private void prepareGameAreaForNewGame() {
     // deal to piles
     Iterator<Card> deckIterator = game.getDeck().iterator();
@@ -114,7 +153,4 @@ public class KlondikeApp extends Application {
     gameArea.getStockView().setOnMouseClicked(mouseUtil.stockReverseCardsHandler);
   }
 
-  public void newGame() {
-
-  }
 }

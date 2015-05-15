@@ -19,15 +19,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * This class represents the area where the game is taking place.
+ */
 public class KlondikeGameArea extends Pane {
 
+  /**
+   * The list of {@link CardView} objects that are on the playing area.
+   */
   List<CardView> cardViewList = new ArrayList<>();
+
+  /**
+   * The list of {@link CardPileView} objects that serves as the view for
+   * the standard piles.
+   */
   private List<CardPileView> standardPileViews;
+
+  /**
+   * The list of {@link CardPileView} objects that serves as the view for
+   * the foundation piles.
+   */
   private List<CardPileView> foundationPileViews;
+
+  /**
+   * The {@link CardPileView} object that serves as the view for the stock.
+   */
   private CardPileView stockView;
+
+  /**
+   * The {@link CardPileView} object that serves as the view for the waste.
+   */
   private CardPileView wasteView;
+
+  /**
+   * The gap (offset) between the cards.
+   */
   private double cardGap = 30;
 
+  /**
+   * Constructs a new {@link KlondikeGameArea} object.
+   */
   public KlondikeGameArea() {
     this.standardPileViews = FXCollections.observableArrayList();
     this.foundationPileViews = FXCollections.observableArrayList();
@@ -36,11 +67,20 @@ public class KlondikeGameArea extends Pane {
     initGameArea();
   }
 
+  /**
+   * Constructs a new {@link KlondikeGameArea} object, with the given image
+   * as the background.
+   *
+   * @param tableauBackground The {@link Image} object for the background.
+   */
   public KlondikeGameArea(Image tableauBackground) {
     this();
     setTableauBackground(tableauBackground);
   }
 
+  /**
+   * Initializes the game area.
+   */
   private void initGameArea() {
     buildStock();
     buildWaste();
@@ -48,6 +88,10 @@ public class KlondikeGameArea extends Pane {
     buildStandardPiles();
   }
 
+  /**
+   * Configures the {@link CardPileView} object that serves as the view
+   * of the stock.
+   */
   private void buildStock() {
     BackgroundFill backgroundFill = new BackgroundFill(
         Color.gray(0.0, 0.2), null, null);
@@ -64,6 +108,10 @@ public class KlondikeGameArea extends Pane {
     getChildren().add(stockView);
   }
 
+  /**
+   * Configures the {@link CardPileView} object that serves as the view
+   * of the waste.
+   */
   private void buildWaste() {
     BackgroundFill backgroundFill = new BackgroundFill(
         Color.gray(0.0, 0.2), null, null);
@@ -80,6 +128,10 @@ public class KlondikeGameArea extends Pane {
     getChildren().add(wasteView);
   }
 
+  /**
+   * Configures the {@link CardPileView} objects that serves as the view
+   * of the foundation piles.
+   */
   private void buildFoundationPiles() {
     BackgroundFill backgroundFill = new BackgroundFill(
         Color.gray(0.0, 0.2), null, null);
@@ -99,6 +151,10 @@ public class KlondikeGameArea extends Pane {
     });
   }
 
+  /**
+   * Configures the {@link CardPileView} objects that serves as the view
+   * of the standard piles.
+   */
   private void buildStandardPiles() {
     BackgroundFill backgroundFill = new BackgroundFill(
         Color.gray(0.0, 0.2), null, null);
@@ -118,36 +174,63 @@ public class KlondikeGameArea extends Pane {
     });
   }
 
-  public double getCardGap() {
-    return cardGap;
-  }
-
-  public void setCardGap(double cardGap) {
-    this.cardGap = cardGap;
-  }
-
+  /**
+   * Returns the {@link List} of {@link CardPileView} objects that serves
+   * as the view of the standard piles.
+   *
+   * @return The {@link List} of {@link CardPileView} objects.
+   */
   public List<CardPileView> getStandardPileViews() {
     return standardPileViews;
   }
 
+  /**
+   * Returns the {@link List} of {@link CardPileView} objects that serves
+   * as the view of the foundation piles.
+   *
+   * @return The {@link List} of {@link CardPileView} objects.
+   */
   public List<CardPileView> getFoundationPileViews() {
     return foundationPileViews;
   }
 
+  /**
+   * Returns the {@link CardPileView} object that serves as the view
+   * of the stock.
+   *
+   * @return The {@link CardPileView} object.
+   */
   public CardPileView getStockView() {
     return stockView;
   }
 
+  /**
+   * Returns the {@link CardPileView} object that serves as the view
+   * of the waste.
+   *
+   * @return The {@link CardPileView} object.
+   */
   public CardPileView getWasteView() {
     return wasteView;
   }
 
+  /**
+   * Sets the background image for the tableau.
+   *
+   * @param tableauBackground The {@link Image} object to set.
+   */
   public void setTableauBackground(Image tableauBackground) {
     setBackground(new Background(new BackgroundImage(tableauBackground,
         BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
         BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
   }
 
+  /**
+   * Updates the card images of each card on the game area.
+   * Mainly used when switching card themes.
+   *
+   * @param cardTheme The current card theme to update from.
+   */
   public void updateCardViews(CardTheme cardTheme) {
     cardViewList.forEach(cardView -> cardView.setBackFace(cardTheme.getBackFace()));
   }

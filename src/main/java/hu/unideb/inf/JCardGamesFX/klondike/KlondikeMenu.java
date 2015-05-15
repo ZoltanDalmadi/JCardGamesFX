@@ -8,15 +8,22 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 
+/**
+ * This class represents the menu bar for the application.
+ */
 public class KlondikeMenu extends MenuBar {
 
+  /**
+   * Constructs a {@link KlondikeMenu} object for the given {@link KlondikeApp}.
+   *
+   * @param klondikeApp The {@link KlondikeApp} instance to create the menu for.
+   */
   public KlondikeMenu(KlondikeApp klondikeApp) {
     Menu gameMenu = new Menu("Game");
     Menu settingsMenu = new Menu("Settings");
     getMenus().addAll(gameMenu, settingsMenu);
 
     MenuItem newGameMenuItem = new MenuItem("New Game");
-    newGameMenuItem.setOnAction(e -> klondikeApp.newGame());
 
     MenuItem exitGameMenuItem = new MenuItem("Exit");
     exitGameMenuItem.setOnAction(e -> Platform.exit());
