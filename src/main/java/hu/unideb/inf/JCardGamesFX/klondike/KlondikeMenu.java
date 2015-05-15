@@ -48,8 +48,15 @@ public class KlondikeMenu extends MenuBar {
       klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
     });
 
+    RadioMenuItem piatnikLuxuryMenuItem = new RadioMenuItem("Piatnik Luxury");
+    piatnikLuxuryMenuItem.setToggleGroup(cardThemeToggleGroup);
+    piatnikLuxuryMenuItem.setOnAction(e -> {
+      klondikeApp.cardTheme.setThemeFile("/cardfaces/piatnik_luxury/theme.json");
+      klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
+    });
+
     cardThemeSettingsMenu.getItems().addAll(classicMenuItem,
-        piatnikImperialMenuItem);
+        piatnikImperialMenuItem, piatnikLuxuryMenuItem);
 
     cardThemeToggleGroup.selectToggle(cardThemeToggleGroup.getToggles().get(0));
 
@@ -106,9 +113,24 @@ public class KlondikeMenu extends MenuBar {
       klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
     });
 
+    RadioMenuItem piatnikLuxuryBack1 = new RadioMenuItem("Piatnik Luxury 1");
+    piatnikLuxuryBack1.setToggleGroup(cardBackToggleGroup);
+    piatnikLuxuryBack1.setOnAction(e -> {
+      klondikeApp.cardTheme.setBackFace(new Image("/backfaces/piatnik_luxury_1.png"));
+      klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
+    });
+
+    RadioMenuItem piatnikLuxuryBack2 = new RadioMenuItem("Piatnik Luxury 2");
+    piatnikLuxuryBack2.setToggleGroup(cardBackToggleGroup);
+    piatnikLuxuryBack2.setOnAction(e -> {
+      klondikeApp.cardTheme.setBackFace(new Image("/backfaces/piatnik_luxury_2.png"));
+      klondikeApp.gameArea.updateCardViews(klondikeApp.cardTheme);
+    });
+
     cardBackSettingsMenu.getItems().addAll(classicBlueMenuItem,
         classicRedMenuItem, fancyBlueMenuItem, fancyRedMenuItem,
-        hearthStoneMenuItem, piatnikImperialBack1, piatnikImperialBack2);
+        hearthStoneMenuItem, piatnikImperialBack1, piatnikImperialBack2,
+        piatnikLuxuryBack1, piatnikLuxuryBack2);
 
     cardBackToggleGroup.selectToggle(cardBackToggleGroup.getToggles().get(0));
     settingsMenu.getItems().addAll(cardThemeSettingsMenu, cardBackSettingsMenu);
