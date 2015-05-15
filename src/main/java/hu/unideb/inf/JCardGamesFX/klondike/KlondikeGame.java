@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.stream.IntStream;
 
 /**
  * This class represents the game itself, with methods to manipulate the state
@@ -61,13 +60,15 @@ public class KlondikeGame {
 
     // create foundations
     this.foundations = FXCollections.observableArrayList();
-    IntStream.range(0, 4)
-        .forEach(i -> foundations.add(new CardPile(CardPile.Type.Foundation, "F" + i)));
+
+    for (int i = 0; i < 4; i++)
+      foundations.add(new CardPile(CardPile.Type.Foundation, "F" + i));
 
     // create standard piles
     this.standardPiles = FXCollections.observableArrayList();
-    IntStream.range(0, 7)
-        .forEach(i -> standardPiles.add(new CardPile(CardPile.Type.Klondike, "K" + i)));
+
+    for (int i = 0; i < 7; i++)
+      standardPiles.add(new CardPile(CardPile.Type.Klondike, "K" + i));
 
     // load rules
     this.rules = new KlondikeRules(standardPiles, foundations, waste, stock);
