@@ -6,7 +6,7 @@
 
   <groupId>hu.unideb.inf</groupId>
   <artifactId>JCardGamesFX</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.6</version>
 
   <url>https://github.com/ZoltanDalmadi/JCardGamesFX</url>
   <description>
@@ -31,6 +31,14 @@
       </roles>
     </developer>
   </developers>
+
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>http://opensource.org/licenses/MIT</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -91,7 +99,7 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>1.8</version>
+                  <version>1.8.0_40</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
