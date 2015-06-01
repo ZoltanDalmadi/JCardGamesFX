@@ -99,7 +99,7 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>1.8.0_40</version>
+                  <version>1.8.0-40</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
